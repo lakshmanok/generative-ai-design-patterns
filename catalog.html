@@ -1,0 +1,137 @@
+<table>
+    <tr>
+        <th>Category</th>
+        <td>Pattern Name</td>
+        <td>Problem</td>
+        <td>Best Practice Solution</td>
+        <td>Reference</td>
+        <td>Tradeoffs and Alternatives</td>
+        <td>Example demonstrating usage</td>
+    </tr>
+    <tr>
+        <th>Controlling Style</th>
+        <td>Grammar</td>
+        <td>LLM needs to generate text that follows a strict grammar. This could be as simple as JSON, XML, etc. or as complex as a chess game notation.</td>
+        <td>Express constraints in Backus-Naur Form (BNF), and augment demonstration examples with the grammar.</td>
+        <td>https://arxiv.org/abs/2305.19234  https://github.com/ggerganov/llama.cpp/blob/master/grammars/README.md</td>
+        <td>Providing just examples is inconsistent, and fails more frequently  For simple tasks, possible to use a template approach</td>
+        <td>https://til.simonwillison.net/llms/llama-cpp-python-grammars  https://github.com/ejones/llama-journey</td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Self Check</td>
+        <td>Get an LLM to say &quot;I don&#39;t know&quot; rather than hallucinating facts or details.</td>
+        <td>Get an LLM to generate multiple answers in parallel. Do a self-consistency check, and if they diverge, it&#39;s probably hallucinating.</td>
+        <td>https://arxiv.org/abs/2303.08896</td>
+        <td>Fine-tuning the LLM or using examples for which &quot;I don&#39;t know&quot; is the right answer is less reliable.</td>
+        <td>Use output rails in NeMo-Guardrails: https://github.com/NVIDIA/NeMo-Guardrails</td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Reverse Neutralization</td>
+        <td>LLM needs to match a specific tone and voice, such as your company style or personal style.</td>
+        <td>Take content created in desired style, ask LLM to rephrase in neutral language at 10th grade level. Reverse the inputs and outputs and use it to fine-tune a model that will take LLM outputs and rephrase them in your style.</td>
+        <td>https://community.openai.com/t/train-a-gpt-model-in-my-tone/119175/31  https://arxiv.org/abs/2308.07968  https://github.com/technicalwriting/hank</td>
+        <td>It&#39;s hard to create a dataset that covers all possible topics, so using only a fine-tuned LLM tends to lose of creativity.  If all you need is a style checker, you can use an off-the-shelf LLM to enforce a style guide.  If your content does cover all possible topics, you can create a RAG and fine-tune every stage of it (see: https://arxiv.org/abs/2308.07968)  If the matching is in terms of instructions, use the Style Transfer pattern.</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Style Transfer</td>
+        <td>Get an LLM to follow instructions such as &quot;more positive&quot; but get the right level of positivity.</td>
+        <td>Use augmented zero-shot prompting, which augments what&#39;s desired with variations that are non-exemplars.</td>
+        <td>https://aclanthology.org/2022.acl-short.94.pdf</td>
+        <td>See Reverse Neutralization</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>Controlling Task</th>
+        <td>Adapter Tuning</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Instruction Tuning</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Few Shot</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Chain of Thought</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>Architectural</th>
+        <td>Agents</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>RAG</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Tools</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Prompt Tuning</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Guardrails</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>Controlling Context</th>
+        <td>Example Selection</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
