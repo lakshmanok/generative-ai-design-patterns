@@ -70,43 +70,45 @@
     <tr>
         <th>Controlling Task</th>
         <td>Adapter Tuning</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <th></th>
-        <td>Instruction Tuning</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>LLM has to do a task that the foundational model was not trained to do.</td>
+        <td>Create instruction dataset of input-output pairs that demonstrate task; use LoRA</td>
+        <td><a href="https://arxiv.org/abs/2106.09685">Low Rank adapation of LLMs</a></td>
+        <td>Few-shot examples are enough if the task is similar to one the model was trained on.</td>
         <td></td>
     </tr>
     <tr>
         <th></th>
         <td>Few Shot</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>LLM has to do a task that the foundational model was not trained to do, but lies within its frontier capability.</td>
+        <td>Add a few examples of task input and output to the prompt.</td>
+        <td><a href="https://arxiv.org/abs/2005.14165">Language Models are Few-Shot Learners</a></td>
+        <td>If beyond frontier capability, may need to do Adapter Tuning.</td>
         <td></td>
     </tr>
     <tr>
         <th></th>
         <td>Chain of Thought</td>
+        <td>Teach the LLM the steps it has to follow to get to an answer.</td>
         <td></td>
         <td></td>
+        <td>Limited to linear flows only. For complex flows, consider Tree of Thought.
+            In many cases, the LLM can self-reflect and get the list of steps to follow.
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Tree of Thought</td>
+        <td>Teach the LLM the steps it has to follow to get to an answer.</td>
         <td></td>
         <td></td>
+        <td>For simple linear flows, can use Chain of Thought</td>
         <td></td>
     </tr>
     <tr>
         <th>Architectural</th>
         <td>Agents</td>
-        <td></td>
+        <td>Orchestrate a complex workflow consisting of information retrieval, function calling, and conversation maintenance.</td>
         <td></td>
         <td></td>
         <td></td>
@@ -115,35 +117,53 @@
     <tr>
         <th></th>
         <td>RAG</td>
+        <td>Use knowledge the LLM was not trained on, such as confidential information or new information in generation.</td>
         <td></td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <th></th>
-        <td>Tools</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>Considerations include appropriate chunking and reranking strategies.</td>
         <td></td>
     </tr>
     <tr>
         <th></th>
-        <td>Prompt Tuning</td>
+        <td>Tool Functions</td>
+        <td>Incorporate non-language tasks whose results are needed for generation</td>
+        <td>Teach LLM to emit text of function name + parameters to call backend functions </td>
         <td></td>
+        <td>See Grammar for how to ensure compliance to API specs.  See also Domain Languages.</td>
         <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Domain Languages</td>
+        <td>Incorporate non-language tasks whose results are needed for generation</td>
+        <td>Teach LLM to emit a domain specific language (SQL, Matplotlib, etc.) that will be processed by a sandbox or backend service.</td>
         <td></td>
+        <td>See Grammar for how to ensure compliance to API specs.  See also Tool Functions.</td>
         <td></td>
+    </tr>    
+    <tr>
+        <th></th>
+        <td>Automatic Prompt Tuning</td>
+        <td>Ensure that as model versions change, your prompts continue to perform well. </td>
+        <td>Evaluate multiple candidate prompts against desired outputs as part of both development and deployment.</td>
+        <td></td>
+        <td>A form of drift detection.</td>
         <td></td>
     </tr>
     <tr>
         <th></th>
         <td>Guardrails</td>
+        <td>Guard against toxicity, bias, information leakage, etc.</td>
+        <td>Pre- and post- processing of LLM inputs and outputs to ensure compliance to goals</td>
         <td></td>
         <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Distillation</td>
+        <td>Reduce cost of inference within acceptable quality bounds.</td>
+        <td>Teach student model on output of larger model.</td>
         <td></td>
         <td></td>
         <td></td>
@@ -151,6 +171,24 @@
     <tr>
         <th>Controlling Context</th>
         <td>Example Selection</td>
+        <td>Guard against information leakage.</td>
+        <td>Restrict world knowledge.</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Conversation State</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Context Window</td>
         <td></td>
         <td></td>
         <td></td>
