@@ -1,16 +1,41 @@
-<table border="1">
+<html>
+<head>
+    <title>My Table</title>
+    <style>
+        table {
+            border-collapse: collapse; /* Make table borders touch */
+            width: 80%;                /* Adjust table width as needed */
+            margin: 20px auto;         /* Center the table */
+        }
+
+        th, td {
+            border: 1px solid black;   /* Give cells a border */
+            padding: 10px;             /* Add spacing within cells */
+            text-align: left;        /* Center the text in cells */
+        }
+
+        th {
+            background-color: #f0f0f0; /* Light gray background for headers */
+        }
+
+        li {
+            margin-bottom: 10px;    /* Add space between list items */
+        }
+    </style>
+</head>
+<table>
     <caption>
         Catalog of Generative AI Design Patterns.
         See: https://github.com/lakshmanok/generative-ai-design-patterns/blob/main/catalog.html
     </caption>
     <tr>
         <th>Category</th>
-        <td>Pattern Name</td>
-        <td>Problem</td>
-        <td>Best Practice Solution</td>
-        <td>Reference</td>
-        <td>Tradeoffs and Alternatives</td>
-        <td>Example demonstrating usage</td>
+        <th>Pattern Name</th>
+        <th>Problem</th>
+        <th>Best Practice Solution</th>
+        <th>Reference</th>
+        <th>Tradeoffs and Alternatives</th>
+        <th>Example demonstrating usage</th>
     </tr>
     <tr>
         <th>Controlling Style</th>
@@ -255,3 +280,4 @@
         <td></td>
     </tr>
 </table>
+</html>
