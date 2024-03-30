@@ -1,5 +1,7 @@
 # generative-ai-design-patterns
-A catalog of design patterns when building generative AI applications
+A [catalog](./catalog.html) of design patterns when building generative AI applications
+
+
 
 Please see:
 https://medium.com/@lakshmanok/generative-ai-design-patterns-8eb1d937fccc
