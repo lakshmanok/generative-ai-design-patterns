@@ -1,5 +1,5 @@
 # generative-ai-design-patterns
-A [catalog](./catalog.html) of design patterns when building generative AI applications
+A [catalog](https://htmlpreview.github.io/?https://github.com/lakshmanok/generative-ai-design-patterns/blob/main/catalog.html) of design patterns when building generative AI applications
 
 
 
