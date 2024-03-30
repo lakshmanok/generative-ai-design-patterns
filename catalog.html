@@ -18,13 +18,20 @@
         <td>LLM needs to generate text that follows a strict grammar. 
             This could be as simple as JSON, XML, etc. or as complex as a chess game notation.</td>
         <td>Express constraints in Backus-Naur Form (BNF), and augment demonstration examples with the grammar.</td>
-        <td><a href="https://arxiv.org/abs/2305.19234">Grammar Prompting for Domain-Specific Language Generation with LLMs</a>
-            <a href="https://github.com/ggerganov/llama.cpp/blob/master/grammars/README.md">GNBF Guide in llama.cpp</a>
+        <td>
+            <ul>
+                <li><a href="https://arxiv.org/abs/2305.19234">Grammar Prompting for Domain-Specific Language Generation with LLMs</a></li>
+                <li><a href="https://github.com/ggerganov/llama.cpp/blob/master/grammars/README.md">GNBF Guide in llama.cpp</a></li>
+            </ul>
+
         </td>
         <td>Providing just examples is inconsistent, and fails more frequently. <br/>
             For simple tasks, possible to use a template approach</td>
-        <td><a href="https://til.simonwillison.net/llms/llama-cpp-python-grammars">Llama CPP Python Grammars</a><br/>
-            <a href="https://github.com/ejones/llama-journey">A game with Llama CPP Grammar</a>
+        <td>
+            <ul>
+            <li><a href="https://til.simonwillison.net/llms/llama-cpp-python-grammars">Llama CPP Python Grammars</a></li>
+            <li><a href="https://github.com/ejones/llama-journey">A game with Llama CPP Grammar</a></li>
+            </ul>
         </td>
     </tr>
     <tr>
@@ -45,17 +52,24 @@
         <td>Reverse Neutralization</td>
         <td>LLM needs to match a specific tone and voice, such as your company style or personal style.</td>
         <td>Take content created in desired style, ask LLM to rephrase in neutral language at 10th grade level. 
-            Reverse the inputs and outputs and use it to fine-tune a model that will take LLM outputs 
+            Reverse the inputs and outputs and use it to Adapter Tune a model that will take LLM outputs
             and rephrase them in your style.</td>
         <td>
-            <a href="https://community.openai.com/t/train-a-gpt-model-in-my-tone/119175/31"> Train a GPT Model in My Tone </a><br/>
-            <a href="https://arxiv.org/abs/2308.07968">Teach LLMs to Personalize</a><br/>
-            <a href="https://technicalwriting.tools/posts/style-guide-fine-tuning/">Fine-tuning an LLM into a style guide editor</a>
+            <ul>
+            <li><a href="https://community.openai.com/t/train-a-gpt-model-in-my-tone/119175/31"> Train a GPT Model in My Tone </a></li>
+            <li><a href="https://arxiv.org/abs/2308.07968">Teach LLMs to Personalize</a></li>
+            <li><a href="https://technicalwriting.tools/posts/style-guide-fine-tuning/">Fine-tuning an LLM into a style guide editor</a></li>
+            </ul>
+
         </td>
-        <td>It&#39;s hard to create a dataset that covers all possible topics, so using only a fine-tuned LLM tends to lose of creativity.<br/>
-            If all you need is a style checker, you can use an off-the-shelf LLM to enforce a style guide. <br/>
-            If your content does cover all possible topics, you can create a RAG and fine-tune every stage of it (see: https://arxiv.org/abs/2308.07968) <br/>
-            If the matching is in terms of instructions, use the Style Transfer pattern.</td>
+        <td>
+            <ul>
+                <li>It&#39;s hard to create a dataset that covers all possible topics, so using only a fine-tuned LLM tends to lose of creativity.</li>
+                <li>If all you need is a style checker, you can use an off-the-shelf LLM to enforce a style guide. </li>
+                <li>If your content does cover all possible topics, you can create a RAG and fine-tune every stage of it (see: https://arxiv.org/abs/2308.07968) </li>
+                <li>If the matching is in terms of instructions, use the Style Transfer pattern.</li>
+            </ul>
+        </td>
         <td></td>
     </tr>
     <tr>
@@ -63,17 +77,22 @@
         <td>Style Transfer</td>
         <td>Get an LLM to follow instructions such as &quot;more positive&quot; but get the right level of positivity.</td>
         <td>Use augmented zero-shot prompting, which augments what&#39;s desired with variations that are non-exemplars.</td>
-        <td>https://aclanthology.org/2022.acl-short.94.pdf</td>
+        <td><a href="https://aclanthology.org/2022.acl-short.94.pdf">A Recipe For Arbitrary Text Style Transfer with Large Language Models</a></td>
         <td>See Reverse Neutralization</td>
         <td></td>
     </tr>
     <tr>
-        <th>Controlling Task</th>
+        <th>Adding Capability</th>
         <td>Adapter Tuning</td>
         <td>LLM has to do a task that the foundational model was not trained to do.</td>
         <td>Create instruction dataset of input-output pairs that demonstrate task; use LoRA</td>
         <td><a href="https://arxiv.org/abs/2106.09685">Low Rank adapation of LLMs</a></td>
-        <td>Few-shot examples are enough if the task is similar to one the model was trained on.</td>
+        <td>
+            <ul>
+                <li>For tasks that are similar to the foundational model, consider Few Shot.</li>
+                <li>More efficient than fine-tuning of all the weights (instruction tuning).</li>
+            </ul></u>
+        </td>
         <td></td>
     </tr>
     <tr>
@@ -91,8 +110,11 @@
         <td>Teach the LLM the steps it has to follow to get to an answer.</td>
         <td></td>
         <td></td>
-        <td>Limited to linear flows only. For complex flows, consider Tree of Thought.
-            In many cases, the LLM can self-reflect and get the list of steps to follow.
+        <td>
+            <ul>
+                <li>Limited to linear flows only. For complex flows, consider Tree of Thought.</li>
+                <li>In many cases, the LLM can self-reflect and get the list of steps to follow.</li>
+            </ul>
         </td>
         <td></td>
     </tr>
@@ -103,6 +125,25 @@
         <td></td>
         <td></td>
         <td>For simple linear flows, can use Chain of Thought</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Evol Instruct</td>
+        <td>Teach the LLM new capabilities efficiently</td>
+        <td>Organize the training data starting from tutorials and then evolve the examples to increase complexity.</td>
+        <td>
+            <ul>
+                <li><a href="https://arxiv.org/abs/2306.11644">Textbooks are all you need</a></li>
+                <li><a href="https://arxiv.org/abs/2304.12244">WizardLM: Empowering LLMs to follow complex instructions</a></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Applies to all the other patterns in this category.</li>
+                <li>Could also increase model complexity along with instruction complexity, but more common to use Adapter Tuning where complexity is fixed. </li>
+            </ul>
+        </td>
         <td></td>
     </tr>
     <tr>
@@ -145,27 +186,9 @@
         <th></th>
         <td>Automatic Prompt Tuning</td>
         <td>Ensure that as model versions change, your prompts continue to perform well. </td>
-        <td>Evaluate multiple candidate prompts against desired outputs as part of both development and deployment.</td>
+        <td>Evaluate multiple candidate prompts against desired outputs as part of both development and deployment. Incorporate into CI/CD ML pipelines.</td>
         <td></td>
-        <td>A form of drift detection.</td>
-        <td></td>
-    </tr>
-    <tr>
-        <th></th>
-        <td>Guardrails</td>
-        <td>Guard against toxicity, bias, information leakage, etc.</td>
-        <td>Pre- and post- processing of LLM inputs and outputs to ensure compliance to goals</td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <th></th>
-        <td>Distillation</td>
-        <td>Reduce cost of inference within acceptable quality bounds.</td>
-        <td>Teach student model on output of larger model.</td>
-        <td></td>
-        <td></td>
+        <td>Can also be used to counteract drift.</td>
         <td></td>
     </tr>
     <tr>
@@ -180,7 +203,43 @@
     <tr>
         <th></th>
         <td>Conversation State</td>
+        <td>How can the LLM remember previous turns of the conversation?</td>
+        <td>Summarize the previous conversation and add it to context.</td>
         <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Guardrails</td>
+        <td>Guard against toxicity, bias, information leakage, etc.</td>
+        <td>Pre- and post- processing of LLM inputs and outputs to ensure compliance to goals</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>Meeting Constraints</th>
+        <td>Distillation</td>
+        <td>Reduce cost of inference within acceptable quality bounds.</td>
+        <td>Teach student model on output of larger model.</td>
+        <td></td>
+        <td>See also Quantization</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>History Cache</td>
+        <td>Ensure same answer to repeat query.</td>
+        <td>Cache previous queries and responses to provide deterministic behavior</td>
+        <td></td>
+        <td>Should you use semantic search or exact match to see if this is a repeat query?</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Context Window</td>
+        <td>How to fit examples, conversation state, etc. into limited context window</td>
         <td></td>
         <td></td>
         <td></td>
@@ -188,11 +247,11 @@
     </tr>
     <tr>
         <th></th>
-        <td>Context Window</td>
+        <td>Quantization</td>
+        <td>Reduce cost of inference within acceptable quality bounds.</td>
         <td></td>
         <td></td>
-        <td></td>
-        <td></td>
+        <td>Would use collection of techniques (quantization, distillation, caching, etc.)</td>
         <td></td>
     </tr>
 </table>
