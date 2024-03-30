@@ -26,4 +26,8 @@ We can already glimpse two potential reasons why even RAG may not stand the test
 ## But just right for a living catalog on GitHub
 Even though it's too early to make it a book that needs to remain relevant for a few years, it's also clear that there is a need to capture what today's best practices are. Perhaps a living catalog on GitHub can help cut through the noise and point to where improvements are happening. Then, once the catalog stabilizes (whether in a few months or in a few years), we can freeze it into a book.
 
+You can find the catalog on GitHub here:
+https://github.com/lakshmanok/generative-ai-design-patterns/blob/main/catalog.html
+and [preview it using this link](https://htmlpreview.github.io/?https://github.com/lakshmanok/generative-ai-design-patterns/blob/main/catalog.html).
+
 Please do feel free to file issues, create a pull-request, etc. When it comes time to create a book, I'll reach out to the top contributors about collaborating on making it a book.
