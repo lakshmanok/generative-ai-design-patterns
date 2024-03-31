@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>My Table</title>
+    <title>Generative AI Design Patterns</title>
     <style>
         table {
             border-collapse: collapse; /* Make table borders touch */
@@ -23,11 +23,13 @@
         }
     </style>
 </head>
+<h2>Generative AI Design Patterns.</h2>
+
+This is a catalog that is being updated routinely.
+Please see: https://github.com/lakshmanok/generative-ai-design-patterns/
+for the updated list.
+
 <table>
-    <caption>
-        Catalog of Generative AI Design Patterns.
-        See: https://github.com/lakshmanok/generative-ai-design-patterns/blob/main/catalog.html
-    </caption>
     <tr>
         <th>Category</th>
         <th>Pattern Name</th>
@@ -132,13 +134,20 @@
     <tr>
         <th></th>
         <td>Chain of Thought</td>
+        <td>LLMs are poor at math and reasoning.</td>
         <td>Teach the LLM the steps it has to follow to get to an answer.</td>
-        <td></td>
-        <td></td>
+        <td>
+            <ul>
+                <li><a href="https://arxiv.org/abs/2201.11903">Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a></li>
+                <li><a href="https://arxiv.org/abs/2203.11171">Self-Consistency Improves Chain of Thought Reasoning in Language Models</a></li>
+            </ul>
+        </td>
         <td>
             <ul>
                 <li>Limited to linear flows only. For complex flows, consider Tree of Thought.</li>
-                <li>In many cases, the LLM can self-reflect and get the list of steps to follow.</li>
+                <li>In some cases, the LLM can self-reflect and get the list of steps to follow.</li>
+                <li>Can also generate steps using LLMs and self-consistency checks.</li>
+                <li>If unable to express logic, see Iterative Self-Refine</li>
             </ul>
         </td>
         <td></td>
@@ -146,10 +155,16 @@
     <tr>
         <th></th>
         <td>Tree of Thought</td>
+        <td>LLMs are poor at planning, math, and reasoning.</td>
         <td>Teach the LLM the steps it has to follow to get to an answer.</td>
-        <td></td>
-        <td></td>
-        <td>For simple linear flows, can use Chain of Thought</td>
+        <td><a href="https://arxiv.org/abs/2305.10601">Tree of Thoughts: Deliberate Problem Solving with LLMs</a></td>
+        <td>
+            <ul>
+                <li>For simple linear flows, can use Chain of Thought. Trees provide the ability to look ahead strategically.</li>
+                <li>See also Agent frameworks for orchestrating a flow with multiple LLM prompts.</li>
+            </ul>
+
+        </td>
         <td></td>
     </tr>
     <tr>
@@ -173,29 +188,44 @@
     </tr>
     <tr>
         <th>Architectural</th>
-        <td>Agents</td>
-        <td>Orchestrate a complex workflow consisting of information retrieval, function calling, and conversation maintenance.</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <th></th>
-        <td>RAG</td>
+        <td>Retrieval Augmented Generation (RAG)</td>
         <td>Use knowledge the LLM was not trained on, such as confidential information or new information in generation.</td>
-        <td></td>
-        <td></td>
-        <td>Considerations include appropriate chunking and reranking strategies.</td>
-        <td></td>
+        <td>Identify document chunks relevant to a question, add into the context and ask LLM to generate answer.</td>
+        <td>
+            <ul>
+                <li><a href="https://arxiv.org/abs/2005.11401">Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</a></li>
+                <li><a href="https://github.com/jxzhangjhu/Awesome-LLM-RAG">GitHub Repo with links to RAG papers</a></li>
+                <li><a href="https://docs.llamaindex.ai/en/stable/">LlamaIndex: abstraction framework for RAG</a></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Considerations include appropriate chunking, embedding, matching, query rewriting, and reranking strategies.</li>
+                <li>Recent research <a href="https://arxiv.org/html/2402.09906v1">Generative Representational Instruction Tuning (GRIT)</a> combining the search and generation into a single model.</li>
+                <li>Fully managed services like Glean, Vertex AI Search exist.</li>
+                <li>Parts of the workflow can be outsourced, e.g. embedding to Unstructured.io and search to pinecone </li>
+            </ul>
+        </td>
+        <td>
+            RAG in:
+            <ul>
+                <li><a href="https://python.langchain.com/docs/use_cases/question_answering/">langchain</a></li>
+                <li><a href="https://docs.llamaindex.ai/en/stable/">LlamaIndex</a></li>
+            </ul>
+        </td>
     </tr>
     <tr>
         <th></th>
         <td>Tool Functions</td>
         <td>Incorporate non-language tasks whose results are needed for generation</td>
         <td>Teach LLM to emit text of function name + parameters to call backend functions </td>
-        <td></td>
-        <td>See Grammar for how to ensure compliance to API specs.  See also Domain Languages.</td>
+        <td>
+            <ul>
+                <li><a href="https://arxiv.org/abs/2302.04761">Toolformer: Language Models Can Teach Themselves to Use Tools</a></li>
+            </ul>
+
+        </td>
+        <td>See Grammar for how to ensure compliance to API specs.  See also Domain Languages. See also Agents for the orchestration.</td>
         <td></td>
     </tr>
     <tr>
@@ -214,6 +244,26 @@
         <td>Evaluate multiple candidate prompts against desired outputs as part of both development and deployment. Incorporate into CI/CD ML pipelines.</td>
         <td></td>
         <td>Can also be used to counteract drift.</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Iterative Self-Refine</td>
+        <td>Get an LLM to improve its own performance.</td>
+        <td>Use the LLM to critique generated text and invoke again.</td>
+        <td><a href="https://arxiv.org/abs/2303.17651">Self-Refine: Iterative Refinement with Self-Feedback</a></td>
+        <td>
+            Use Chain of Thought for a less costly alternative if generation can be expressed in terms of logical steps.
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Agents</td>
+        <td>Orchestrate a complex workflow consisting of information retrieval, function calling, and conversation maintenance.</td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td></td>
     </tr>
     <tr>
@@ -240,7 +290,7 @@
         <td>Guard against toxicity, bias, information leakage, etc.</td>
         <td>Pre- and post- processing of LLM inputs and outputs to ensure compliance to goals</td>
         <td></td>
-        <td></td>
+        <td>See also Iterative Self-Refine to decrease number of refusals.</td>
         <td></td>
     </tr>
     <tr>
