@@ -34,7 +34,7 @@ for the updated list.
         <th>Category</th>
         <th>Pattern Name</th>
         <th>Problem</th>
-        <th>Best Practice Solution</th>
+        <th>Design Pattern Solution</th>
         <th>Reference</th>
         <th>Tradeoffs and Alternatives</th>
         <th>Example demonstrating usage</th>
@@ -44,16 +44,28 @@ for the updated list.
         <td>Grammar</td>
         <td>LLM needs to generate text that follows a strict grammar. 
             This could be as simple as JSON, XML, etc. or as complex as a chess game notation.</td>
-        <td>Express constraints in Backus-Naur Form (BNF), and augment demonstration examples with the grammar.</td>
+        <td>
+            Express constraints in Backus-Naur Form (BNF) using GGML -- this is called GNBF.
+            The model will use these constraints to change the token probabilities
+            to ensure that only legal next-tokens receive non-zero probabilities.
         <td>
             <ul>
-                <li><a href="https://arxiv.org/abs/2305.19234">Grammar Prompting for Domain-Specific Language Generation with LLMs</a></li>
                 <li><a href="https://github.com/ggerganov/llama.cpp/blob/master/grammars/README.md">GNBF Guide in llama.cpp</a></li>
             </ul>
-
         </td>
-        <td>Providing just examples is inconsistent, and fails more frequently. <br/>
-            For simple tasks, possible to use a template approach</td>
+        <td>
+            Because this is just a constraint on how the next token is chosen,
+            there is no guarantee that the generated JSON will be complete/closed.
+            <ul>
+                <li>Providing few-shot examples is simpler, but is more inconsistent.</li>
+                <li>For simple tasks, it's possible to get guaranteed conformance and completeness with a template approach.</li>
+                <li>Approaches like <a href="https://arxiv.org/abs/2305.19234">Grammar Prompting for Domain-Specific Language Generation with LLMs</a>
+                    that incorporate the grammar into the prompt are error-prone.
+                </li>
+                <li>This is what the structured output generation in GPT-4, Gemini, etc. do for
+                    supported formats. Using the GNBF pattern allows you to add much more specific constraints.
+                </li>
+            </ul>
         <td>
             <ul>
             <li><a href="https://til.simonwillison.net/llms/llama-cpp-python-grammars">Llama CPP Python Grammars</a></li>
@@ -134,7 +146,7 @@ for the updated list.
     <tr>
         <th></th>
         <td>Chain of Thought</td>
-        <td>LLMs are poor at math and reasoning.</td>
+        <td>LLMs are poor at reasoning.</td>
         <td>Teach the LLM the steps it has to follow to get to an answer.</td>
         <td>
             <ul>
@@ -155,7 +167,7 @@ for the updated list.
     <tr>
         <th></th>
         <td>Tree of Thought</td>
-        <td>LLMs are poor at planning, math, and reasoning.</td>
+        <td>LLMs are poor at planning, and reasoning.</td>
         <td>Teach the LLM the steps it has to follow to get to an answer.</td>
         <td><a href="https://arxiv.org/abs/2305.10601">Tree of Thoughts: Deliberate Problem Solving with LLMs</a></td>
         <td>
@@ -187,7 +199,7 @@ for the updated list.
         <td></td>
     </tr>
     <tr>
-        <th>Architectural</th>
+        <th>Agentic Architectures</th>
         <td>Retrieval Augmented Generation (RAG)</td>
         <td>Use knowledge the LLM was not trained on, such as confidential information or new information in generation.</td>
         <td>Identify document chunks relevant to a question, add into the context and ask LLM to generate answer.</td>
@@ -248,7 +260,7 @@ for the updated list.
     </tr>
     <tr>
         <th></th>
-        <td>Iterative Self-Refine</td>
+        <td>Iterative Self-Refine (or Reflection)</td>
         <td>Get an LLM to improve its own performance.</td>
         <td>Use the LLM to critique generated text and invoke again.</td>
         <td><a href="https://arxiv.org/abs/2303.17651">Self-Refine: Iterative Refinement with Self-Feedback</a></td>
@@ -259,12 +271,12 @@ for the updated list.
     </tr>
     <tr>
         <th></th>
-        <td>Agents</td>
+        <td>Agentic workflows</td>
         <td>Orchestrate a complex workflow consisting of information retrieval, function calling, and conversation maintenance.</td>
         <td></td>
         <td></td>
-        <td></td>
-        <td></td>
+        <td>Whenever a single LLM call can not do the job.</td>
+        <td>Multiagent, ReAct: different philosophies/ways of doing the orchestration</td>
     </tr>
     <tr>
         <th>Controlling Context</th>
@@ -304,11 +316,35 @@ for the updated list.
     </tr>
     <tr>
         <th></th>
-        <td>History Cache</td>
-        <td>Ensure same answer to repeat query.</td>
-        <td>Cache previous queries and responses to provide deterministic behavior</td>
+        <td>Templates</td>
+        <td>Reduce need for human oversight.</td>
+        <td>Have the LLM generate a limited number of templated responses. The template will be replaced at runtime.</td>
+        <td><a href="https://medium.com/towards-data-science/how-to-choose-the-architecture-for-your-genai-application-6053e862c457">Balancing creativity and risk</a></td>
+        <td>
+            <ul>
+                <li>Assembled reformat: use LLMs to extract the data that goes into the template.</li>
+                <li>ML selection of template: for personalization</li>
+            </ul>
+        </td>
         <td></td>
-        <td>Should you use semantic search or exact match to see if this is a repeat query?</td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Prompt Caching</td>
+        <td>Ensure same answer to repeat query and/or reduce costs.</td>
+        <td>Cache previous queries and responses to provide deterministic behavior.
+            You can cache parts of a prompt (system instructions, context) and not just whole prompts.
+            If the context includes a large PDF, for example, context caching can improve speed.
+        </td>
+        <td>
+            <ul>
+                <li> <a href="https://www.anthropic.com/news/prompt-caching">Anthropic prompt-caching</a></li>
+                <li> <a href="https://ai.google.dev/gemini-api/docs/caching?lang=python">Gemini context caching</a></li>
+            </ul>
+        </td>
+        <td>
+            Should you use semantic search or exact match to see if this is a repeat query?
+        </td>
         <td></td>
     </tr>
     <tr>
