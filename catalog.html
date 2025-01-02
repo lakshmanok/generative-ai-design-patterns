@@ -39,6 +39,7 @@ for the updated list.
         <th>Tradeoffs and Alternatives</th>
         <th>Example demonstrating usage</th>
     </tr>
+    <!-- MANIPULATING OUTPUT STYLE -->
     <tr>
         <th>Controlling Style</th>
         <td>Grammar</td>
@@ -120,6 +121,8 @@ for the updated list.
         <td>See Reverse Neutralization</td>
         <td></td>
     </tr>
+
+    <!-- ADDRESSING CAPABILITY LIMITATIONS of LLMs -->
     <tr>
         <th>Adding Capability</th>
         <td>Adapter Tuning</td>
@@ -198,8 +201,58 @@ for the updated list.
         </td>
         <td></td>
     </tr>
+
+    <!-- ADDRESSING UNRELIABILITY -->
     <tr>
-        <th>Agentic Architectures</th>
+        <th>Unreliable Primitives</th>
+        <td>Dependency Injection</td>
+        <td>LLMs return different answers to same input</td>
+        <td>During development and testing, inject proxies for all internal and external dependencies.</td>
+        <td>
+            <ul>
+                <li><a href="https://medium.com/towards-data-science/evaluation-driven-development-for-agentic-applications-using-pydanticai-d9293ac81d91">Evaluation-driven development</a></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Should proxies be stochastic?</li>
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+     <tr>
+        <th></th>
+        <td>Multiple Responses</td>
+        <td>LLMs responses are highly variable</td>
+        <td>Generate multiple responses and choose the best</td>
+        <td>How to do this efficiently instead of invoking LLM multiple times.</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Automatic Prompt Tuning</td>
+        <td>Ensure that as model versions change, your prompts continue to perform well. </td>
+        <td>Evaluate multiple candidate prompts against desired outputs as part of both development and deployment. Incorporate into CI/CD ML pipelines.</td>
+        <td></td>
+        <td>Can also be used to counteract drift.</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Iterative Self-Refine (or Reflection)</td>
+        <td>Get an LLM to improve its own performance and meet some evaluation criterion.</td>
+        <td>Use the LLM to critique generated text and invoke again.</td>
+        <td><a href="https://arxiv.org/abs/2303.17651">Self-Refine: Iterative Refinement with Self-Feedback</a></td>
+        <td>
+            Use Chain of Thought for a less costly alternative if generation can be expressed in terms of logical steps.
+        </td>
+        <td></td>
+    </tr>
+
+    <!-- AGENTIC ARCHITECTURES -->
+    <tr>
+        <th>Extending LLMs</th>
         <td>Retrieval Augmented Generation (RAG)</td>
         <td>Use knowledge the LLM was not trained on, such as confidential information or new information in generation.</td>
         <td>Identify document chunks relevant to a question, add into the context and ask LLM to generate answer.</td>
@@ -248,26 +301,6 @@ for the updated list.
         <td></td>
         <td>See Grammar for how to ensure compliance to API specs.  See also Tool Functions.</td>
         <td></td>
-    </tr>    
-    <tr>
-        <th></th>
-        <td>Automatic Prompt Tuning</td>
-        <td>Ensure that as model versions change, your prompts continue to perform well. </td>
-        <td>Evaluate multiple candidate prompts against desired outputs as part of both development and deployment. Incorporate into CI/CD ML pipelines.</td>
-        <td></td>
-        <td>Can also be used to counteract drift.</td>
-        <td></td>
-    </tr>
-    <tr>
-        <th></th>
-        <td>Iterative Self-Refine (or Reflection)</td>
-        <td>Get an LLM to improve its own performance.</td>
-        <td>Use the LLM to critique generated text and invoke again.</td>
-        <td><a href="https://arxiv.org/abs/2303.17651">Self-Refine: Iterative Refinement with Self-Feedback</a></td>
-        <td>
-            Use Chain of Thought for a less costly alternative if generation can be expressed in terms of logical steps.
-        </td>
-        <td></td>
     </tr>
     <tr>
         <th></th>
@@ -278,6 +311,8 @@ for the updated list.
         <td>Whenever a single LLM call can not do the job.</td>
         <td>Multiagent, ReAct: different philosophies/ways of doing the orchestration</td>
     </tr>
+
+    <!-- CONTROLLING CONTEXT -->
     <tr>
         <th>Controlling Context</th>
         <td>Example Selection</td>
