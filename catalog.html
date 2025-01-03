@@ -104,6 +104,7 @@ for the updated list.
         </td>
         <td>
             <ul>
+                <li>For simple use cases, Few Shot might suffice.</li>
                 <li>It&#39;s hard to create a dataset that covers all possible topics, so using only a fine-tuned LLM tends to lose of creativity.</li>
                 <li>If all you need is a style checker, you can use an off-the-shelf LLM to enforce a style guide. </li>
                 <li>If your content does cover all possible topics, you can create a RAG and fine-tune every stage of it (see: https://arxiv.org/abs/2308.07968) </li>
@@ -119,6 +120,15 @@ for the updated list.
         <td>Use augmented zero-shot prompting, which augments what&#39;s desired with variations that are non-exemplars.</td>
         <td><a href="https://aclanthology.org/2022.acl-short.94.pdf">A Recipe For Arbitrary Text Style Transfer with Large Language Models</a></td>
         <td>See Reverse Neutralization</td>
+        <td></td>
+    </tr>
+     <tr>
+        <th></th>
+        <td>Preference Optimization</td>
+        <td>Get an LLM to generate content in desired style when it is not possible to explain reason for preference.</td>
+        <td>Generate pairs of responses, have humans choose, and train a reward model through RLHF or DPO.</td>
+        <td><a href="https://huggingface.co/blog/rlhf">RLHF</a> or <a href="https://arxiv.org/abs/2305.18290">Direct Preference Optimization</a></td>
+        <td>Gathering good annotated labels is hard. If you can explain preference rationale, use the other patterns.</td>
         <td></td>
     </tr>
 
@@ -220,14 +230,39 @@ for the updated list.
         </td>
         <td></td>
     </tr>
-     <tr>
+    <tr>
         <th></th>
         <td>Multiple Responses</td>
         <td>LLMs responses are highly variable</td>
         <td>Generate multiple responses and choose the best</td>
          <td></td>
-        <td>How to do this efficiently instead of invoking LLM multiple times.</td>
+        <td>Can do this efficiently by sampling the output multiple times, not necessary to invoke LLM multiple times.</td>
         <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Human-in-the-Loop</td>
+        <td>
+            LLMs can not perform task autonomously because
+            <ul>
+                <li>Human preferences are involved (e.g. travel bookings)</li>
+                <li>Beyond the jagged frontier of LLM capability</li>
+            </ul>
+        </td>
+        <td>Incorporate a human in the loop by treating the human as an agent/tool/action in a multi-agent framework.
+        </td>
+        <td>
+            <ul>
+                <li><a href="https://www.hbs.edu/faculty/Pages/item.aspx?num=64700">Navigating the Jagged Technological Frontier (HBS)</a></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Often in a conversational context, but could also use traditional UIs for humans to steer.</li>
+                <li>Explicitly maintain memory, state and intent between tasks.</li>
+            </ul>
+        </td>
+        <td>Autogen</td>
     </tr>
     <tr>
         <th></th>
