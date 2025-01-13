@@ -226,23 +226,6 @@ for the updated list.
     <!-- ADDRESSING UNRELIABILITY -->
     <tr>
         <th>Unreliable Primitives</th>
-        <td>Dependency Injection</td>
-        <td>LLMs return different answers to same input</td>
-        <td>During development and testing, inject proxies for all internal and external dependencies.</td>
-        <td>
-            <ul>
-                <li><a href="https://medium.com/towards-data-science/evaluation-driven-development-for-agentic-applications-using-pydanticai-d9293ac81d91">Evaluation-driven development</a></li>
-            </ul>
-        </td>
-        <td>
-            <ul>
-                <li>Should proxies be stochastic?</li>
-            </ul>
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <th></th>
         <td>Multiple Responses</td>
         <td>LLMs responses are highly variable</td>
         <td>Generate multiple responses and choose the best</td>
@@ -449,6 +432,54 @@ for the updated list.
         <td></td>
         <td></td>
         <td>Would use collection of techniques (quantization, distillation, caching, etc.)</td>
+        <td></td>
+    </tr>
+
+    <!-- LLM Ops -->
+    <tr>
+        <th>LLM Ops (placeholder)</th>
+        <td>Dependency Injection</td>
+        <td>Testing is difficult when LLMs can return different answers to same input</td>
+        <td>During development and testing, inject proxies for all internal and external dependencies.</td>
+        <td>
+            <ul>
+                <li><a href="https://medium.com/towards-data-science/evaluation-driven-development-for-agentic-applications-using-pydanticai-d9293ac81d91">Evaluation-driven development</a></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Should proxies be stochastic?</li>
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>LLM Evaluators</td>
+        <td>Need to evaluate LLM applications beyond measures like fluency and coherence</td>
+        <td>Use specially trained LLMs to do the evaluation</td>
+        <td>
+            <ul>
+                <li>LLM as judge</li>
+                <li>Train SLMs on custom metrics</li>
+                <li>Convert to a binary problem</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li><a href="https://www.evidentlyai.com/llm-guide/llm-as-a-judge">Pattern</a> description</li>
+                <li>Setting up LLM-as-judge <a href="https://hamel.dev/blog/posts/llm-judge/">Hamel</a></li>
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>Speculative Decoding</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td></td>
     </tr>
 </table>
