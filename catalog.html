@@ -145,7 +145,7 @@ for the updated list.
                 <li>More efficient than fine-tuning of all the weights (instruction tuning).</li>
             </ul></u>
         </td>
-        <td></td>
+        <td>Multimodal: Voice cloning via <a href="https://arxiv.org/pdf/1802.06006">Speaker embedding adaptation</a> </td>
     </tr>
     <tr>
         <th></th>
@@ -175,7 +175,7 @@ for the updated list.
                 <li>If unable to express logic, see Iterative Self-Refine</li>
             </ul>
         </td>
-        <td></td>
+        <td>Can also be used for image understanding, see: <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/multimodal/best_practices_for_vision.ipynb">Anthropic cookbook on counting dogs</a></td>
     </tr>
     <tr>
         <th></th>
@@ -189,6 +189,17 @@ for the updated list.
                 <li>See also Agent frameworks for orchestrating a flow with multiple LLM prompts.</li>
             </ul>
 
+        </td>
+        <td></td>
+    </tr>
+       <tr>
+        <th></th>
+        <td>Conditioning Style</td>
+        <td>It's easier to show an example of images in desired style to mimic, along with text prompt of what to depict.</td>
+        <td>Control diffusion models with a tokenized starting point</td>
+        <td><a href="https://arxiv.org/html/2409.02543v1">Style Tokenizer</a></td>
+        <td>
+            Can also use fine-tuning approach: <a href="https://arxiv.org/abs/2306.00983">StyleDrop</a>
         </td>
         <td></td>
     </tr>
@@ -282,7 +293,7 @@ for the updated list.
         <td>
             Use Chain of Thought for a less costly alternative if generation can be expressed in terms of logical steps.
         </td>
-        <td></td>
+        <td>Multimodal: can be used to improve image generation.</td>
     </tr>
 
     <!-- AGENTIC ARCHITECTURES -->
@@ -335,7 +346,7 @@ for the updated list.
         <td>Teach LLM to emit a domain specific language (SQL, Matplotlib, etc.) that will be processed by a sandbox or backend service.</td>
         <td></td>
         <td>See Grammar for how to ensure compliance to API specs.  See also Tool Functions.</td>
-        <td></td>
+        <td>Multimodal: use code to generate graphs.</td>
     </tr>
     <tr>
         <th></th>
@@ -387,7 +398,7 @@ for the updated list.
         <td>Teach student model on output of larger model.</td>
         <td></td>
         <td>See also Quantization</td>
-        <td></td>
+        <td>Multimodal: creating simpler images</td>
     </tr>
     <tr>
         <th></th>
@@ -420,7 +431,7 @@ for the updated list.
         <td>
             Should you use semantic search or exact match to see if this is a repeat query?
         </td>
-        <td></td>
+        <td>Multimodal: particularly useful for large media like videos that are part of a conversation prompting.</td>
     </tr>
     <tr>
         <th></th>
