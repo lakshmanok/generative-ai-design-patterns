@@ -9,7 +9,7 @@ This book will be focused on GenAI design patterns and this repository captures 
 
 You can find the catalog on GitHub here:
 https://github.com/lakshmanok/generative-ai-design-patterns/blob/main/catalog.html
-and [preview it using this link](https://html-preview.github.io/?url=https://github.com/lakshmanok/generative-ai-design-patterns/blob/main/catalog.html).
+and [preview it using this link](https://htmlpreview.github.io/?https://github.com/lakshmanok/generative-ai-design-patterns/blob/main/catalog.html).
 
 ## How to contribute?
 If you have a neat solution to a problem that you think is recurring, please file an issue.
