@@ -194,7 +194,7 @@ def generate_entry(entry_type: str = None) -> Dict[str, str]:
 
     return {"messages": [
         {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": note + " Style: " + entry_type},
+        {"role": "user", "content": note},
         {"role": "assistant", "content": "Subject: " + subject + "\n\nBody: " + body}
     ]}
 
