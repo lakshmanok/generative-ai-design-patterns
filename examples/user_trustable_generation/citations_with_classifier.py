@@ -247,8 +247,8 @@ def initialize_vector_store() -> Chroma:
             print(f"Loaded vector store with {len(all_docs['ids'])} documents.")
             return vectorstore
 
-def run_interactive_session():
-    """Run an interactive session with the RAG system."""
+def main():
+    """Run the RAG system."""
     print("Loading RAG system...")
 
     # Make sure we have an API key set
@@ -280,9 +280,6 @@ def run_interactive_session():
         import traceback
         traceback.print_exc()
 
-def main():
-    """Run the RAG system."""
-    run_interactive_session()
 
 if __name__ == "__main__":
     main()
