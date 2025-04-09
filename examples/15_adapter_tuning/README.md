@@ -7,7 +7,7 @@ To replicate the example for this pattern, you will need to:
 Run the notebook 1_prepare_data.ipynb
 
 ## Step 2: Try a foundational model
-Run the notebook 2_pretrained.ipynb
+Run the notebook 2_foundational.ipynb
 
 ## Step 3: Sign up on HuggingFace
 We will be adapter tuning the Gemma model.
