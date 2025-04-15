@@ -3,3 +3,5 @@ symbol_lookup.csv
 user-agent*
 company_tickers.json
 generated_qas.json
+outputs
+unsloth_compiled_cache
