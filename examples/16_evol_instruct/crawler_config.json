@@ -1,0 +1,24 @@
+{
+	"download_filings": {
+		"start_year": 2021,
+		"end_year": 2024,
+		"quarters": [1, 2, 3, 4],
+		"filing_types": ["10-K"],
+		"cik_tickers": ["MMM", "AOS", "ABT", "ABBV", "ACN", "ADBE", "AMD", "GOOG", "AMZN", "AAPL", "MSFT", "NVDA", "TSLA", "BRK.B", "JPM", "V", "UNH", "MA", "XOM", "JNJ", "PG", "LLY", "CVX", "HD", "KO", "BAC", "CRM", "ABNB", "PFE", "MRK", "PEP", "AVGO", "COST", "TMO", "WMT", "MCD", "DIS", "CMCSA", "NEE", "T", "VZ", "CSCO", "INTC", "ORCL", "IBM", "TXN", "HON", "GE", "BA", "CAT", "UNP", "UPS", "FDX", "RTX", "LMT", "GD", "NOC", "ADP", "BLK", "PYPL", "INTU", "NOW", "ADSK", "NFLX", "META", "AVB", "PLD", "AMT", "EQIX", "PSA", "SPG", "O", "ARE", "CCI", "WELL", "VTR", "BXP", "SLB", "COP", "EOG", "MRO", "MPC", "CVX", "OXY", "KMI", "WMB", "CNP", "SO", "DUK", "D", "EXC", "AEP", "XEL", "SRE", "ED", "PEG", "FE", "ETR", "ES", "NRG", "PCG", "ALL", "AXP", "AIG", "MET", "PRU", "MMC", "PGR", "CB", "SCHW", "MS", "GS", "C", "WFC", "USB", "PNC", "BK", "TFC", "RF", "KEY", "FITB", "ZION", "HBAN", "MTB", "CFG", "RJF", "IVZ", "AMP", "BEN", "MKTX", "TROW", "LNC", "AJG", "AON", "WRB", "BRO", "MKC", "LH", "CI", "HUM", "ANTM", "CVS", "DGX", "SYK", "BDX", "MDT", "BSX", "EW", "ZBH", "ISRG", "VAR", "RMD", "COO", "BAX", "ABMD", "HOLX", "PKI", "WAT", "TFX", "VEEV", "MTD", "DHR", "FTV", "CTSH", "FIS", "GPN", "MA", "PYPL", "SQ", "ADI", "KEYS", "MXL", "QRVO", "SWKS", "XYL", "ROK", "EMR", "IR", "DOV", "PH", "FTNT", "PANW", "SNPS", "CDNS", "ANSS", "ADBE", "INTC", "QCOM", "TXN", "MU", "KLAC", "LRCX", "AMAT", "MKSI", "TER", "ENPH", "SEDG", "FSLR", "RUN", "CARR", "LEN", "PHM", "DHI", "NVR", "MHK", "TPR", "PVH", "RL", "VFC", "NKE", "LULU", "ROST", "TJX", "KR", "WBA", "CVS", "DG", "DLTR", "KMX", "ORLY", "AZO", "AAP", "GPC", "BBY", "HD", "LOW", "TGT", "WMT", "COST", "AMZN", "EBAY", "BKNG", "EXPE", "MAR", "HLT", "MGM", "CCL", "RCL", "NCLH", "GM", "F", "TSLA", "TM", "HMC", "K", "GIS", "HSY", "MDLZ", "CAG", "SJM", "CPB", "KHC", "MNST", "KO", "PEP", "KDP", "TAP", "MO", "PM", "BTI", "STZ", "BF.B", "DEO", "EL", "CL", "PG", "CLX", "KMB", "IP", "WRK", "SEE", "AVY", "SHW", "PPG", "RPM", "MLM", "APD", "SHW", "IFF", "LYB", "DOW", "EMN", "ECL", "FCX", "NEM", "GOLD", "AEM", "FCX", "RIO", "BHP", "VALE", "ITW", "ROP", "MMM", "AOS", "ALLE", "FAST", "GWW", "SWK", "IR", "JCI", "EMR", "PH", "XYL", "ROK", "CTAS", "URI", "FTV", "WM", "RSG", "AWK", "WTR", "FE", "ED", "XEL", "SO", "DUK", "D", "EXC", "AEP", "CNP", "NRG", "PEG", "ES", "ETR", "NEE", "SRE", "PCG", "CMS", "DTE", "LUMN", "VZ", "T", "AMT", "CCI", "EQIX", "PLD", "PSA", "SPG", "O", "ARE", "VTR", "BXP", "SLG", "DLR", "WELL", "REG", "FRT", "KIM", "PEAK", "EQR", "UDR", "AVB", "MAA", "ESS", "IRM", "EXR", "PSA", "PLD", "AMT", "EQIX", "O", "ARE", "CCI", "WELL", "VTR", "BXP", "SLG", "DLR", "REG", "FRT", "KIM", "PEAK", "EQR", "UDR", "AVB", "MAA", "ESS", "IRM", "EXR"],
+		"user_agent": "genai_design_patterns_book@oreilly.com",
+		"raw_filings_folder": "RAW_FILINGS",
+		"indices_folder": "INDICES",
+		"filings_metadata_file": "FILINGS_METADATA.csv",
+		"skip_present_indices": true
+	},
+	"extract_items": {
+		"raw_filings_folder": "RAW_FILINGS",
+		"extracted_filings_folder": "EXTRACTED_FILINGS",
+		"filings_metadata_file": "FILINGS_METADATA.csv",
+		"filing_types": ["10-K"],
+		"include_signature": false,
+		"items_to_extract": [],
+		"remove_tables": true,
+		"skip_extracted_filings": true
+	}
+}
