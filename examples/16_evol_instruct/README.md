@@ -22,7 +22,10 @@ http://huggingface.co/google/gemma-3-4b-pt
 ## Step 4: Get a sufficiently large machine with a GPU.
 We used a NVIDIA L4 with 32 GB of memory machine on Google Cloud
 
-## Step 5: Adapter Tuning
+## Step 5: Instruction Tuning
 Run the notebook 2_training.ipynb
+
+Note: the dataset required to do step 5 is generated_qas_scored.json and it's checked into Git.
+So you can do just steps 4 and 5 if you want to try out just training the model.
 
 
