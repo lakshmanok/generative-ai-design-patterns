@@ -1,3 +1,5 @@
+# Example from https://github.com/simplescaling/s1?tab=readme-ov-file#vllm
+
 # pip install vllm
 
 from vllm import LLM, SamplingParams
