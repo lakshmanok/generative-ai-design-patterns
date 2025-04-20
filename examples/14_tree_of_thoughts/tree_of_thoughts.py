@@ -298,9 +298,9 @@ class ClaudeTreeOfThoughts:
             return "Failed to generate solution summary due to an error."
 
 # Example usage for a complex reasoning problem
-def main():
+def solve_tot(problem):
     api_key = os.environ.get("ANTHROPIC_API_KEY", "your_api_key_here")
-    print(f"api_key: {api_key}")
+    # print(f"api_key: {api_key}")
     if not api_key:
         raise ValueError("Anthropic API key not found in environment variables")
 
@@ -312,7 +312,24 @@ def main():
         verbose=True
     )
 
-    problem = """
+    solution = tot.solve(problem)
+
+    print("\n=== SOLUTION ===")
+    print(f"Problem: {solution['problem']}")
+    print(f"Final Score: {solution['solution_score']:.2f}")
+    print("\nReasoning Path:")
+    for step in solution['reasoning_path']:
+        print(f"  {step}")
+    print("\nSolution Summary:")
+    print(solution['solution_summary'])
+    print("\nStats:")
+    print(f"  API Calls: {solution['stats']['api_calls']}")
+    print(f"  Time Taken: {solution['stats']['elapsed_time']:.2f} seconds")
+    print(f"  Steps Taken: {solution['stats']['steps_taken']}")
+    
+    
+def main():
+    solve_tot("""
 I need to optimize our supply chain using Tree of Thoughts:
 
 Current situation:
@@ -334,22 +351,7 @@ For each possible configuration:
   - Disruption vulnerability
 4. Compare the risk-adjusted performance of each path
 5. Identify which configuration offers the best balance of cost, speed, and resilience
-    """
-
-    solution = tot.solve(problem)
-
-    print("\n=== SOLUTION ===")
-    print(f"Problem: {solution['problem']}")
-    print(f"Final Score: {solution['solution_score']:.2f}")
-    print("\nReasoning Path:")
-    for step in solution['reasoning_path']:
-        print(f"  {step}")
-    print("\nSolution Summary:")
-    print(solution['solution_summary'])
-    print("\nStats:")
-    print(f"  API Calls: {solution['stats']['api_calls']}")
-    print(f"  Time Taken: {solution['stats']['elapsed_time']:.2f} seconds")
-    print(f"  Steps Taken: {solution['stats']['steps_taken']}")
+    """)
 
 if __name__ == "__main__":
     main()
