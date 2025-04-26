@@ -53,7 +53,7 @@ These are the design patterns covered in the book:
 | 17 | LLM-as-Judge | Evaluation of GenAI capabilities is hard because the tasks that GenAI performs are open-ended. | Provide detailed, multi-dimensional feedback that can be used to compare models, track improvements, and guide further development. | Evaluation is core to many of the other patterns and to building AI applications effectively. | [examples/17_llm_as_judge](examples/17_llm_as_judge) |
 | 18 | Reflection | How to get the LLM to correct an earlier response in response to feedback or criticism. | The feedback is used to modify the prompt that is sent to the LLM a second time. | Reliable performance in most complex tasks where the approach can not be predetermined. | [examples/18_reflection](examples/18_reflection) |
 | 19 | Self-Check | Identify potential hallucinations cost-effectively | Use token probabilities to detect hallucination in LLM responses | In any situation where factual (as opposed to creative) responses are needed. |  [examples/19_self_check](examples/19_self_check) |
-| 20 | Dependency Injection | 
+| 20 | Dependency Injection | Need to independently develop and test each component of an LLM chain. | When you build chains of LLM calls, build them such that it is easy to inject a mock implementation to replace any step of the chain. | In any situation where you chain LLM calls or use external tools. | [examples/20_dependency_injection](examples/20_dependency_injection) |
 | 21 | Guardrails |
 | 22 | Automated Prompt Tuning |
 </details>
