@@ -1,0 +1,122 @@
+Artificial intelligence techniques are becoming a fundamental component of business growth across a wide range of industries. Enterprise technologies that automate and detect patterns can augment human expertise, empowering both employees and applications to make richer, more data-driven decisions.
+
+Complete with case studies, implementation examples, and a survey of the current landscape, this book serves as an ideal starting point for your journey into enterprise AI.
+
+As a developer tasked with building enterprise-level AI applications, you’re looking to learn about the tools and techniques that will help you get the job done. In this book, authors Tom Markiewicz and Josh Zheng—developer advocates for IBM Watson—explore three of the more common uses for AI in the enterprise: natural language processing (NLP), computer vision, and chatbots.You'll also learn methods for creating a data pipeline that forms the backbone for building these applications.
+
+Explore why NLP is the key to mining unstructured data in emails, articles, blog posts, customer support discussions, and other documents
+Gain practical tips for building chatbots, and learn how these applications are used in the customer support and e-commerce industries
+Examine capabilities that computer vision brings to your applications, including image classification and tagging
+Get a high-level guide to data pipelines—the backbone of your AI applications
+
+***
+
+Recent breakthroughs in AI have not only increased demand for AI products, they've also lowered the barriers to entry for those who want to build AI products. The model-as-a-service approach has transformed AI from an esoteric discipline into a powerful development tool that anyone can use. Everyone, including those with minimal or no prior AI experience, can now leverage AI models to build applications. In this book, author Chip Huyen discusses AI engineering: the process of building applications with readily available foundation models.
+
+The book starts with an overview of AI engineering, explaining how it differs from traditional ML engineering and discussing the new AI stack. The more AI is used, the more opportunities there are for catastrophic failures, and therefore, the more important evaluation becomes. This book discusses different approaches to evaluating open-ended models, including the rapidly growing AI-as-a-judge approach.
+
+AI application developers will discover how to navigate the AI landscape, including models, datasets, evaluation benchmarks, and the seemingly infinite number of use cases and application patterns. You'll learn a framework for developing an AI application, starting with simple techniques and progressing toward more sophisticated methods, and discover how to efficiently deploy these applications.
+
+Understand what AI engineering is and how it differs from traditional machine learning engineering
+Learn the process for developing an AI application, the challenges at each step, and approaches to address them
+Explore various model adaptation techniques, including prompt engineering, RAG, fine-tuning, agents, and dataset engineering, and understand how and why they work
+Examine the bottlenecks for latency and cost when serving foundation models and learn how to overcome them
+Choose the right model, dataset, evaluation benchmarks, and metrics for your needs
+Chip Huyen works to accelerate data analytics on GPUs at Voltron Data. Previously, she was with Snorkel AI and NVIDIA, founded an AI infrastructure startup, and taught Machine Learning Systems Design at Stanford. She's the author of the book Designing Machine Learning Systems, an Amazon bestseller in AI.
+
+AI Engineering builds upon and is complementary to Designing Machine Learning Systems (O'Reilly).
+
+***
+
+Machine learning systems are both complex and unique. Complex because they consist of many different components and involve many different stakeholders. Unique because they're data dependent, with data varying wildly from one use case to the next. In this book, you'll learn a holistic approach to designing ML systems that are reliable, scalable, maintainable, and adaptive to changing environments and business requirements.
+
+Author Chip Huyen, co-founder of Claypot AI, considers each design decision--such as how to process and create training data, which features to use, how often to retrain models, and what to monitor--in the context of how it can help your system as a whole achieve its objectives. The iterative framework in this book uses actual case studies backed by ample references.
+
+This book will help you tackle scenarios such as:
+
+Engineering data and choosing the right metrics to solve a business problem
+Automating the process for continually developing, evaluating, deploying, and updating models
+Developing a monitoring system to quickly detect and address issues your models might encounter in production
+Architecting an ML platform that serves across use cases
+Developing responsible ML systems
+
+***
+
+Generative AI has revolutionized how organizations tackle problems, accelerating the journey from concept to prototype to solution. While these applications enhance efficiency, they often require extensive planning, drafting, and revising to complete complex tasks. By combining many of these actions, AI agents offer greater autonomy and efficiency, but understanding and deploying them remains a challenge for many organizations, especially as technology and research rapidly develops.
+
+This book is your indispensable guide through this intricate and fast-moving landscape. Author Michael Albada provides a practical and research-based approach to designing and implementing single- and multi-agent systems. It simplifies the complexities and equips you with the tools to move from concept to solution efficiently. By the end, you'll:
+
+Understand the distinct features of foundation model-enabled AI agents
+Discover the core components and design principles of AI agents
+Explore design trade-offs and implement effective multi-agent systems
+Design and deploy tailored AI solutions, enhancing efficiency and innovation in your field
+Michael Albada is a seasoned machine learning engineer with expertise in deploying large-scale solutions for major tech firms including Uber, ServiceNow, and Microsoft. He holds degrees from Stanford University, the University of Cambridge, and Georgia Tech, specializing in machine learning.
+
+***
+
+Drawing from her experience at Google and Meta, Dr. Marily Nika delivers the definitive guide for product managers building AI and GenAI powered products. Packed with smart strategies, actionable tools, and real-world examples, this book breaks down the complex world of AI agents and generative AI products into a playbook for driving innovation to help product leaders bridge the gap between niche AI and GenAI technologies and user pain points. Whether you're already leading product teams or are an aspiring product manager, and regardless of your prior knowledge with AI, this guide will empower you to confidently navigate every stage of the AI product lifecycle.
+
+Confidently manage AI product development with tools, frameworks, strategic insights, and real-world examples from Google, Meta, OpenAI, and more
+Lead product orgs to solve real problems via agentic AI and GenAI capabilities
+Gain AI Awareness and technical fluency to work with AI models, LLMs, and the algorithms that power them; get cross-functional alignment; make strategic trade-offs; and set OKRs
+
+***
+
+The widespread adoption of AI and machine learning is revolutionizing many industries today. Once these technologies are combined with the programmatic availability of historical and real-time financial data, the financial industry will also change fundamentally. With this practical book, you'll learn how to use AI and machine learning to discover statistical inefficiencies in financial markets and exploit them through algorithmic trading.
+
+Author Yves Hilpisch shows practitioners, students, and academics in both finance and data science practical ways to apply machine learning and deep learning algorithms to finance. Thanks to lots of self-contained Python examples, you'll be able to replicate all results and figures presented in the book.
+
+In five parts, this guide helps you:
+
+Learn central notions and algorithms from AI, including recent breakthroughs on the way to artificial general intelligence (AGI) and superintelligence (SI)
+Understand why data-driven finance, AI, and machine learning will have a lasting impact on financial theory and practice
+Apply neural networks and reinforcement learning to discover statistical inefficiencies in financial markets
+Identify and exploit economic inefficiencies through backtesting and algorithmic trading--the automated execution of trading strategies
+Understand how AI will influence the competitive dynamics in the financial industry and what the potential emergence of a financial singularity might bring about
+
+***
+While many introductory guides to AI are calculus books in disguise, this one mostly eschews the math. Instead, author Jeff Prosise helps engineers and software developers build an intuitive understanding of AI to solve business problems. Need to create a system to detect the sounds of illegal logging in the rainforest, analyze text for sentiment, or predict early failures in rotating machinery? This practical book teaches you the skills necessary to put AI and machine learning to work at your company.
+
+Applied Machine Learning and AI for Engineers provides examples and illustrations from the AI and ML course Prosise teaches at companies and research institutions worldwide. There's no fluff and no scary equations—just a fast start for engineers and software developers, complete with hands-on examples.
+
+This book helps you:
+
+Learn what machine learning and deep learning are and what they can accomplish
+Understand how popular learning algorithms work and when to apply them
+Build machine learning models in Python with Scikit-Learn, and neural networks with Keras and TensorFlow
+Train and score regression models and binary and multiclass classification models
+Build facial recognition models and object detection models
+Build language models that respond to natural-language queries and translate text to other languages
+Use Cognitive Services to infuse AI into the apps that you write
+
+***
+
+Large language models (LLMs) and diffusion models such as ChatGPT and Stable Diffusion have unprecedented potential. Because they have been trained on all the public text and images on the internet, they can make useful contributions to a wide variety of tasks. And with the barrier to entry greatly reduced today, practically any developer can harness LLMs and diffusion models to tackle problems previously unsuitable for automation.
+
+With this book, you'll gain a solid foundation in generative AI, including how to apply these models in practice. When first integrating LLMs and diffusion models into their workflows, most developers struggle to coax reliable enough results from them to use in automated systems. Authors James Phoenix and Mike Taylor show you how a set of principles called prompt engineering can enable you to work effectively with AI.
+
+Learn how to empower AI to work for you. This book explains:
+
+The structure of the interaction chain of your program's AI model and the fine-grained steps in between
+How AI model requests arise from transforming the application problem into a document completion problem in the model training domain
+The influence of LLM and diffusion model architecture—and how to best interact with it
+How these principles apply in practice in the domains of natural language processing, text and image generation, and code
+Show and hide more
+
+***
+
+If you're looking to make a career move from programmer to AI specialist, this is the ideal place to start. Based on Laurence Moroney's extremely successful AI courses, this introductory book provides a hands-on, code-first approach to help you build confidence while you learn key topics.
+
+You'll understand how to implement the most common scenarios in machine learning, such as computer vision, natural language processing (NLP), and sequence modeling for web, mobile, cloud, and embedded runtimes. Most books on machine learning begin with a daunting amount of advanced math. This guide is built on practical lessons that let you work directly with the code.
+
+You'll learn:
+
+How to build models with TensorFlow using skills that employers desire
+The basics of machine learning by working with code samples
+How to implement computer vision, including feature detection in images
+How to use NLP to tokenize and sequence words and sentences
+Methods for embedding models in Android and iOS
+How to serve models over the web and in the cloud with TensorFlow Serving
+
+
+
