@@ -54,8 +54,8 @@ These are the design patterns covered in the book:
 | 18 | Reflection | How to get the LLM to correct an earlier response in response to feedback or criticism. | The feedback is used to modify the prompt that is sent to the LLM a second time. | Reliable performance in most complex tasks where the approach can not be predetermined. | [examples/18_reflection](examples/18_reflection) |
 | 19 | Self-Check | Identify potential hallucinations cost-effectively | Use token probabilities to detect hallucination in LLM responses | In any situation where factual (as opposed to creative) responses are needed. |  [examples/19_self_check](examples/19_self_check) |
 | 20 | Dependency Injection | Need to independently develop and test each component of an LLM chain. | When you build chains of LLM calls, build them such that it is easy to inject a mock implementation to replace any step of the chain. | In any situation where you chain LLM calls or use external tools. | [examples/20_dependency_injection](examples/20_dependency_injection) |
-| 21 | Guardrails |
-| 22 | Automated Prompt Tuning |
+| 21 | Prompt Optimization | Need to easily update prompts when dependencies change to maintain level of performance | Systematically set the prompts used in a GenAI pipeline by optimizing them on a dataset of examples | In any situation where you have to reduce the maintenance overhead associated with LLM version changes (and other dependencies). | [examples/21_prompt_optimiation](examples/21_prompt_optimization) |
+
 </details>
 
 <details>
