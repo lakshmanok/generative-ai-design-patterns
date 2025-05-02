@@ -1,0 +1,118 @@
+digraph G {
+
+       "Florida" -> "Houston" [label="65-63"]
+   subgraph cluster_national_championship {
+       label = "National championship"
+       {rank = same; "Houston"; }
+   }
+       "Alabama State" -> "Saint Francis" [label="70-68"]
+       "North Carolina" -> "San Diego State" [label="95-68"]
+   subgraph cluster_first_four {
+       label = "First Four"
+       {rank = same; "Saint Francis"; "San Diego State"; }
+   }
+       "Mount St. Mary's" -> "American University" [label="83-72"]
+       "Xavier" -> "Texas" [label="86-80"]
+   subgraph cluster_first_four {
+       label = "First Four"
+       {rank = same; "American University"; "Texas"; }
+   }
+       "Creighton" -> "Louisville" [label="89-75"]
+       "Purdue" -> "High Point" [label="75-63"]
+       "Wisconsin" -> "Montana" [label="85-66"]
+       "Houston" -> "SIU Edwardsville" [label="78-40"]
+       "Auburn" -> "Alabama State" [label="83-63"]
+       "McNeese" -> "Clemson" [label="69-67"]
+       "BYU" -> "VCU" [label="80-71"]
+       "Gonzaga" -> "Georgia" [label="89-68"]
+       "Tennessee" -> "Wofford" [label="77-62"]
+       "Arkansas" -> "Kansas" [label="79-72"]
+       "Texas A&M" -> "Yale" [label="80-71"]
+       "Drake" -> "Missouri" [label="67-57"]
+       "UCLA" -> "Utah State" [label="72-47"]
+       "St. John's" -> "Omaha" [label="83-53"]
+       "Michigan" -> "UC San Diego" [label="68-65"]
+       "Texas Tech" -> "UNC Wilmington" [label="82-72"]
+   subgraph cluster_round_of_64 {
+       label = "Round of 64"
+       {rank = same; "Louisville"; "High Point"; "Montana"; "SIU Edwardsville"; "Alabama State"; "Clemson"; "VCU"; "Georgia"; "Wofford"; "Kansas"; "Yale"; "Missouri"; "Utah State"; "Omaha"; "UC San Diego"; "UNC Wilmington";}
+   }
+       "Baylor" -> "Mississippi State" [label="75-72"]
+       "Alabama" -> "Robert Morris" [label="90-81"]
+       "Iowa State" -> "Lipscomb" [label="82-55"]
+       "Colorado State" -> "Memphis" [label="78-70"]
+       "Duke" -> "Mount St. Mary's" [label="93-49"]
+       "Saint Mary's" -> "Vanderbilt" [label="59-56"]
+       "Ole Miss" -> "North Carolina" [label="71-64"]
+       "Maryland" -> "Grand Canyon" [label="81-49"]
+       "Florida" -> "Norfolk State" [label="95-69"]
+       "Kentucky" -> "Troy" [label="76-57"]
+       "New Mexico" -> "Marquette" [label="75-66"]
+       "Arizona" -> "Akron" [label="93-65"]
+       "UConn" -> "Oklahoma" [label="67-59"]
+       "Illinois" -> "Xavier" [label="86-73"]
+       "Michigan State" -> "Bryant" [label="87-62"]
+       "Oregon" -> "Liberty" [label="81-52"]
+   subgraph cluster_round_of_64 {
+       label = "Round of 64"
+       {rank = same; "Mississippi State"; "Robert Morris"; "Lipscomb"; "Memphis"; "Mount St. Mary's"; "Vanderbilt"; "North Carolina"; "Grand Canyon"; "Norfolk State"; "Troy"; "Marquette"; "Akron"; "Oklahoma"; "Xavier"; "Bryant"; "Liberty";}
+   }
+       "Purdue" -> "McNeese" [label="76-62"]
+       "Arkansas" -> "St. John's" [label="75-66"]
+       "Michigan" -> "Texas A&M" [label="91-79"]
+       "Texas Tech" -> "Drake" [label="77-64"]
+       "Auburn" -> "Creighton" [label="82-70"]
+       "BYU" -> "Wisconsin" [label="91-89"]
+       "Houston" -> "Gonzaga" [label="81-76"]
+       "Tennessee" -> "UCLA" [label="67-58"]
+   subgraph cluster_round_of_32 {
+       label = "Round of 32"
+       {rank = same; "McNeese"; "St. John's"; "Texas A&M"; "Drake"; "Creighton"; "Wisconsin"; "Gonzaga"; "UCLA";}
+   }
+       "Florida" -> "UConn" [label="77-75"]
+       "Duke" -> "Baylor" [label="89-66"]
+       "Kentucky" -> "Illinois" [label="84-75"]
+       "Alabama" -> "Saint Mary's" [label="80-66"]
+       "Maryland" -> "Colorado State" [label="72-71"]
+       "Ole Miss" -> "Iowa State" [label="91-78"]
+       "Michigan State" -> "New Mexico" [label="71-63"]
+       "Arizona" -> "Oregon" [label="87-83"]
+   subgraph cluster_round_of_32 {
+       label = "Round of 32"
+       {rank = same; "UConn"; "Baylor"; "Illinois"; "Saint Mary's"; "Colorado State"; "Iowa State"; "New Mexico"; "Oregon";}
+   }
+       "Alabama" -> "BYU" [label="113-88"]
+       "Florida" -> "Maryland" [label="87-71"]
+       "Duke" -> "Arizona" [label="100-93"]
+       "Texas Tech" -> "Arkansas" [label="85-83"]
+   subgraph cluster_sweet_16 {
+       label = "Sweet 16"
+       {rank = same; "BYU"; "Maryland"; "Arizona"; "Arkansas";}
+   }
+       "Michigan State" -> "Ole Miss" [label="73-70"]
+       "Tennessee" -> "Kentucky" [label="78-65"]
+       "Auburn" -> "Michigan" [label="78-65"]
+       "Houston" -> "Purdue" [label="62-60"]
+   subgraph cluster_sweet_16 {
+       label = "Sweet 16"
+       {rank = same; "Ole Miss"; "Kentucky"; "Michigan"; "Purdue";}
+   }
+       "Florida" -> "Texas Tech" [label="84-79"]
+       "Duke" -> "Alabama" [label="85-65"]
+   subgraph cluster_elite_eight {
+       label = "Elite Eight"
+       {rank = same; "Texas Tech"; "Alabama"; }
+   }
+       "Houston" -> "Tennessee" [label="69-50"]
+       "Auburn" -> "Michigan State" [label="70-64"]
+   subgraph cluster_elite_eight {
+       label = "Elite Eight"
+       {rank = same; "Tennessee"; "Michigan State"; }
+   }
+       "Florida" -> "Auburn" [label="79-73"]
+       "Houston" -> "Duke" [label="70-67"]
+   subgraph cluster_final_four {
+       label = "Final Four"
+       {rank = same; "Auburn"; "Duke";}
+   }
+}

@@ -1,0 +1,10 @@
+digraph tournament  {
+       "Florida" -> "Texas Tech" [label="84-79"]
+       "Duke" -> "Alabama" [label="85-65"]
+       "Auburn" -> "Michigan State" [label="70-64"]
+       "Houston" -> "Tennessee" [label="69-50"]
+   subgraph cluster_elite_eight {
+       label = "Elite Eight"
+       {rank = same; "Texas Tech"; "Alabama"; "Michigan State"; "Tennessee"; }
+   }
+}
