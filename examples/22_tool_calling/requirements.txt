@@ -1,0 +1,10 @@
+googlemaps
+bs4
+langgraph
+langchain
+langchain-community
+langchain-openai
+langchain-google-genai
+deepeval
+langchain-mcp-adapters
+langchain-anthropic
