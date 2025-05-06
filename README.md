@@ -59,9 +59,19 @@ These are the design patterns covered in the book:
 </details>
 
 <details>
-<summary>Chapters 7-9 (not yet started)</summary>
+<summary>Chapter 7: Enabling Action </summary>
 
-* Chapter 7: Enabling action and autonomy
+| Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
+| -------------: | :----------- | :------ | :------- | :-------------- | :----------- |  
+| 22 | Tool Calling | How can you bridge the LLM and a software API so that the LLM is able to invoke the API and get the job done? | The LLM emits special tokens when it determines that a function needs to be called and also emits the parameters to pass to that function. A client-side postprocessor invokes the function with those parameters, and sends the results back to the LLM. The LLM incorporates the function results in its response. | Whenever you want the LLM to not just state the steps needed, but to execute those steps. Also allows you to incorporate up-to-date knowledge from real-time sources, connect to transactional enterprise systems, perform calculations, and use optimization solvers. | [examples/22_tool_calling](examples/22_tool_calling) |
+| 23 | Code Execution | You have a software system that can do the task, but invoking it involves a DSL. | LLMs generate code that is then executed by an external system. | Creating graphs, annotating images, updating databases. | [examples/23_code_execution](examples/23_code_execution) |
+| 24 | Multi-agent Collaboration | Handle multi-step tasks that require different tools, maintain content over extended interactions, evaluate situations and take appropriate actions without human intervention, and adapt to user preferences. | Multi-agent architectures allow you to solve real-world problems using specialized single-purpose agents and organizing them in ways that mimic human organizational structures. | Complex reasoning, multi-step problem solving, collaborative content creation, adversarial verification, specialized domain integration, self-improving systems | [examples/24_multi_agent](examples/24_multi_agent) |
+    
+</details>
+
+<details>
+<summary>Chapters 8-9 (not yet started)</summary>
+
 * Chapter 8: Meeting Constraints
 * Chapter 9: Ensuring Resilience
 
