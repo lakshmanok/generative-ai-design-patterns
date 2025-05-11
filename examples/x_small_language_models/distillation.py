@@ -113,46 +113,54 @@ Documentation:
     print(f"Created dataset with {len(dataset['train'])} training examples and {len(dataset['test'])} validation examples")
     return dataset
 
-def prepare_model_and_tokenizer(
-    model_name: str = "google/gemma-3-1b-it"
-) -> tuple[AutoModelForCausalLM, AutoTokenizer]:
+def prepare_models(
+    teacher_model_name: str = "claude-3-7-sonnet-20250219",  # or any other large model
+    student_model_name: str = "google/gemma-3-1b-it"
+) -> tuple[AutoModelForCausalLM, AutoModelForCausalLM, AutoTokenizer]:
     """
-    Load and prepare the model and tokenizer for fine-tuning.
+    Load and prepare both teacher and student models for distillation.
 
     Args:
-        model_name: Name of the model to load
+        teacher_model_name: Name of the teacher model
+        student_model_name: Name of the student model
 
     Returns:
-        Tuple of (model, tokenizer)
+        Tuple of (teacher_model, student_model, tokenizer)
     """
-    print(f"Loading model and tokenizer: {model_name}")
-
-    # Load tokenizer
+    # Load tokenizer (we'll use the student's tokenizer)
     tokenizer = AutoTokenizer.from_pretrained(
-        model_name,
+        student_model_name,
         trust_remote_code=True,
         padding_side="right",
         truncation_side="right"
     )
 
-    # Add special tokens if needed
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
-    # Load model with 4-bit quantization for memory efficiency
-    model = AutoModelForCausalLM.from_pretrained(
-        model_name,
+    # Load teacher model (frozen)
+    teacher_model = AutoModelForCausalLM.from_pretrained(
+        teacher_model_name,
+        torch_dtype=torch.float16,
+        device_map="auto",
+        trust_remote_code=True
+    )
+    teacher_model.eval()  # Set to evaluation mode
+
+    # Load student model (trainable)
+    student_model = AutoModelForCausalLM.from_pretrained(
+        student_model_name,
         torch_dtype=torch.float16,
         device_map="auto",
         trust_remote_code=True
     )
 
-    # Prepare model for 4-bit training
-    model = prepare_model_for_kbit_training(model)
+    # Prepare student model for training
+    student_model = prepare_model_for_kbit_training(student_model)
 
     # Configure LoRA for efficient fine-tuning
     lora_config = LoraConfig(
-        r=16,  # rank
+        r=16,
         lora_alpha=32,
         target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
         lora_dropout=0.05,
@@ -160,33 +168,29 @@ def prepare_model_and_tokenizer(
         task_type="CAUSAL_LM"
     )
 
-    # Apply LoRA to the model
-    model = get_peft_model(model, lora_config)
+    # Apply LoRA to student model
+    student_model = get_peft_model(student_model, lora_config)
+    student_model.gradient_checkpointing_enable()
 
-    # Enable gradient checkpointing to save memory
-    model.gradient_checkpointing_enable()
-
-    print("Model and tokenizer loaded successfully")
-    print(f"Trainable parameters: {sum(p.numel() for p in model.parameters() if p.requires_grad)}")
-
-    return model, tokenizer
+    return teacher_model, student_model, tokenizer
 
 def train_model(
-    model: AutoModelForCausalLM,
+    teacher_model: AutoModelForCausalLM,
+    student_model: AutoModelForCausalLM,
     tokenizer: AutoTokenizer,
     dataset: Dataset,
     output_dir: str
 ) -> None:
     """
-    Fine-tune the model on the generated dataset.
+    Train the student model using knowledge distillation.
 
     Args:
-        model: The model to fine-tune
-        tokenizer: The tokenizer for the model
+        teacher_model: The teacher model (frozen)
+        student_model: The student model to train
+        tokenizer: Tokenizer for both models
         dataset: Training dataset
         output_dir: Directory to save the fine-tuned model
     """
-    # Create output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
 
     # Tokenize the dataset
@@ -227,23 +231,20 @@ def train_model(
         report_to="tensorboard"
     )
 
-    # Set up data collator
-    data_collator = DataCollatorForLanguageModeling(
-        tokenizer=tokenizer,
-        mlm=False
-    )
-
-    # Initialize trainer
-    trainer = Trainer(
-        model=model,
+    # Initialize distillation trainer
+    trainer = DistillationTrainer(
+        teacher_model=teacher_model,
+        temperature=2.0,  # Temperature for softening probability distributions
+        alpha=0.5,  # Weight for distillation loss
+        model=student_model,
         args=training_args,
         train_dataset=tokenized_dataset["train"],
         eval_dataset=tokenized_dataset["test"],
-        data_collator=data_collator,
+        data_collator=DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False),
     )
 
     # Train the model
-    print("Starting training...")
+    print("Starting distillation training...")
     trainer.train()
 
     # Save the final model
@@ -260,7 +261,7 @@ def train_model(
     print(f"Final evaluation metrics: {metrics}")
 
 def main():
-    # Initialize Anthropic client
+    # Initialize Anthropic client for data generation
     client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
     # Define the prompt template for code documentation generation
@@ -288,12 +289,13 @@ def main():
     # Create dataset
     dataset = create_dataset(examples)
 
-    # Prepare model and tokenizer
-    model, tokenizer = prepare_model_and_tokenizer()
+    # Prepare models and tokenizer
+    teacher_model, student_model, tokenizer = prepare_models()
 
-    # Train model
+    # Train model using distillation
     train_model(
-        model=model,
+        teacher_model=teacher_model,
+        student_model=student_model,
         tokenizer=tokenizer,
         dataset=dataset,
         output_dir="./distilled_model"

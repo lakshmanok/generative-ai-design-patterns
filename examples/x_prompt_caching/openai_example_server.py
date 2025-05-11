@@ -1,7 +1,6 @@
 import os
 import time
-import json
-from anthropic import Anthropic
+from openai import OpenAI
 from dotenv import load_dotenv
 
 if os.path.exists("examples/saved_keys.env"):
@@ -10,7 +9,7 @@ else:
     raise FileNotFoundError("examples/saved_keys.env not found")
 
 def main():
-    client = Anthropic()
+    client = OpenAI()
 
     # Create a long system prompt that exceeds 1024 tokens
     long_system_prompt = """You are an expert AI assistant with deep knowledge across multiple domains.
@@ -122,74 +121,79 @@ def main():
     - Maintain professionalism
     - Ensure accuracy"""
 
-    # Your prompt
-    prompt = "Explain the concept of prompt caching in AI systems."
-
     # Common parameters for all requests
     common_params = {
-        "model": "claude-3-7-sonnet-20250219",
-        "max_tokens": 4096,
-        "system": long_system_prompt,
+        "model": "gpt-4o-mini",
+        "messages": [
+            {"role": "system", "content": long_system_prompt},
+            {"role": "user", "content": "What is the capital of Monaco?"}
+        ],
         "temperature": 0.0,  # Set to 0 for deterministic responses
-        "messages": [{"role": "user", "content": [{"type": "text", "text": prompt}]}],
-        "stream": False
+        "seed": 42,  # Fixed seed for deterministic responses
+        "response_format": {"type": "text"},  # Ensure consistent response format
+        "cache_control": "force-cache"  # Force cache usage
     }
 
-    # First call - will make API request
-    print("\nFirst call:")
-    response1_start_time = time.time()
-    response1 = client.messages.create(**common_params)
-    response1_end_time = time.time()
-    print(f"First response length: {len(response1.content[0].text)}")
-    print(f"First response hash: {hash(response1.content[0].text)}")
+    # Run 5 identical requests and measure time
+    timings = []
+    response_hashes = []
 
-    # Check for cache creation tokens - using direct attribute access
-    if hasattr(response1, 'usage'):
-        print(f"Cache creation tokens: {getattr(response1.usage, 'cache_creation_input_tokens', 0)}")
-        print(f"Cache read tokens: {getattr(response1.usage, 'cache_read_input_tokens', 0)}")
-        print(f"Input tokens: {response1.usage.input_tokens}")
-        print(f"Output tokens: {response1.usage.output_tokens}")
+    print("Making 5 identical requests to test server-side caching...")
+    print("Note: OpenAI's server-side cache typically has a TTL of a few minutes")
 
-    # Second call - should use caching
-    print("\nSecond call:")
-    response2_start_time = time.time()
-    response2 = client.messages.create(**common_params)
-    response2_end_time = time.time()
-    print(f"Second response length: {len(response2.content[0].text)}")
-    print(f"Second response hash: {hash(response2.content[0].text)}")
+    for i in range(5):
+        print(f"\nRun {i+1}:")
+        start_time = time.time()
+        try:
+            response = client.chat.completions.create(**common_params)
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            timings.append(elapsed_time)
 
-    # Check for cache read tokens
-    if hasattr(response2, 'usage'):
-        print(f"Cache creation tokens: {getattr(response2.usage, 'cache_creation_input_tokens', 0)}")
-        print(f"Cache read tokens: {getattr(response2.usage, 'cache_read_input_tokens', 0)}")
-        print(f"Input tokens: {response2.usage.input_tokens}")
-        print(f"Output tokens: {response2.usage.output_tokens}")
+            # Store response hash for comparison
+            response_hash = hash(response.choices[0].message.content)
+            response_hashes.append(response_hash)
 
-    # Third call - should also use caching
-    print("\nThird call:")
-    response3_start_time = time.time()
-    response3 = client.messages.create(**common_params)
-    response3_end_time = time.time()
-    print(f"Third response length: {len(response3.content[0].text)}")
-    print(f"Third response hash: {hash(response3.content[0].text)}")
+            print(f"Time: {elapsed_time:.2f} seconds")
+            print(f"Response length: {len(response.choices[0].message.content)} characters")
+            print(f"Response hash: {response_hash}")
 
-    # Check for cache read tokens
-    if hasattr(response3, 'usage'):
-        print(f"Cache creation tokens: {getattr(response3.usage, 'cache_creation_input_tokens', 0)}")
-        print(f"Cache read tokens: {getattr(response3.usage, 'cache_read_input_tokens', 0)}")
-        print(f"Input tokens: {response3.usage.input_tokens}")
-        print(f"Output tokens: {response3.usage.output_tokens}")
+            # Add a small delay between requests to avoid rate limits
+            if i < 4:  # Don't delay after the last request
+                time.sleep(1)
+        except Exception as e:
+            print(f"Error on run {i+1}: {str(e)}")
+            if "cache_control" in str(e):
+                print("Removing cache_control parameter and retrying...")
+                del common_params["cache_control"]
+                response = client.chat.completions.create(**common_params)
+                end_time = time.time()
+                elapsed_time = end_time - start_time
+                timings.append(elapsed_time)
+                response_hash = hash(response.choices[0].message.content)
+                response_hashes.append(response_hash)
+                print(f"Time: {elapsed_time:.2f} seconds")
+                print(f"Response length: {len(response.choices[0].message.content)} characters")
+                print(f"Response hash: {response_hash}")
 
-    # Verify responses are identical
-    print("\nResponse comparisons:")
-    print(f"First == Second: {response1.content[0].text == response2.content[0].text}")
-    print(f"Second == Third: {response2.content[0].text == response3.content[0].text}")
-    print(f"First == Third: {response1.content[0].text == response3.content[0].text}")
+    # Print summary statistics
+    print("\nSummary:")
+    print(f"Average time: {sum(timings)/len(timings):.2f} seconds")
+    print(f"Min time: {min(timings):.2f} seconds")
+    print(f"Max time: {max(timings):.2f} seconds")
+    print(f"Time difference between fastest and slowest: {max(timings) - min(timings):.2f} seconds")
 
-    print("\nTiming:")
-    print(f"First call time: {response1_end_time - response1_start_time:.2f} seconds")
-    print(f"Second call time: {response2_end_time - response2_start_time:.2f} seconds")
-    print(f"Third call time: {response3_end_time - response3_start_time:.2f} seconds")
+    # Check if all responses were identical
+    all_identical = all(h == response_hashes[0] for h in response_hashes)
+    print(f"\nAll responses identical: {all_identical}")
+
+    if not all_identical:
+        print("Note: Different response hashes indicate that server-side caching might not be working.")
+        print("This could be due to:")
+        print("1. Cache TTL expiration")
+        print("2. Server load balancing")
+        print("3. Rate limiting")
+        print("4. Different server instances handling the requests")
 
 if __name__ == "__main__":
     main()
