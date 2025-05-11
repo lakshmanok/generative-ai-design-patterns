@@ -84,7 +84,7 @@ These are the design patterns covered in the book:
 
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |  
-| 28 | Pregeneration |  |  |  |  [examples/28_pregeneration](examples/28_pregeneration) |
+| 28 | Templated Generation |  |  |  |  [examples/28_templated_generation](examples/28_templated_generation) |
 | 29 | Self-Check | Identify potential hallucinations cost-effectively | Use token probabilities to detect hallucination in LLM responses | In any situation where factual (as opposed to creative) responses are needed. |  [examples/29_self_check](examples/29_self_check) |
 | 30 | Guardails |  |  |  |  [examples/30_guardrails](examples/30_guardrails) |
 
