@@ -52,9 +52,8 @@ These are the design patterns covered in the book:
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |  
 | 17 | LLM-as-Judge | Evaluation of GenAI capabilities is hard because the tasks that GenAI performs are open-ended. | Provide detailed, multi-dimensional feedback that can be used to compare models, track improvements, and guide further development. | Evaluation is core to many of the other patterns and to building AI applications effectively. | [examples/17_llm_as_judge](examples/17_llm_as_judge) |
 | 18 | Reflection | How to get the LLM to correct an earlier response in response to feedback or criticism. | The feedback is used to modify the prompt that is sent to the LLM a second time. | Reliable performance in most complex tasks where the approach can not be predetermined. | [examples/18_reflection](examples/18_reflection) |
-| 19 | Self-Check | Identify potential hallucinations cost-effectively | Use token probabilities to detect hallucination in LLM responses | In any situation where factual (as opposed to creative) responses are needed. |  [examples/19_self_check](examples/19_self_check) |
-| 20 | Dependency Injection | Need to independently develop and test each component of an LLM chain. | When you build chains of LLM calls, build them such that it is easy to inject a mock implementation to replace any step of the chain. | In any situation where you chain LLM calls or use external tools. | [examples/20_dependency_injection](examples/20_dependency_injection) |
-| 21 | Prompt Optimization | Need to easily update prompts when dependencies change to maintain level of performance | Systematically set the prompts used in a GenAI pipeline by optimizing them on a dataset of examples | In any situation where you have to reduce the maintenance overhead associated with LLM version changes (and other dependencies). | [examples/21_prompt_optimiation](examples/21_prompt_optimization) |
+| 19 | Dependency Injection | Need to independently develop and test each component of an LLM chain. | When you build chains of LLM calls, build them such that it is easy to inject a mock implementation to replace any step of the chain. | In any situation where you chain LLM calls or use external tools. | [examples/19_dependency_injection](examples/19_dependency_injection) |
+| 20 | Prompt Optimization | Need to easily update prompts when dependencies change to maintain level of performance | Systematically set the prompts used in a GenAI pipeline by optimizing them on a dataset of examples | In any situation where you have to reduce the maintenance overhead associated with LLM version changes (and other dependencies). | [examples/20_prompt_optimiation](examples/20_prompt_optimization) |
 
 </details>
 
@@ -63,24 +62,36 @@ These are the design patterns covered in the book:
 
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |  
-| 22 | Tool Calling | How can you bridge the LLM and a software API so that the LLM is able to invoke the API and get the job done? | The LLM emits special tokens when it determines that a function needs to be called and also emits the parameters to pass to that function. A client-side postprocessor invokes the function with those parameters, and sends the results back to the LLM. The LLM incorporates the function results in its response. | Whenever you want the LLM to not just state the steps needed, but to execute those steps. Also allows you to incorporate up-to-date knowledge from real-time sources, connect to transactional enterprise systems, perform calculations, and use optimization solvers. | [examples/22_tool_calling](examples/22_tool_calling) |
-| 23 | Code Execution | You have a software system that can do the task, but invoking it involves a DSL. | LLMs generate code that is then executed by an external system. | Creating graphs, annotating images, updating databases. | [examples/23_code_execution](examples/23_code_execution) |
-| 24 | Multi-agent Collaboration | Handle multi-step tasks that require different tools, maintain content over extended interactions, evaluate situations and take appropriate actions without human intervention, and adapt to user preferences. | Multi-agent architectures allow you to solve real-world problems using specialized single-purpose agents and organizing them in ways that mimic human organizational structures. | Complex reasoning, multi-step problem solving, collaborative content creation, adversarial verification, specialized domain integration, self-improving systems | [examples/24_multi_agent](examples/24_multi_agent) |
+| 21 | Tool Calling | How can you bridge the LLM and a software API so that the LLM is able to invoke the API and get the job done? | The LLM emits special tokens when it determines that a function needs to be called and also emits the parameters to pass to that function. A client-side postprocessor invokes the function with those parameters, and sends the results back to the LLM. The LLM incorporates the function results in its response. | Whenever you want the LLM to not just state the steps needed, but to execute those steps. Also allows you to incorporate up-to-date knowledge from real-time sources, connect to transactional enterprise systems, perform calculations, and use optimization solvers. | [examples/21_tool_calling](examples/21_tool_calling) |
+| 22 | Code Execution | You have a software system that can do the task, but invoking it involves a DSL. | LLMs generate code that is then executed by an external system. | Creating graphs, annotating images, updating databases. | [examples/22_code_execution](examples/22_code_execution) |
+| 23 | Multi-agent Collaboration | Handle multi-step tasks that require different tools, maintain content over extended interactions, evaluate situations and take appropriate actions without human intervention, and adapt to user preferences. | Multi-agent architectures allow you to solve real-world problems using specialized single-purpose agents and organizing them in ways that mimic human organizational structures. | Complex reasoning, multi-step problem solving, collaborative content creation, adversarial verification, specialized domain integration, self-improving systems | [examples/23_multi_agent](examples/23_multi_agent) |
     
 </details>
 
 <details>
-<summary>Chapters 8-9 (not yet started)</summary>
+<summary>Chapters 8: Meeting Constraints </summary>
 
-* Chapter 8: Meeting Constraints
-* Chapter 9: Ensuring Resilience
+| Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
+| -------------: | :----------- | :------ | :------- | :-------------- | :----------- |
+| 24 | Small Language Models (SLMs) |  |  |  |  [examples/24_slms](examples/24_slms) |
+| 25 | Prompt Caching |  |  |  |  [examples/24_slms](examples/24_slms) |
+| 26 | Optimizing Inference |  |  |  |  [examples/24_slms](examples/24_slms) |
+| 27 | Inference Distribution Testing |  |  |  |  [examples/24_slms](examples/24_slms) |
+    
+</details>
+<details>
+<summary>Chapters 9: Setting Safeguards</summary>
+
+| Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
+| -------------: | :----------- | :------ | :------- | :-------------- | :----------- |  
+| 28 | Pregeneration |  |  |  |  [examples/28_pregeneration](examples/28_pregeneration) |
+| 29 | Self-Check | Identify potential hallucinations cost-effectively | Use token probabilities to detect hallucination in LLM responses | In any situation where factual (as opposed to creative) responses are needed. |  [examples/29_self_check](examples/29_self_check) |
+| 30 | Guardails |  |  |  |  [examples/30_guardrails](examples/30_guardrails) |
 
 </details>
 
 ## How to contribute?
-* We are looking for reviewers for the book. Please DM me on LinkedIn saying you are interested. Key criteria: experience building GenAI applications, ability to read fast, provide insightful feedback. If there are only specific chapters you feel qualified to review, please do note that.
-* If you have a neat solution to a problem that you think is recurring, please file an issue.
-* If you know of a production use of any of the patterns in the book, submit a PR to update the USAGE.md in the folder corresponding to the pattern.
+* If you have implemented any of the patterns in the book in production, submit a PR to update the USAGE.md in the folder corresponding to the pattern.
 See [examples/15_adapter_tuning/USAGE.md](examples/15_adapter_tuning/USAGE.md) for an example.
 
 
