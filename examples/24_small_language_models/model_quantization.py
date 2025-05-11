@@ -4,20 +4,25 @@ import os
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from dotenv import load_dotenv
 
-if os.path.exists("examples/keys.env"):
-    load_dotenv("examples/keys.env")
+# Load environment variables
+if os.path.exists("../keys.env"):
+    load_dotenv("../keys.env")
 else:
-    raise FileNotFoundError("examples/keys.env not found")
-
+    raise FileNotFoundError("keys.env not found")
 
 def load_model(model_name, quantization_config=None):
     """Load a model with optional quantization."""
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    hf_token = os.getenv("HF_TOKEN")
+    if not hf_token:
+        raise ValueError("HF_TOKEN environment variable not set")
+
+    tokenizer = AutoTokenizer.from_pretrained(model_name, token=hf_token)
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
         quantization_config=quantization_config,
         device_map="auto",
-        torch_dtype=torch.float16
+        torch_dtype=torch.float16,
+        token=hf_token
     )
     return model, tokenizer
 
