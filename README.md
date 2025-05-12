@@ -84,8 +84,8 @@ These are the design patterns covered in the book:
 
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |  
-| 28 | Template Generation |  |  |  |  [examples/28_template_generation](examples/28_template_generation) |
-| 29 | Assembled Reformat |  |  |  |  [examples/29_assembled_reformat](examples/29_assembled_reformat) |
+| 28 | Template Generation | The risk of sending content without human review is very high, but human review will not scale to the volume of communications. | Pregenerate templates that are reviewed beforehand. Inference time requires only deterministic string replacement, and is therefore safe to directly send to consumers. | Personalized communications in business to consumer settings. | [examples/28_template_generation](examples/28_template_generation) |
+| 29 | Assembled Reformat | Content needs to be presented in an appealing way, but the risk posed by dynamically generated content is too high. | Reduce the risk of inaccurate or hallucinated content by separating out the task of content creation into two low-risk steps — first, assembling data in low-risk ways and second, formatting the content based on that data. | Situations where accurate content needs to be presented in appealing ways, such as in product catalogs. | [examples/29_assembled_reformat](examples/29_assembled_reformat) |
 | 30 | Self-Check | Identify potential hallucinations cost-effectively | Use token probabilities to detect hallucination in LLM responses | In any situation where factual (as opposed to creative) responses are needed. |  [examples/30_self_check](examples/30_self_check) |
 | 31 | Guardails |  |  |  |  [examples/30_guardrails](examples/30_guardrails) |
 
