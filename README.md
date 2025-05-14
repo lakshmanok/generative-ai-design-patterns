@@ -34,7 +34,7 @@ These are the design patterns covered in the book:
 </details>
 
 <details>
-<summary>Chapter 5: Teaching Capability </summary>
+<summary>Chapter 5: Extending Model Capability </summary>
   
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |
