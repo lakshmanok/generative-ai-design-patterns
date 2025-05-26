@@ -1,3 +1,6 @@
+# This example shows how to quantize a model using bitsandbytes.
+# pip install bitsandbytes torch transformers dotenv
+
 import torch
 import time
 import os
@@ -42,7 +45,7 @@ def generate_response(model, tokenizer, prompt, max_length=100):
     return response, generation_time
 
 def main():
-    model_name = "google/gemma3-1b-it"
+    model_name = "google/gemma-3-1b-it"
 
     # Load original model
     print("Loading original model...")
