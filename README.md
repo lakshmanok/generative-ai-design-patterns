@@ -1,8 +1,9 @@
-# generative-ai-design-patterns
-Code repo for in-progress O'Reilly book on GenAI design patterns by Valliappa Lakshmanan and Hannes Hapke. <br/>
-It is a companion book to the O'Reilly book [Machine Learning Design Patterns](https://www.amazon.com/Machine-Learning-Design-Patterns-Preparation/dp/1098115783).
+# Generative AI Design Patterns
+|    |    |
+| -- | -- |
+| <a href="https://www.oreilly.com/library/view/generative-ai-design/9798341622654/"><img src="diagrams/cover.jpg" width="500"></a> | Code repo for in-progress O'Reilly book on GenAI design patterns by Valliappa Lakshmanan and Hannes Hapke. https://www.oreilly.com/library/view/generative-ai-design/9798341622654/ <br/><br/> 
 
-## Generative AI Design Patterns
+## Summary of patterns
 These are the design patterns covered in the book:
 
 <details>
@@ -91,8 +92,11 @@ These are the design patterns covered in the book:
 
 </details>
 
-## How to contribute?
+## Want to be cited in future versions of the book?
 * If you have implemented any of the patterns in the book in production, submit a PR to update the USAGE.md in the folder corresponding to the pattern.
 See [examples/15_adapter_tuning/USAGE.md](examples/15_adapter_tuning/USAGE.md) for an example.
+
+## Further reading
+The GenAI Design Patterns book is a companion book to the O'Reilly book [Machine Learning Design Patterns](https://www.amazon.com/Machine-Learning-Design-Patterns-Preparation/dp/1098115783).
 
 
