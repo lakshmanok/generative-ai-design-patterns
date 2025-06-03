@@ -348,6 +348,7 @@ def main():
     TEACHER_MODEL_NAME = "google/gemma-3-12b-it"     # 12B teacher model (~24GB in FP16)
     STUDENT_MODEL_NAME = "google/gemma-3-1b-it"      # 1B student model (~2GB in FP16)
     OUTPUT_DIR = "./distilled_model"
+    NUM_TRAIN_EPOCHS = 10
 
     # Validate that training data exists
     print("\n🔍 Validating training data...")
@@ -408,7 +409,7 @@ def main():
 
     training_args = TrainingArguments(
         output_dir=OUTPUT_DIR,
-        num_train_epochs=3,
+        num_train_epochs=NUM_TRAIN_EPOCHS,
         per_device_train_batch_size=2,
         per_device_eval_batch_size=4,
         gradient_accumulation_steps=8,
