@@ -4,14 +4,16 @@ from pathlib import Path
 from typing import Dict, Any, Optional, List
 import hashlib
 import time
+import re
+
 from anthropic import Anthropic
 
 from dotenv import load_dotenv
 
-if os.path.exists("examples/keys.env"):
-    load_dotenv("examples/keys.env")
+if os.path.exists("examples/saved_keys.env"):
+    load_dotenv("examples/saved_keys.env")
 else:
-    raise FileNotFoundError("examples/keys.env not found")
+    raise FileNotFoundError("examples/saved_keys.env not found")
 
 
 class PromptCache:
@@ -19,6 +21,7 @@ class PromptCache:
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(exist_ok=True)
         self.client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+        self.num_semantic_requests = 10
 
     def _get_cache_key(self, prompt: str) -> str:
         """Generate a unique cache key for the prompt."""
@@ -38,18 +41,18 @@ class PromptCache:
                 return json.load(f)
         return None
 
-    def _get_semantic_requests(self, prompt: str) -> List[str]:
-      """Use LLM to get 3 semantic, alternative requests for the prompt."""
+    def _get_semantic_requests(self, prompt: str, show_alternatives: bool = True) -> List[str]:
+      """Use LLM to get {self.num_semantic_requests} semantic, alternative requests for the prompt."""
 
       claude_prompt = f"""
-      You are a helpful assistant that generates 3 semantic, alternative requests for a given prompt.
+      You are a helpful assistant that generates {self.num_semantic_requests} semantic, alternative requests for a given prompt.
       The requests should be different from the original prompt, but still related to the same topic.
       The requests should be in the same language as the prompt.
 
       Here is the prompt:
       {prompt}
 
-      Return a JSON array of 3 requests.
+      Return a JSON array of {self.num_semantic_requests} requests.
       """
       response = self.client.messages.create(
         model="claude-3-7-sonnet-20250219",
@@ -57,9 +60,18 @@ class PromptCache:
         messages=[{"role": "user", "content": claude_prompt}]
       )
       try:
-          return json.loads(response.content[0].text)
+          response_text = response.content[0].text
+
+          json_match = re.search(r"```json\n(.*?)\n```", response_text, re.DOTALL)
+          alternatives = json.loads(json_match.group(1))
       except json.JSONDecodeError:
+          print(f"Error: {response.content[0].text}")
           return []
+
+      if show_alternatives:
+          alternative_str = "\n".join([f"*{i+1}* {alt}" for i, alt in enumerate(alternatives)])
+          print(f"Alternatives:\n{alternative_str}")
+      return alternatives
 
     def cache_response(self, prompt: str, response: Dict[str, Any]):
         """Cache a response for future use."""
@@ -102,7 +114,7 @@ def main():
     cache = PromptCache()
 
     # Example prompt
-    prompt = "Explain the concept of prompt caching in AI systems."
+    prompt = "Explain the concept of prompt caching in AI systems. 100 words max."
 
     # First call - will make API request
     print("\nFirst call:")
