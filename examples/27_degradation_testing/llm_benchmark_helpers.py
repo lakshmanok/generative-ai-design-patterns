@@ -11,14 +11,14 @@ from dotenv import load_dotenv
 
 def load_api_key():
     """Load OpenAI API key from environment."""
-    if os.path.exists("../saved_keys.env"):
-        load_dotenv("../saved_keys.env")
+    if os.path.exists("../keys.env"):
+        load_dotenv("../keys.env")
     else:
         # Try loading from current directory
-        if os.path.exists("saved_keys.env"):
-            load_dotenv("saved_keys.env")
+        if os.path.exists("keys.env"):
+            load_dotenv("keys.env")
         else:
-            print("Warning: saved_keys.env not found. Make sure OPENAI_API_KEY is set in environment.")
+            print("Warning: keys.env not found. Make sure OPENAI_API_KEY is set in environment.")
 
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:

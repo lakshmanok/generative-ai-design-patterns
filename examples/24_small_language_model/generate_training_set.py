@@ -181,7 +181,7 @@ def get_api_key() -> str:
         return userdata.get('ANTHROPIC_API_KEY')
     except ImportError:
         from dotenv import load_dotenv
-        load_dotenv("examples/saved_keys.env")
+        load_dotenv("examples/keys.env")
         api_key = os.getenv("ANTHROPIC_API_KEY")
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY not found in environment variables")
