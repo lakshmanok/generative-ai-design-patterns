@@ -3,10 +3,10 @@ import time
 import os
 from dotenv import load_dotenv
 
-if os.path.exists("examples/saved_keys.env"):
-    load_dotenv("examples/saved_keys.env")
+if os.path.exists("examples/keys.env"):
+    load_dotenv("examples/keys.env")
 else:
-    raise FileNotFoundError("examples/saved_keys.env not found")
+    raise FileNotFoundError("examples/keys.env not found")
 # Setup API Key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 

@@ -3,10 +3,10 @@ import time
 from openai import OpenAI
 from dotenv import load_dotenv
 
-if os.path.exists("examples/saved_keys.env"):
-    load_dotenv("examples/saved_keys.env")
+if os.path.exists("examples/keys.env"):
+    load_dotenv("examples/keys.env")
 else:
-    raise FileNotFoundError("examples/saved_keys.env not found")
+    raise FileNotFoundError("examples/keys.env not found")
 
 def main():
     client = OpenAI()
