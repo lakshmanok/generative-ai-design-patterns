@@ -27,10 +27,7 @@ if os.path.exists("examples/keys.env"):
 else:
     raise FileNotFoundError("examples/keys.env not found")
 
-# Set up your API keys
-# You can set these as environment variables or replace with your actual keys
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 def get_memory_config():
     """Get a working memory configuration that avoids permission issues"""
