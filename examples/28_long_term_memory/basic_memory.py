@@ -18,11 +18,16 @@ import tempfile
 from typing import List, Dict, Any
 from mem0 import Memory
 from openai import OpenAI
+from dotenv import load_dotenv
 
-# Set up your API keys
-# You can set these as environment variables or replace with your actual keys
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "your-openai-api-key")
-os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+load_dotenv()
+
+if os.path.exists("examples/keys.env"):
+    load_dotenv("examples/keys.env")
+else:
+    raise FileNotFoundError("examples/keys.env not found")
+
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 def get_memory_config():
     """Get a working memory configuration that avoids permission issues"""
