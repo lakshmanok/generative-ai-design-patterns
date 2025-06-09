@@ -271,22 +271,76 @@ def demo_basic_memory_operations():
     print("\n1. Adding sample memories...")
 
     sample_conversations = [
+        # Conversation 1: Personal introduction with distractors
         [
-            {"role": "user", "content": "Hi, my name is Alice and I love pizza."},
-            {"role": "assistant", "content": "Nice to meet you Alice! I'll remember that you love pizza."}
+            {"role": "user", "content": "Hello there! How are you doing today?"},
+            {"role": "assistant", "content": "Hello! I'm doing well, thank you for asking. How can I help you today?"},
+            {"role": "user", "content": "That's great to hear. The weather is pretty nice today, isn't it?"},
+            {"role": "assistant", "content": "Yes, nice weather can really brighten up the day! Is there anything specific I can assist you with?"},
+            {"role": "user", "content": "I'm looking to travel from Seattle to Reykjavik. What's the best way to do this?"},
+            {"role": "assistant", "content": "The best way to travel from Seattle to Reykjavik is to fly. The flight is about 10 hours long."},
+            {"role": "user", "content": "That's a long flight. Can you recommend airlines that fly to Reykjavik?"},
+            {"role": "assistant", "content": "Iceland Air is the only airline that flies to Reykjavik. It is a direct flight from Seattle to Reykjavik."},
+            {"role": "user", "content": "That's great. I'm also looking for a hotel in Reykjavik. Can you recommend a good hotel?"},
+            {"role": "assistant", "content": "I'm not sure about the best hotels in Reykjavik. I'll need to look that up."},
+            {"role": "user", "content": "That's great. I'm also looking for a rental car in Reykjavik. Can you recommend a good rental car company?"},
         ],
+
+        # Conversation 2: Health/dietary restrictions with small talk
         [
-            {"role": "user", "content": "I'm allergic to nuts, please remember that."},
-            {"role": "assistant", "content": "I've noted your nut allergy. I'll keep that in mind for any food recommendations."}
+            {"role": "user", "content": "What's 2 + 2?"},
+            {"role": "assistant", "content": "2 + 2 equals 4."},
+            {"role": "user", "content": "Good, just making sure you can do basic math. Now, I need to tell you something important about my health."},
+            {"role": "assistant", "content": "Of course! I'm here to listen. Please go ahead and share what you'd like me to know."},
+            {"role": "user", "content": "What's the largest planet in our solar system?"},
+            {"role": "assistant", "content": "Jupiter is the largest planet in our solar system."},
         ],
+
+        # Conversation 3: Work and location with general chatter
         [
-            {"role": "user", "content": "I work as a software engineer in San Francisco."},
-            {"role": "assistant", "content": "Got it! You're a software engineer working in San Francisco."}
+            {"role": "user", "content": "Can you explain what artificial intelligence is?"},
+            {"role": "assistant", "content": "Artificial Intelligence (AI) refers to computer systems that can perform tasks that typically require human intelligence, such as learning, reasoning, problem-solving, and understanding language."},
+            {"role": "user", "content": "That's a good explanation. I work with AI actually - I'm a software engineer in Portland, Oregon."},
+            {"role": "assistant", "content": "That's fantastic! Working as a software engineer in San Francisco must be exciting, especially with all the tech innovation happening there. Do you enjoy working with AI technologies?"},
+            {"role": "user", "content": "Yes, I love it! The tech scene here is amazing. By the way, did you know that San Francisco has about 875,000 people?"},
+            {"role": "assistant", "content": "Yes, San Francisco is indeed a vibrant city with a rich population! It's great that you're enjoying both your work with AI and the tech scene there."},
+            {"role": "user", "content": "I specialize in machine learning and natural language processing. I've been coding for about 8 years now."},
+            {"role": "assistant", "content": "That's impressive! 8 years of coding experience with a specialization in machine learning and NLP is quite substantial. You must have worked on some interesting projects in Portland's tech ecosystem."},
+            {"role": "user", "content": "What's the speed of light?"},
+            {"role": "assistant", "content": "The speed of light in a vacuum is approximately 299,792,458 meters per second."},
+            {"role": "user", "content": "Thanks. Oh, I should also mention that I prefer working on backend systems rather than frontend development."},
+            {"role": "assistant", "content": "Good to know! Backend development, especially with your ML and NLP expertise, probably involves some fascinating work with data processing, algorithms, and system architecture."}
+        ],
+
+        # Conversation 4: Hobbies and preferences with trivia
+        [
+            {"role": "user", "content": "Who wrote Romeo and Juliet?"},
+            {"role": "assistant", "content": "William Shakespeare wrote Romeo and Juliet."},
+            {"role": "user", "content": "Correct! I actually love reading, especially science fiction novels. Isaac Asimov is one of my favorite authors."},
+            {"role": "assistant", "content": "That's wonderful! Isaac Asimov was a brilliant science fiction writer. His Foundation series and robot stories are classics. Do you have a favorite Asimov book or series?"},
+            {"role": "user", "content": "The Foundation series is definitely my favorite. I also enjoy hiking on weekends when the weather is nice."},
+            {"role": "assistant", "content": "The Foundation series is amazing! And hiking is a great way to stay active and enjoy nature. Do you have any favorite hiking spots, especially living in the San Francisco area?"},
+            {"role": "user", "content": "What's the chemical symbol for gold?"},
+            {"role": "assistant", "content": "The chemical symbol for gold is Au."},
+            {"role": "user", "content": "Right again. I like to hike in Marin County - there are some beautiful trails there. I'm also learning to play guitar in my spare time."},
+            {"role": "assistant", "content": "Marin County has some absolutely gorgeous hiking trails! And learning guitar is fantastic - music is such a rewarding hobby. How long have you been learning to play?"}
+        ],
+
+        # Conversation 5: Personal preferences with random facts
+        [
+            {"role": "user", "content": "What year did the first moon landing happen?"},
+            {"role": "assistant", "content": "The first moon landing happened in 1969."},
+            {"role": "user", "content": "Thanks. I'm not really into history much, but I do love documentaries about space and astronomy."},
+            {"role": "assistant", "content": "Space and astronomy documentaries are fascinating! There's so much to learn about the universe. Do you have any favorite space documentaries or topics you're particularly interested in?"},
+            {"role": "user", "content": "I really enjoyed the Cosmos series, both the original with Carl Sagan and the newer one with Neil deGrasse Tyson."},
+            {"role": "assistant", "content": "Both versions of Cosmos are excellent! Carl Sagan and Neil deGrasse Tyson have such a gift for making complex astronomical concepts accessible and inspiring."},
+            {"role": "user", "content": "How many days are in a leap year?"},
+            {"role": "assistant", "content": "A leap year has 366 days."},
         ]
     ]
 
     for i, conv in enumerate(sample_conversations, 1):
-        print(f"\nAdding conversation {i}/3...")
+        print(f"\nAdding conversation {i}/5...")
         result = add_conversation_to_memory(memory, conv, user_id)
         if "error" in result:
             print(f"Failed to add conversation {i}")
@@ -299,8 +353,9 @@ def demo_basic_memory_operations():
     search_queries = [
         "What's my name?",
         "What do I do for work?",
-        "Do I have any food allergies?",
-        "What foods do I like?"
+        "What my hobbies are?",
+        "What are my favorite books?",
+        "What are my travel plans?"
     ]
 
     for query in search_queries:
