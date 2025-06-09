@@ -1,13 +1,13 @@
 # Generative AI Design Patterns
 |    |    |
 | -- | -- |
-| <a href="https://www.oreilly.com/library/view/generative-ai-design/9798341622654/"><img src="diagrams/cover.jpg" width="500"></a> | Code repo for in-progress O'Reilly book on GenAI design patterns by Valliappa Lakshmanan and Hannes Hapke. https://www.oreilly.com/library/view/generative-ai-design/9798341622654/ <br/><br/> 
+| <a href="https://www.oreilly.com/library/view/generative-ai-design/9798341622654/"><img src="diagrams/cover.jpg" width="500"></a> | Code repo for in-press O'Reilly book on GenAI design patterns by Valliappa Lakshmanan and Hannes Hapke. https://www.oreilly.com/library/view/generative-ai-design/9798341622654/ <br/><br/> 
 
 ## Summary of patterns
-These are the design patterns covered in the book:
+These are the 32 design patterns covered in the book:
 
 <details>
-<summary>Chapter 2: Controlling Style</summary>
+<summary>Chapter 2: Controlling Style (Patterns 1-5)</summary>
 
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |
@@ -20,7 +20,7 @@ These are the design patterns covered in the book:
 </details>
 
 <details>
-<summary>Chapters 3 and 4: Adding Knowledge </summary>
+<summary>Chapters 3 and 4: Adding Knowledge (Patterns 6-12) </summary>
   
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |
@@ -35,7 +35,7 @@ These are the design patterns covered in the book:
 </details>
 
 <details>
-<summary>Chapter 5: Extending Model Capability </summary>
+<summary>Chapter 5: Extending Model Capability (Patterns 13-16) </summary>
   
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |
@@ -47,7 +47,7 @@ These are the design patterns covered in the book:
 </details>
 
 <details>
-<summary>Chapter 6: Increasing Reliability </summary>
+<summary>Chapter 6: Increasing Reliability (Patterns 17-20) </summary>
 
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |  
@@ -59,7 +59,7 @@ These are the design patterns covered in the book:
 </details>
 
 <details>
-<summary>Chapter 7: Enabling Action </summary>
+<summary>Chapter 7: Enabling Action (Patterns 21-23) </summary>
 
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |  
@@ -70,25 +70,26 @@ These are the design patterns covered in the book:
 </details>
 
 <details>
-<summary>Chapters 8: Meeting Constraints </summary>
+<summary>Chapters 8: Meeting Constraints (Patterns 24-28) </summary>
 
-| Pattern Number | Pattern Name               | Problem                                                                                                                   | Solution                                                                                                                                                                                                                                                                     | Usage Scenarios                                                                                                                           | Code Example                                                         |
-| -------------: |:---------------------------|:--------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------|
-| 24 | Small Language Model (SLM) | The foundational model you are using is introducing too much latency or cost.                                             | Use a small foundational model to fit within cost and latency constraints without compromising unduly on quality by employing quantization (reduce precision of model parameters), distillation (narrow knowledge scope), or speculative coding (backstop with larger model) | Narrow-scoped knowledge applications, cost reduction, edge device deployment, faster inference requirements, GPU-constrained environments | [examples/24_small_language_model](examples/24_small_language_model) |
-| 25 | Prompt Caching             | User requests follow patterns with repeated queries. Recomputing the same responses wastes resources and increases costs. | Reuse previously generated responses (in the case of client-side caching) and/or model internal states (in the case of server-side caching) for the same or similar prompts. The similarity can be based on prompt meaning (semantic cache) or overlap (prefix caching).     | Applications with repeated queries, cost optimization, interactive applications requiring fast responses, multi-tenant systems            | [examples/25_prompt_caching](examples/25_prompt_caching) |
+| Pattern Number | Pattern Name               | Problem                                                                                                                   | Solution                                                                                                                                                                                                                                                                     | Usage Scenarios                                                                                                                           | Code Example                                                             |
+| -------------: |:---------------------------|:--------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------|
+| 24 | Small Language Model (SLM) | The foundational model you are using is introducing too much latency or cost.                                             | Use a small foundational model to fit within cost and latency constraints without compromising unduly on quality by employing quantization (reduce precision of model parameters), distillation (narrow knowledge scope), or speculative coding (backstop with larger model) | Narrow-scoped knowledge applications, cost reduction, edge device deployment, faster inference requirements, GPU-constrained environments | [examples/24_small_language_model](examples/24_small_language_model)     |
+| 25 | Prompt Caching             | User requests follow patterns with repeated queries. Recomputing the same responses wastes resources and increases costs. | Reuse previously generated responses (in the case of client-side caching) and/or model internal states (in the case of server-side caching) for the same or similar prompts. The similarity can be based on prompt meaning (semantic cache) or overlap (prefix caching).     | Applications with repeated queries, cost optimization, interactive applications requiring fast responses, multi-tenant systems            | [examples/25_prompt_caching](examples/25_prompt_caching)                 |
 | 26 | Inference Optimization     | Self-hosting LLMs brings with it GPU constraints and hardware utilization challenges. Real-time applications need faster response times. | Improves the efficiency of model inference by employing continuous batching (requests are pulled from a queue and slotted into GPU cores as soon as they become available), speculative decoding (efficiently compute the next set of tokens whenever the smaller model is able to do so, backstopping this with a large model), and/or prompt compression (preprocess prompts to make them shorter). | Self-hosted LLM deployments, real-time applications, GPU memory-constrained environments, high-throughput serving scenarios               | [examples/26_inference_optimization](examples/26_inference_optimization) |
-| 27 | Degradation Testing        |  Need metrics to help identify when service quality degrades and the constraint under which the application is bounded. | A set of core metrics — Time-to-First-Token (TTFT), End-to-End Request Latency (EERL), Tokens per Second (TPS) — and a variety of scalability and resilience metrics can help identify degradation of service quality; targeted interventions can help improve specific metrics. | Pre-production testing, performance validation, bottleneck identification, capacity planning, ongoing monitoring and optimization.        | [examples/27_degradation_testing](examples/27_degradation_testing)   |
-    
+| 27 | Degradation Testing        |  Need metrics to help identify when service quality degrades and the constraint under which the application is bounded. | A set of core metrics — Time-to-First-Token (TTFT), End-to-End Request Latency (EERL), Tokens per Second (TPS) — and a variety of scalability and resilience metrics can help identify degradation of service quality; targeted interventions can help improve specific metrics. | Pre-production testing, performance validation, bottleneck identification, capacity planning, ongoing monitoring and optimization.        | [examples/27_degradation_testing](examples/27_degradation_testing)       |
+| 28 | Long-Term Memory | LLM applications need to simulate memory of past interactions by prepending relevant history to each prompt, but this approach can become costly and inefficient with long conversations due to context window limitations. | LLM applications use various types of memory – working, episodic, procedural, and semantic – to maintain context, recall past interactions, personalize responses, and retain key facts, respectively. | Chatbots, multi-step workflows, personalization, processing large documents | [examples/28_long_term_memory](examples/28_long_term_memory)             |
+
 </details>
 <details>
-<summary>Chapters 9: Setting Safeguards</summary>
+<summary>Chapters 9: Setting Safeguards (Patterns 29-32) </summary>
 
-| Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
-| -------------: | :----------- | :------ | :------- | :-------------- | :----------- |  
-| 28 | Template Generation | The risk of sending content without human review is very high, but human review will not scale to the volume of communications. | Pregenerate templates that are reviewed beforehand. Inference time requires only deterministic string replacement, and is therefore safe to directly send to consumers. | Personalized communications in business to consumer settings. | [examples/28_template_generation](examples/28_template_generation) |
-| 29 | Assembled Reformat | Content needs to be presented in an appealing way, but the risk posed by dynamically generated content is too high. | Reduce the risk of inaccurate or hallucinated content by separating out the task of content creation into two low-risk steps — first, assembling data in low-risk ways and second, formatting the content based on that data. | Situations where accurate content needs to be presented in appealing ways, such as in product catalogs. | [examples/29_assembled_reformat](examples/29_assembled_reformat) |
-| 30 | Self-Check | Identify potential hallucinations cost-effectively | Use token probabilities to detect hallucination in LLM responses | In any situation where factual (as opposed to creative) responses are needed. |  [examples/30_self_check](examples/30_self_check) |
-| 31 | Guardails |  Require safeguards for security, data privacy, content moderation, hallucination, and alignment to ensure that AI applications operate within ethical, legal, and functional parameters. | Wrap the LLM calls with a layer of code that preprocesses the information going into the model and/or post-processes the output of the model. Knowledge retrieval and tool use will also need to be protected. | Anytime your application could be subject to attacks by malicious adversaries. |  [examples/30_guardrails](examples/30_guardrails) |
+| Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example                                                       |
+|---------------:| :----------- | :------ | :------- | :-------------- |:-------------------------------------------------------------------|
+|             29 | Template Generation | The risk of sending content without human review is very high, but human review will not scale to the volume of communications. | Pregenerate templates that are reviewed beforehand. Inference time requires only deterministic string replacement, and is therefore safe to directly send to consumers. | Personalized communications in business to consumer settings. | [examples/29_template_generation](examples/29_template_generation) |
+|             30 | Assembled Reformat | Content needs to be presented in an appealing way, but the risk posed by dynamically generated content is too high. | Reduce the risk of inaccurate or hallucinated content by separating out the task of content creation into two low-risk steps — first, assembling data in low-risk ways and second, formatting the content based on that data. | Situations where accurate content needs to be presented in appealing ways, such as in product catalogs. | [examples/30_assembled_reformat](examples/30_assembled_reformat)   |
+|             31 | Self-Check | Identify potential hallucinations cost-effectively | Use token probabilities to detect hallucination in LLM responses | In any situation where factual (as opposed to creative) responses are needed. | [examples/31_self_check](examples/31_self_check)                   |
+|             32 | Guardails |  Require safeguards for security, data privacy, content moderation, hallucination, and alignment to ensure that AI applications operate within ethical, legal, and functional parameters. | Wrap the LLM calls with a layer of code that preprocesses the information going into the model and/or post-processes the output of the model. Knowledge retrieval and tool use will also need to be protected. | Anytime your application could be subject to attacks by malicious adversaries. | [examples/32_guardrails](examples/32_guardrails)                   |
 
 </details>
 
@@ -98,5 +99,3 @@ See [examples/15_adapter_tuning/USAGE.md](examples/15_adapter_tuning/USAGE.md) f
 
 ## Further reading
 The GenAI Design Patterns book is a companion book to the O'Reilly book [Machine Learning Design Patterns](https://www.amazon.com/Machine-Learning-Design-Patterns-Preparation/dp/1098115783).
-
-
