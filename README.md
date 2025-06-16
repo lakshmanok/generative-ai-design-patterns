@@ -1,7 +1,7 @@
 # Generative AI Design Patterns
 |    |    |
 | -- | -- |
-| <a href="https://www.oreilly.com/library/view/generative-ai-design/9798341622654/"><img src="diagrams/cover.jpg" width="500"></a> | Code repo for in-press O'Reilly book on GenAI design patterns by Valliappa Lakshmanan and Hannes Hapke. https://www.oreilly.com/library/view/generative-ai-design/9798341622654/ <br/><br/> 
+| <a href="https://www.oreilly.com/library/view/generative-ai-design/9798341622654/"><img src="diagrams/cover.png" width="500"></a> | Code repo for in-press O'Reilly book on GenAI design patterns by Valliappa Lakshmanan and Hannes Hapke. https://www.oreilly.com/library/view/generative-ai-design/9798341622654/ <br/><br/> 
 
 ## Summary of patterns
 These are the 32 design patterns covered in the book:
