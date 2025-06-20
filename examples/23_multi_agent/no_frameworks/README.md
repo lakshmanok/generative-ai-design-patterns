@@ -12,7 +12,10 @@ Use Pydantic AI for LLM-agnosticity
 Use commercial off-the-shelf (COTS) tools for monitoring, memory and guardrails:
 * Monitoring: https://pydantic.dev/logfire
 * Memory: https://github.com/mem0ai/mem0
-* Guardrails: 
+* Guardrails: https://github.com/guardrails-ai/guardrails
 
 Deploy the application on a serverless platform such as AWS Lambda or Google Cloud Run.
 
+## Workflow
+The workflow of this application is depicted below:
+![k12_workflow](k12_content_writing_workflow.png)
