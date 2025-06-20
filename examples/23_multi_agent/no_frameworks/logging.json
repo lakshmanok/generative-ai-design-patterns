@@ -1,0 +1,39 @@
+    {
+        "version": 1,
+        "disable_existing_loggers": false,
+        "formatters": {
+            "standard": {
+                "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+            },
+            "json": {
+                "class": "pythonjsonlogger.jsonlogger.JsonFormatter",
+                "format": "%(asctime)s %(levelname)s %(name)s %(message)s"
+            }
+        },
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "level": "INFO",
+                "formatter": "standard"
+            },
+            "file": {
+                "class": "logging.handlers.RotatingFileHandler",
+                "level": "DEBUG",
+                "formatter": "json",
+                "filename": "app.log",
+                "maxBytes": 1024000,
+                "backupCount": 5
+            }
+        },
+        "loggers": {
+            "app": {
+                "handlers": ["console", "file"],
+                "level": "DEBUG",
+                "propagate": false
+            }
+        },
+        "root": {
+            "handlers": ["console"],
+            "level": "INFO"
+        }
+    }
