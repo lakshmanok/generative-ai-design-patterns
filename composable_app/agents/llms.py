@@ -9,7 +9,8 @@ SMALL_MODEL="gemini-2.5-flash-lite-preview-06-17"
 logger = logging.getLogger(__name__)
 
 def _setup():
-    load_dotenv("../../keys.env")
+    source_dir = os.path.dirname(os.path.abspath(__file__))
+    load_dotenv(f"{source_dir}/../keys.env")
     assert os.environ["GEMINI_API_KEY"][:2] == "AI", \
         "Please specify the GEMINI_API_KEY access token in keys.env file"
 

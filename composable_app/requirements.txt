@@ -1,2 +1,2 @@
 pydantic-ai
-
+streamlit
