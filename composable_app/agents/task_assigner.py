@@ -28,11 +28,7 @@ class TaskAssigner:
 
     async def write_about(self, topic: str) -> Article:
         # Step 1: Identify who can write on this topic
-        prompt = PromptService.render_prompt("TaskAssigner_assign_writer",
-                                             writers=[writer.name for writer in list(Writer)],
-                                             topic=topic)
-        result = await self.agent.run(prompt)
-        writer = GenericWriter(result.output)
+        writer = GenericWriter(await self.find_writer(topic))
 
         # Step 2: ask the writer to create an initial draft
         logger.info(f"Assigning {topic} to {writer.name()}")
@@ -45,4 +41,12 @@ class TaskAssigner:
         # Step 4: ask writer to rewrite article based on review
         article = await writer.revise_article(topic, draft, panel_review)
         return article
+
+    async def find_writer(self, topic) -> Writer:
+        prompt = PromptService.render_prompt("TaskAssigner_assign_writer",
+                                             writers=[writer.name for writer in list(Writer)],
+                                             topic=topic)
+        result = await self.agent.run(prompt)
+        return result.output
+
 

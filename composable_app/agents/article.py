@@ -10,7 +10,7 @@ class Article:
     index_keywords: List[str] = Field("List of keywords or phrases by which this answer can be indexed.")
 
     def to_markdown(self):
-        newline = "\n"
+        star = "\n* "
         return (
 f"""## {self.title}
 {self.key_lesson}
@@ -19,5 +19,5 @@ f"""## {self.title}
 {self.full_text}
 
 ### Keywords
-{newline.join(self.index_keywords)}
+{star.join(["", *self.index_keywords])}
 """)
