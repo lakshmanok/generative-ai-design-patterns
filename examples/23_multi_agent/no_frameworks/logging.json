@@ -26,8 +26,8 @@
             }
         },
         "loggers": {
-            "app": {
-                "handlers": ["console", "file"],
+            "agents.prompt_service": {
+                "handlers": ["file"],
                 "level": "DEBUG",
                 "propagate": false
             }

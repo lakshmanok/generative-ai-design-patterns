@@ -3,7 +3,7 @@ from .prompt_service import PromptService
 from .article import Article
 from .generic_writer_agent import Writer
 from . import llms
-from dataclasses import dataclass
+from . import reviewer_panel
 from pydantic_ai import Agent
 import logging
 import uuid
@@ -29,12 +29,20 @@ class TaskAssigner:
     async def write_about(self, topic: str) -> Article:
         # Step 1: Identify who can write on this topic
         prompt = PromptService.render_prompt("TaskAssigner_assign_writer",
-                                             writers=list(Writer))
+                                             writers=[writer.name for writer in list(Writer)],
+                                             topic=topic)
         result = await self.agent.run(prompt)
         writer = GenericWriter(result.output)
 
         # Step 2: ask the writer to create an initial draft
         logger.info(f"Assigning {topic} to {writer.name()}")
-        article = await writer.write_about(topic)
+        draft = await writer.write_about(topic)
+
+        # Step 3: get the review panel to review the article
+        logger.info("Sending article to review panel")
+        panel_review = await reviewer_panel.get_panel_review_of_article(topic, draft)
+
+        # Step 4: ask writer to rewrite article based on review
+        article = await writer.revise_article(topic, draft, panel_review)
         return article
 
