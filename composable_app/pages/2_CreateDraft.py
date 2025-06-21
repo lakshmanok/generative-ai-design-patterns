@@ -1,6 +1,7 @@
 import streamlit as st
 import logging
 import asyncio
+import dataclasses
 from composable_app.agents.article import Article
 from composable_app.utils.human_feedback import record_human_feedback
 
@@ -30,7 +31,7 @@ def write_draft():
         if "ai_generated_draft" not in st.session_state or st.session_state.ai_generated_draft != ai_generated_draft:
             # new topic perhaps; this draft was generated for the first time, and not pulled from cache
             st.session_state.ai_generated_draft = ai_generated_draft
-            st.session_state.draft = ai_generated_draft
+            st.session_state.draft = dataclasses.replace(ai_generated_draft) # makes a copy
 
         # display current version
         draft_title = st.text_area(label="Title", value=st.session_state.draft.title)
@@ -65,7 +66,7 @@ def write_draft():
                                       ai_input=topic,
                                       ai_response=st.session_state.ai_generated_draft,
                                       human_choice=st.session_state.draft)
-                logger.info(f"User has draft to {st.session_state.draft}")
+                logger.info(f"User has changed the draft to {st.session_state.draft}")
             st.switch_page("pages/3_PanelReview1.py")
 
     except Exception as e:
