@@ -26,7 +26,7 @@ def write_draft():
 
         if st.button("Next"):
             st.session_state.draft = draft
-            st.switch_page("pages/3_PanelReview.py")
+            st.switch_page("pages/3_PanelReview1.py")
 
     except Exception as e:
         st.error(f"An error occurred: {e}")

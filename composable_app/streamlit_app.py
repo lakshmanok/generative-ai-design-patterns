@@ -27,11 +27,13 @@ def app_main():
     page_0 = st.Page("pages/0_SelectTopic.py", title="Select topic", icon="🏠")
     page_1 = st.Page("pages/1_AssignToWriter.py", title="Assign to Writer", icon="✒️")
     page_2 = st.Page("pages/2_CreateDraft.py", title="Create Draft", icon="✍️")
-    page_3 = st.Page("pages/3_PanelReview.py", title="Panel Review", icon="🤼")
-    page_4 = st.Page("pages/4_FinalVersion.py", title="Final Version", icon="✒️")
+    page_3 = st.Page("pages/3_PanelReview1.py", title="Panel Review 1", icon="🤼")
+    page_4 = st.Page("pages/4_PanelReview2.py", title="Panel Review 2", icon="🤼")
+    page_5 = st.Page("pages/5_SummarizeReview.py", title="Summarize Review", icon="✍️")
+    page_6 = st.Page("pages/6_FinalVersion.py", title="Final Version", icon="✒️")
 
     # Set up navigation
-    pg = st.navigation([page_0, page_1, page_2, page_3, page_4])
+    pg = st.navigation([page_0, page_1, page_2, page_3, page_4, page_5, page_6])
 
     # Run the selected page
     pg.run()

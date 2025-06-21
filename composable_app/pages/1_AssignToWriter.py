@@ -3,6 +3,7 @@ import logging
 import asyncio
 from composable_app.agents import task_assigner
 from composable_app.agents.generic_writer_agent import Writer, GenericWriter
+from composable_app.utils.human_feedback import record_human_feedback
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,8 @@ def assign_to_writer():
                                         index=list(Writer).index(suggested_writer))
 
         if st.button("Next"):
+            if suggested_writer.name != writer_selection:
+                record_human_feedback("assigned_writer", topic, suggested_writer.name, writer_selection)
             writer = Writer(writer_selection)
             st.write(f"Delegating work to {writer.name}")
             st.session_state.writer = GenericWriter(writer)

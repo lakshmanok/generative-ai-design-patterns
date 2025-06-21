@@ -31,6 +31,14 @@
                 "filename": "guards.log",
                 "maxBytes": 1024000,
                 "backupCount": 2
+            },
+            "feedback": {
+                "class": "logging.handlers.RotatingFileHandler",
+                "level": "DEBUG",
+                "formatter": "json",
+                "filename": "feedback.log",
+                "maxBytes": 1024000,
+                "backupCount": 2
             }
         },
         "loggers": {
@@ -43,6 +51,11 @@
                 "handlers": ["guards"],
                 "level": "DEBUG",
                 "propagate": false
+            },
+            "composable_app.utils.human_feedback": {
+                "handlers": ["feedback"],
+                "level": "DEBUG",
+                "propagate": true
             }
         },
         "root": {

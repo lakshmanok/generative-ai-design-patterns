@@ -31,7 +31,7 @@ def final_version():
 
         if st.button("Next"):
             st.session_state.final_article = final_article
-            st.switch_page("pages/4_FinalVersion.py")
+            st.switch_page("pages/6_FinalVersion.py")
 
     except Exception as e:
         st.error(f"An error occurred: {e}")

@@ -85,22 +85,34 @@ class PanelSecretary:
         return result.output
 
 async def get_panel_review_of_article(topic: str, article: Article) -> str:
-    # set up a panel of reviewers: this is everyone except secretary
-    review_panel = [ReviewerAgent(reviewer) for reviewer in list(Reviewer)[:-1]]
+    first_round_reviews = await do_first_round_reviews(article, topic)
+    final_reviews = await do_second_round_reviews(article, first_round_reviews, topic)
+    return await summarize_reviews(article, final_reviews, topic)
 
-    # Step 1: each person on the panel reviews separately
-    first_round_reviews = list()
-    for reviewer_agent in review_panel:
-        review = await reviewer_agent.review(topic, article, reviews_so_far=[])
-        first_round_reviews.append((reviewer_agent.reviewer, review))
 
-    # Step 2: then they get to review again knowing what the others think
-    final_reviews = list()
-    for reviewer_agent in review_panel:
-        review = await reviewer_agent.review(topic, article, first_round_reviews)
-        final_reviews.append((reviewer_agent.reviewer_type(), review))
-
+async def summarize_reviews(article, final_reviews, topic) -> str:
     # Step 3: finally, the secretary summarizes
     secretary = PanelSecretary()
     summary_review = await secretary.consolidate(topic, article, final_reviews)
     return summary_review
+
+
+async def do_second_round_reviews(article, first_round_reviews, topic) -> list:
+    # Step 2: then they get to review again knowing what the others think
+    review_panel = [ReviewerAgent(reviewer) for reviewer in list(Reviewer)[:-1]]
+    final_reviews = list()
+    for reviewer_agent in review_panel:
+        review = await reviewer_agent.review(topic, article, first_round_reviews)
+        final_reviews.append((reviewer_agent.reviewer_type(), review))
+    return final_reviews
+
+
+async def do_first_round_reviews(article, topic) -> list:
+    # Step 1: each person on the panel reviews separately
+    # set up a panel of reviewers: this is everyone except secretary
+    review_panel = [ReviewerAgent(reviewer) for reviewer in list(Reviewer)[:-1]]
+    first_round_reviews = list()
+    for reviewer_agent in review_panel:
+        review = await reviewer_agent.review(topic, article, reviews_so_far=[])
+        first_round_reviews.append((reviewer_agent.reviewer, review))
+    return first_round_reviews
