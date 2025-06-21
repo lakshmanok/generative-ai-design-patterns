@@ -16,18 +16,31 @@
                 "level": "INFO",
                 "formatter": "standard"
             },
-            "file": {
+            "prompts": {
                 "class": "logging.handlers.RotatingFileHandler",
                 "level": "DEBUG",
                 "formatter": "json",
-                "filename": "app.log",
+                "filename": "prompts.log",
                 "maxBytes": 1024000,
-                "backupCount": 5
+                "backupCount": 2
+            },
+            "guards": {
+                "class": "logging.handlers.RotatingFileHandler",
+                "level": "DEBUG",
+                "formatter": "json",
+                "filename": "guards.log",
+                "maxBytes": 1024000,
+                "backupCount": 2
             }
         },
         "loggers": {
-            "agents.prompt_service": {
-                "handlers": ["file"],
+            "composable_app.utils.prompt_service": {
+                "handlers": ["prompts"],
+                "level": "DEBUG",
+                "propagate": false
+            },
+            "composable_app.utils.guardrails": {
+                "handlers": ["guards"],
                 "level": "DEBUG",
                 "propagate": false
             }

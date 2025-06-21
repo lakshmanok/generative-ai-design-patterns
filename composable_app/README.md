@@ -5,15 +5,20 @@ using primarily OSS components.
 
 ## Design
 Use Pydantic AI for LLM-agnosticity
-* Build: https://ai.pydantic.dev/multi-agent-applications/ 
-* Eval: https://ai.pydantic.dev/evals/#evaluation-with-llmjudge 
-* Prompt library (Jinja2): https://github.com/pydantic/pydantic-ai/issues/921#issuecomment-2813030935
+* Build: https://ai.pydantic.dev/multi-agent-applications/
+* Prompt management (Jinja2): https://github.com/pydantic/pydantic-ai/issues/921#issuecomment-2813030935
 * Logging: https://docs.python.org/3/library/logging.html
+* Eval: https://ai.pydantic.dev/evals/#evaluation-with-llmjudge
 
-Use commercial off-the-shelf (COTS) tools for monitoring, memory and guardrails:
+We build these services using LLM-as-Judge, but log inputs and outputs so as to post-train a SLM later
+* Guardrails: See utils/guardrails.py
+* 
+
+Use commercial off-the-shelf (COTS) tools for monitoring, memory and optionally for guardrails and evaluation:
 * Monitoring: https://pydantic.dev/logfire
 * Memory: https://github.com/mem0ai/mem0
-* Guardrails: https://github.com/guardrails-ai/guardrails
+* Guardrails: https://github.com/guardrails-ai/guardrails (optional: Toxicity, etc. as second layer)
+ 
 
 ## How to run it locally
 Edit keys.env and add your Gemini API key to it (you don't need the others unless you plan to change LLMs):

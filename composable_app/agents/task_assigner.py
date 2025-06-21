@@ -1,12 +1,14 @@
 from .generic_writer_agent import GenericWriter
-from .prompt_service import PromptService
+from composable_app.utils.prompt_service import PromptService
 from .article import Article
 from .generic_writer_agent import Writer
-from . import llms
+from composable_app.utils import llms
+from composable_app.utils.guardrails import InputGuardrail
 from . import reviewer_panel
 from pydantic_ai import Agent
 import logging
 import uuid
+import asyncio
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +22,10 @@ class TaskAssigner:
                            model_settings=llms.default_model_settings(),
                            retries=2,
                            system_prompt=system_prompt)
+
+        self.topic_guardrail = InputGuardrail(name="topic_guardrail",
+                                              condition=PromptService.render_prompt("TaskAssigner_input_guardrail"),
+                                              should_reject=False) # accept condition provided
 
         logger.info(f"Created {self.id}")
 
@@ -46,7 +52,13 @@ class TaskAssigner:
         prompt = PromptService.render_prompt("TaskAssigner_assign_writer",
                                              writers=[writer.name for writer in list(Writer)],
                                              topic=topic)
-        result = await self.agent.run(prompt)
+
+        # guardrail is applied in parallel; it will raise an exception
+        _, result = await asyncio.gather(
+            self.topic_guardrail.is_acceptable(topic, raise_exception=True),
+            self.agent.run(prompt)
+        )
+
         return result.output
 
 
