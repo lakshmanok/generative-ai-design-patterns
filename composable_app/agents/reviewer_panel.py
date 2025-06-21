@@ -6,9 +6,9 @@ import uuid
 from pydantic_ai import Agent
 import logging
 
-from . import llms
+from composable_app.utils import llms
 from .article import Article
-from .prompt_service import PromptService
+from composable_app.utils.prompt_service import PromptService
 from enum import Enum, auto
 from typing import List, Tuple
 
