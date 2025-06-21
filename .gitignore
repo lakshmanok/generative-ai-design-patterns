@@ -3,4 +3,4 @@
 /diagrams/scripts/GuardianSansCond-Regular.otf
 /diagrams/scripts/GuardianSansCond-RegularIt.otf
 **/__pycache__/
-/examples/23_multi_agent/no_frameworks/app.log
+/composable_app/*.log
