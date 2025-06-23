@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import logging
 
-BEST_MODEL="gemini-2.5-pro"
+BEST_MODEL="gemini-2.0-flash"
 DEFAULT_MODEL="gemini-2.0-flash"
 SMALL_MODEL="gemini-2.5-flash-lite-preview-06-17"
 

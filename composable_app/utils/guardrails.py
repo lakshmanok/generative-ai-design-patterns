@@ -24,7 +24,7 @@ class InputGuardrail:
                            retries=2,
                            system_prompt=self.system_prompt)
 
-        logger.info(f"Created InputGuardrail {self.id}")
+        # logger.info(f"Created InputGuardrail {self.id}")
 
     async def is_acceptable(self, prompt: str, raise_exception=False) -> bool:
         result = await self.agent.run(prompt)

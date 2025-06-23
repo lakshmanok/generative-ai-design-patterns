@@ -31,9 +31,13 @@ def app_main():
     page_4 = st.Page("pages/4_PanelReview2.py", title="Panel Review 2", icon="🤼")
     page_5 = st.Page("pages/5_SummarizeReview.py", title="Summarize Review", icon="✍️")
     page_6 = st.Page("pages/6_FinalVersion.py", title="Final Version", icon="✒️")
+    page_logs = st.Page("pages/a_ViewLogs.py", title="View Logs", icon="🕵️")
 
     # Set up navigation
-    pg = st.navigation([page_0, page_1, page_2, page_3, page_4, page_5, page_6])
+    pg = st.navigation({
+        "Workflow": [page_0, page_1, page_2, page_3, page_4, page_5, page_6],
+        "Admin": [page_logs]
+    })
 
     # Run the selected page
     pg.run()

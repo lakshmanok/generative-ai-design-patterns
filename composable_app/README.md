@@ -10,9 +10,9 @@ Use Pydantic AI for LLM-agnosticity
 * Logging: https://docs.python.org/3/library/logging.html
 * Eval: https://ai.pydantic.dev/evals/#evaluation-with-llmjudge
 
-We build these services using LLM-as-Judge, but log inputs and outputs so as to post-train a SLM later
-* Guardrails: See utils/guardrails.py
-* 
+We control these horizontal services and make sure to log inputs and outputs so that we can post-train a SLM later
+* Guardrails: see utils/guardrails.py (uses LLM-as-Judge approach) and agents/task_assigner.py for example usage
+* Human feedback: see utils/human_feedback.py and pages/1_AssignToWriter.py for example usage
 
 Use commercial off-the-shelf (COTS) tools for monitoring, memory and optionally for guardrails and evaluation:
 * Monitoring: https://pydantic.dev/logfire
