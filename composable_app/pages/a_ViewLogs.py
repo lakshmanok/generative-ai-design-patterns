@@ -27,6 +27,7 @@ def display_logs():
 
         if st.button("Reload"):
             get_data.clear(log_selection)
+            st.rerun()
 
     except Exception as e:
         st.error(f"An error occurred: {e}")
