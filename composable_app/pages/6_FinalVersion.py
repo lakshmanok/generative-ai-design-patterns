@@ -29,9 +29,9 @@ def final_version():
         final_article = write_about(writer.name(), topic, draft.title, panel_review)
         st.markdown(final_article.to_markdown())
 
-        if st.button("Next"):
-            st.session_state.final_article = final_article
-            st.switch_page("pages/6_FinalVersion.py")
+        if st.button("Another topic"):
+            st.session_state.clear()
+            st.switch_page("pages/0_SelectTopic.py")
 
     except Exception as e:
         st.error(f"An error occurred: {e}")

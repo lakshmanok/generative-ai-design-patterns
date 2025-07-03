@@ -8,8 +8,11 @@ from scipy import stats
 from typing import List, Any
 import numpy as np
 from sentence_transformers import SentenceTransformer
+import logging
 
-def get_records(target: str = "initial draft"):
+logger = logging.getLogger(__name__)
+
+def get_records(target: str = "initial_draft"):
     records = []
     source_dir = os.path.dirname(os.path.abspath(__file__))
     evals_file = os.path.join(source_dir, "../evals.log")
@@ -38,6 +41,7 @@ def evaluate(keywords: List[str], embedding_model) -> float:
 if __name__ == "__main__":
     articles = get_records()
 
+    logger.warning("Downloading model from Huggingface ... will take a while the first time")
     embed_model = SentenceTransformer('all-MiniLM-L6-v2')
 
     scores = []

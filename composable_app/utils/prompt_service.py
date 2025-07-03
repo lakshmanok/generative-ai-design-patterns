@@ -1,7 +1,6 @@
 """
 Prompt management using Jinja2. See: https://github.com/pydantic/pydantic-ai/issues/921#issuecomment-2813030935
 """
-from cookiecutter.prompt import prompt_for_config
 from jinja2 import Environment, FileSystemLoader
 from typing import Any
 import logging

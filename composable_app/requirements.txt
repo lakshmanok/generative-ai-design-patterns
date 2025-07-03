@@ -3,4 +3,4 @@ streamlit
 mem0ai
 chromadb
 sentence-transformers
-
+python-json-logger

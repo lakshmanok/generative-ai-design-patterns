@@ -4,3 +4,4 @@
 /diagrams/scripts/GuardianSansCond-RegularIt.otf
 **/__pycache__/
 /composable_app/*.log
+/.venv/

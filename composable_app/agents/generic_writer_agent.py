@@ -2,9 +2,12 @@
 Agent that can write content on any topic.
 """
 import uuid
+from typing import Any
 
 from pydantic_ai import Agent
 import logging
+
+from pydantic_ai.agent import AgentRunResult
 
 from composable_app.utils import llms
 from .article import Article
@@ -68,19 +71,25 @@ class GenericWriter:
         prompt = PromptService.render_prompt(**prompt_vars)
         result = await self.agent.run(prompt)
         logger.info(result.usage())
-        evals.record_ai_response("initial draft",
+        evals.record_ai_response("initial_draft",
                                  ai_input=prompt_vars,
                                  ai_response=result.output)
         return result.output
 
     async def revise_article(self, topic: str, initial_draft: Article, panel_review: str) -> Article:
         # the prompt is the same for all writers
-        prompt = PromptService.render_prompt("GenericWriter_revise_article",
-                                             topic=topic,
-                                             content_type=get_content_type(self.writer),
-                                             additional_instructions=ltm.search_relevant_memories(f"{self.writer.name}, revise {topic}"),
-                                             initial_draft=initial_draft.to_markdown(),
-                                             panel_review=panel_review)
-        result = await self.agent.run(prompt)
+        prompt_vars = {
+            "prompt_name": "GenericWriter_revise_article",
+            "topic": topic,
+            "content_type": get_content_type(self.writer),
+            "additional_instructions": ltm.search_relevant_memories(f"{self.writer.name}, revise {topic}"),
+            "initial_draft": initial_draft.to_markdown(),
+            "panel_review": panel_review
+        }
+        prompt = PromptService.render_prompt(**prompt_vars)
+        result: AgentRunResult[Article] = await self.agent.run(prompt)
         logger.info(result.usage())
+        evals.record_ai_response("revised_draft",
+                                 ai_input=prompt_vars,
+                                 ai_response=result.output)
         return result.output

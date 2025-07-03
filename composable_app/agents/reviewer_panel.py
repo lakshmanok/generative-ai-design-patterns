@@ -9,6 +9,7 @@ import logging
 from composable_app.utils import llms
 from .article import Article
 from composable_app.utils.prompt_service import PromptService
+from composable_app.utils import save_for_eval as evals
 from enum import Enum, auto
 from typing import List, Tuple
 
@@ -47,12 +48,18 @@ class ReviewerAgent:
         for reviewer, review in reviews_so_far:
             reviews_text.append(f"BEGIN review by {reviewer.name}:\n{review}\nEND review\n")
 
-        prompt = PromptService.render_prompt("ReviewerAgent_review_prompt",
-                                             topic=topic,
-                                             article=article,
-                                             reviews=reviews_text)
+        prompt_vars = {
+            "prompt_name": "ReviewerAgent_review_prompt",
+            "topic": topic,
+            "article": article,
+            "reviews": reviews_text
+        }
+        prompt = PromptService.render_prompt(**prompt_vars)
         result = await self.agent.run(prompt)
         logger.info(result.usage())
+        evals.record_ai_response(f"{self.reviewer.name}_review",
+                                 ai_input=prompt_vars,
+                                 ai_response=result.output)
         return result.output
 
 class PanelSecretary:
@@ -76,12 +83,18 @@ class PanelSecretary:
         for reviewer, review in reviews_so_far:
             reviews_text.append(f"BEGIN review by {reviewer.name}:\n{review}\nEND review\n")
 
-        prompt = PromptService.render_prompt("Secretary_consolidate_reviews",
-                                             topic=topic,
-                                             article=article,
-                                             reviews=reviews_text)
+        prompt_vars = {
+            "prompt_name": "Secretary_consolidate_reviews",
+            "topic": topic,
+            "article": article,
+            "reviews": reviews_text
+        }
+        prompt = PromptService.render_prompt(**prompt_vars)
         result = await self.agent.run(prompt)
         logger.info(result.usage())
+        evals.record_ai_response("consolidated_review",
+                                 ai_input=prompt_vars,
+                                 ai_response=result.output)
         return result.output
 
 async def get_panel_review_of_article(topic: str, article: Article) -> str:

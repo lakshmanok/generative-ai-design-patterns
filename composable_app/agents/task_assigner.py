@@ -1,5 +1,10 @@
+from typing import Any
+
+from pydantic_ai.agent import AgentRunResult
+
 from .generic_writer_agent import GenericWriter
 from composable_app.utils.prompt_service import PromptService
+from composable_app.utils import save_for_eval as evals
 from .article import Article
 from .generic_writer_agent import Writer
 from composable_app.utils import llms
@@ -49,15 +54,22 @@ class TaskAssigner:
         return article
 
     async def find_writer(self, topic) -> Writer:
-        prompt = PromptService.render_prompt("TaskAssigner_assign_writer",
-                                             writers=[writer.name for writer in list(Writer)],
-                                             topic=topic)
+        prompt_vars = {
+            "prompt_name": "TaskAssigner_assign_writer",
+            "writers": [writer.name for writer in list(Writer)],
+            "topic": topic
+        }
+        prompt = PromptService.render_prompt(**prompt_vars)
 
         # guardrail is applied in parallel; it will raise an exception
+        result: AgentRunResult[Writer]
         _, result = await asyncio.gather(
             self.topic_guardrail.is_acceptable(topic, raise_exception=True),
             self.agent.run(prompt)
         )
+        evals.record_ai_response("find_writer",
+                                 ai_input=prompt_vars,
+                                 ai_response=result.output.name)
 
         return result.output
 
