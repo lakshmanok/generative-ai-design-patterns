@@ -10,6 +10,7 @@ from composable_app.utils import llms
 from .article import Article
 from composable_app.utils.prompt_service import PromptService
 from enum import Enum, auto
+from composable_app.utils import long_term_memory as ltm
 
 logger = logging.getLogger(__name__)
 
@@ -19,16 +20,28 @@ class AutoName(Enum):
     def _generate_next_value_(name, start, count, last_values):
         return name
 
+# HISTORIAN intentionally omitted for illustration
+# although hardcoded here, this might be in user-settings
+content_type = {
+    "GENERALIST": "short article",
+    "MATH_WRITER": "detailed solution"
+}
+
 class Writer(AutoName):
     HISTORIAN = auto()
     MATH_WRITER = auto()
     GENERALIST = auto()
 
+def get_content_type(writer: Writer):
+    # because HISTORIAN is not in the content_type dict, it will default to "2 paragraphs"
+    return content_type.get(writer.name, "2 paragraphs")
 
 class GenericWriter:
     def __init__(self, writer: Writer):
         self.id = f"{writer} Agent {uuid.uuid4()}"
-        system_prompt_file = f"{writer.value}_system_prompt".lower()
+        self.writer = writer
+        # different prompts for different Writer
+        system_prompt_file = f"{self.writer.name}_system_prompt".lower()
         system_prompt = PromptService.render_prompt(system_prompt_file)
 
         self.agent = Agent(llms.BEST_MODEL,
@@ -43,8 +56,10 @@ class GenericWriter:
         return self.id
 
     async def write_about(self, topic: str) -> Article:
-        # the prompt is the same for all writers
-        prompt = PromptService.render_prompt("GenericWriter_write_about",
+        # the prompt is the same for all writers, but the content_type is parameterized in this file
+        prompt = PromptService.render_prompt(f"GenericWriter_write_about",
+                                             content_type=get_content_type(self.writer),
+                                             additional_instructions=ltm.search_relevant_memories(f"{self.writer.name}, write about {topic}"),
                                              topic=topic)
         result = await self.agent.run(prompt)
         logger.info(result.usage())
@@ -54,6 +69,8 @@ class GenericWriter:
         # the prompt is the same for all writers
         prompt = PromptService.render_prompt("GenericWriter_revise_article",
                                              topic=topic,
+                                             content_type=get_content_type(self.writer),
+                                             additional_instructions=ltm.search_relevant_memories(f"{self.writer.name}, revise {topic}"),
                                              initial_draft=initial_draft.to_markdown(),
                                              panel_review=panel_review)
         result = await self.agent.run(prompt)
