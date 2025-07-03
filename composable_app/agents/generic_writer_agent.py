@@ -11,6 +11,8 @@ from .article import Article
 from composable_app.utils.prompt_service import PromptService
 from enum import Enum, auto
 from composable_app.utils import long_term_memory as ltm
+from composable_app.utils import save_for_eval as evals
+
 
 logger = logging.getLogger(__name__)
 
@@ -57,12 +59,18 @@ class GenericWriter:
 
     async def write_about(self, topic: str) -> Article:
         # the prompt is the same for all writers, but the content_type is parameterized in this file
-        prompt = PromptService.render_prompt(f"GenericWriter_write_about",
-                                             content_type=get_content_type(self.writer),
-                                             additional_instructions=ltm.search_relevant_memories(f"{self.writer.name}, write about {topic}"),
-                                             topic=topic)
+        prompt_vars = {
+            "prompt_name": f"GenericWriter_write_about",
+            "content_type": get_content_type(self.writer),
+            "additional_instructions": ltm.search_relevant_memories(f"{self.writer.name}, write about {topic}"),
+            "topic": topic
+        }
+        prompt = PromptService.render_prompt(**prompt_vars)
         result = await self.agent.run(prompt)
         logger.info(result.usage())
+        evals.record_ai_response("initial draft",
+                                 ai_input=prompt_vars,
+                                 ai_response=result.output)
         return result.output
 
     async def revise_article(self, topic: str, initial_draft: Article, panel_review: str) -> Article:
