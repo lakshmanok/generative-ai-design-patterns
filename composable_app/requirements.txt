@@ -1,6 +1,5 @@
 pydantic-ai
 streamlit
 mem0ai
-chromadb
-onnxruntime
+sentence-transformers
 

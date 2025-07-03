@@ -19,6 +19,9 @@ class PromptService:
         env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
         template = env.get_template(f"{prompt_name}.j2")
         prompt = template.render(**variables)
-        logger.info(prompt)
+
+        extra_args = dict(**variables)
+        extra_args['prompt_name'] = prompt_name
+        logger.info(prompt, extra=extra_args)
         return prompt
 

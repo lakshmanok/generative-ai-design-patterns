@@ -39,6 +39,14 @@
                 "filename": "feedback.log",
                 "maxBytes": 1024000,
                 "backupCount": 2
+            },
+            "evals": {
+                "class": "logging.handlers.RotatingFileHandler",
+                "level": "DEBUG",
+                "formatter": "json",
+                "filename": "evals.log",
+                "maxBytes": 1024000,
+                "backupCount": 2
             }
         },
         "loggers": {
@@ -49,6 +57,11 @@
             },
             "composable_app.utils.guardrails": {
                 "handlers": ["guards"],
+                "level": "DEBUG",
+                "propagate": false
+            },
+            "composable_app.utils.save_for_eval": {
+                "handlers": ["evals"],
                 "level": "DEBUG",
                 "propagate": false
             },
