@@ -4,6 +4,7 @@ import asyncio
 import dataclasses
 from composable_app.agents.article import Article
 from composable_app.utils.human_feedback import record_human_feedback
+import composable_app.utils.long_term_memory as ltm
 
 logger = logging.getLogger(__name__)
 
@@ -45,6 +46,11 @@ def write_draft():
             modify_instruction = st.session_state.modify_instruction
             logger.info(f"Updating draft to instructions: {modify_instruction}")
             draft = asyncio.run(writer.revise_article(topic, st.session_state.draft, modify_instruction))
+            # add this instruction to the long-term memory, to use in the future for this user
+            ltm.add_to_memory(modify_instruction, metadata={
+                "topic": topic,
+                "writer": writer.name()
+            })
             logger.info(draft.full_text)
             st.session_state.draft = draft  # but keep the original as "ai_generated_draft"
             # because this is a callback, it redraws the page
