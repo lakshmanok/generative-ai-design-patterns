@@ -1,5 +1,6 @@
 pydantic-ai
 streamlit
 mem0ai
+chromadb
 sentence-transformers
 
