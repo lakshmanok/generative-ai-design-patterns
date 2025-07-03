@@ -22,10 +22,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-if os.path.exists("examples/saved_keys.env"):
-    load_dotenv("examples/saved_keys.env")
+if os.path.exists("../keys.env"):
+    load_dotenv("../keys.env")
 else:
-    raise FileNotFoundError("examples/saved_keys.env not found")
+    raise FileNotFoundError("../keys.env not found")
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
