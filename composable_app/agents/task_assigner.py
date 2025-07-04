@@ -67,9 +67,9 @@ class TaskAssigner:
             self.topic_guardrail.is_acceptable(topic, raise_exception=True),
             self.agent.run(prompt)
         )
-        evals.record_ai_response("find_writer",
-                                 ai_input=prompt_vars,
-                                 ai_response=result.output.name)
+        await evals.record_ai_response("find_writer",
+                                       ai_input=prompt_vars,
+                                       ai_response=result.output.name)
 
         return result.output
 

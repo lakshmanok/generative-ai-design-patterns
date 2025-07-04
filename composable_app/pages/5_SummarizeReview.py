@@ -1,7 +1,7 @@
 import streamlit as st
 import logging
-import asyncio
 from composable_app.agents import reviewer_panel
+from composable_app.pages import patched_asyncio
 
 logger = logging.getLogger(__name__)
 
@@ -11,7 +11,7 @@ def summarize(topic, draft_title, final_reviews) -> str:
     assert draft.title == draft_title
     st.write(f"Reviewing {draft_title} on {topic}")
     logger.info(f"Reviewing {draft_title} on {topic}")
-    panel_review = asyncio.run(reviewer_panel.summarize_reviews(draft, final_reviews, topic))
+    panel_review = patched_asyncio.run(reviewer_panel.summarize_reviews(draft, final_reviews, topic))
     return panel_review
 
 def perform_panel_review():

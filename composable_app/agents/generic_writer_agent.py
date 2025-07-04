@@ -71,9 +71,9 @@ class GenericWriter:
         prompt = PromptService.render_prompt(**prompt_vars)
         result = await self.agent.run(prompt)
         logger.info(result.usage())
-        evals.record_ai_response("initial_draft",
-                                 ai_input=prompt_vars,
-                                 ai_response=result.output)
+        await evals.record_ai_response("initial_draft",
+                                       ai_input=prompt_vars,
+                                       ai_response=result.output)
         return result.output
 
     async def revise_article(self, topic: str, initial_draft: Article, panel_review: str) -> Article:
@@ -89,7 +89,7 @@ class GenericWriter:
         prompt = PromptService.render_prompt(**prompt_vars)
         result: AgentRunResult[Article] = await self.agent.run(prompt)
         logger.info(result.usage())
-        evals.record_ai_response("revised_draft",
-                                 ai_input=prompt_vars,
-                                 ai_response=result.output)
+        await evals.record_ai_response("revised_draft",
+                                       ai_input=prompt_vars,
+                                       ai_response=result.output)
         return result.output

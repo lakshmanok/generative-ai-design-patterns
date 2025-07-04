@@ -1,10 +1,10 @@
 import streamlit as st
 import logging
-import asyncio
 import dataclasses
 from composable_app.agents.article import Article
 from composable_app.utils.human_feedback import record_human_feedback
 import composable_app.utils.long_term_memory as ltm
+from composable_app.pages import patched_asyncio
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +18,7 @@ def write_about(writer_name, topic) -> Article:
     st.write(f"Employing {writer.name()} to create content on {topic} ...")
     logger.info(f"Employing {writer.name()} to create content on {topic} ...")
 
-    article = asyncio.run(writer.write_about(topic))
+    article = patched_asyncio.run(writer.write_about(topic))
     return article
 
 def write_draft():
@@ -45,7 +45,7 @@ def write_draft():
         def modify_draft():
             modify_instruction = st.session_state.modify_instruction
             logger.info(f"Updating draft to instructions: {modify_instruction}")
-            draft = asyncio.run(writer.revise_article(topic, st.session_state.draft, modify_instruction))
+            draft = patched_asyncio.run(writer.revise_article(topic, st.session_state.draft, modify_instruction))
             # add this instruction to the long-term memory, to use in the future for this user
             ltm.add_to_memory(modify_instruction, metadata={
                 "topic": topic,

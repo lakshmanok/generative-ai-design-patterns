@@ -57,9 +57,9 @@ class ReviewerAgent:
         prompt = PromptService.render_prompt(**prompt_vars)
         result = await self.agent.run(prompt)
         logger.info(result.usage())
-        evals.record_ai_response(f"{self.reviewer.name}_review",
-                                 ai_input=prompt_vars,
-                                 ai_response=result.output)
+        await evals.record_ai_response(f"{self.reviewer.name}_review",
+                                       ai_input=prompt_vars,
+                                       ai_response=result.output)
         return result.output
 
 class PanelSecretary:
@@ -92,9 +92,9 @@ class PanelSecretary:
         prompt = PromptService.render_prompt(**prompt_vars)
         result = await self.agent.run(prompt)
         logger.info(result.usage())
-        evals.record_ai_response("consolidated_review",
-                                 ai_input=prompt_vars,
-                                 ai_response=result.output)
+        await evals.record_ai_response("consolidated_review",
+                                       ai_input=prompt_vars,
+                                       ai_response=result.output)
         return result.output
 
 async def get_panel_review_of_article(topic: str, article: Article) -> str:

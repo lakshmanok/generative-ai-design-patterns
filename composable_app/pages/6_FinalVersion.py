@@ -1,7 +1,7 @@
 import streamlit as st
 import logging
-import asyncio
 from composable_app.agents.article import Article
+from composable_app.pages import patched_asyncio
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +15,7 @@ def write_about(writer_name, topic, draft_title, panel_review) -> Article:
     st.write(f"Using {writer.name()} to rewrite {draft_title} on {topic} based on panel review")
     logger.info(f"Using {writer.name()} to rewrite {draft_title} on {topic} based on panel review")
 
-    article = asyncio.run(writer.revise_article(topic, draft, panel_review))
+    article = patched_asyncio.run(writer.revise_article(topic, draft, panel_review))
     return article
 
 def final_version():
