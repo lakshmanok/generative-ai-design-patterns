@@ -21,6 +21,11 @@ Use commercial off-the-shelf (COTS) tools for monitoring, memory and optionally 
 * Guardrails: https://github.com/guardrails-ai/guardrails (optional: Toxicity, etc. as second layer)
 
 ## How to run it locally
+Clone the repo and make sure you don't check in your keys.env by mistake
+```
+git clone https://github.com/lakshmanok/generative-ai-design-patterns/
+git update-index --assume-unchanged keys.env
+```
 Edit keys.env and add your Gemini API key to it (you don't need the others unless you plan to change LLMs):
 ```
 GEMINI_API_KEY=AI...
