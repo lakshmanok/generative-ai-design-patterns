@@ -6,6 +6,7 @@ set -e
 # --- User-configurable names ---
 export IMAGE_NAME="composable-app"
 export SERVICE_NAME="composable-app-service"
+export REPOSITORY="composable-app-repo" # Set your Artifact Registry repo name here
 
 # Attempt to get Project ID and Region from gcloud config.
 export PROJECT_ID=$(gcloud config get-value project)
@@ -26,19 +27,25 @@ fi
 
 echo "Using Project: $PROJECT_ID"
 echo "Using Region: $REGION"
+echo "Using Artifact Registry Repository: $REPOSITORY"
 
 # --- Build with Cloud Build ---
 echo "Building Docker image with Cloud Build..."
-export IMAGE_TAG="gcr.io/${PROJECT_ID}/${IMAGE_NAME}"
+export IMAGE_TAG="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE_NAME}"
 gcloud builds submit --tag "${IMAGE_TAG}" .
 
 # --- Deploy to Cloud Run ---
 echo "Deploying container to Cloud Run..."
+if [ -z "$GEMINI_API_KEY" ]; then
+    echo "WARNING: GEMINI_API_KEY environment variable is not set."
+    echo "Set it in your shell or pass it inline: GEMINI_API_KEY=your-key bash deploy_to_cloud_run.sh"
+fi
 gcloud run deploy "${SERVICE_NAME}" \
   --image "${IMAGE_TAG}" \
   --platform "managed" \
   --region "${REGION}" \
-  --allow-unauthenticated # Use --no-allow-unauthenticated for private services
+  --allow-unauthenticated \
+  --set-env-vars=GEMINI_API_KEY=${GEMINI_API_KEY}
 
 echo "Deployment complete."
 echo "Service URL will be displayed above."

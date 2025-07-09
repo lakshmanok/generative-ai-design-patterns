@@ -3,7 +3,7 @@ import logging
 from composable_app.agents import task_assigner
 from composable_app.agents.generic_writer_agent import Writer, GenericWriter
 from composable_app.utils.human_feedback import record_human_feedback
-from composable_app.pages import patched_asyncio
+from pages import patched_asyncio
 
 logger = logging.getLogger(__name__)
 

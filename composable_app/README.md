@@ -31,6 +31,18 @@ Edit keys.env and add your Gemini API key to it (you don't need the others unles
 GEMINI_API_KEY=AI...
 ```
 
+----
+### Step-by-step: Get a Gemini API key
+1. Go to the Gemini API page
+👉 https://makersuite.google.com/app
+
+2. Sign in with your Google account
+Make sure you’re using a supported region (Gemini may not be available in all countries yet).
+
+3. Click "Get API Key" or go to:
+👉 https://makersuite.google.com/app/apikey
+---
+
 Install the packages:
 ```
 pip install -r requirements.txt 
@@ -53,9 +65,43 @@ streamlit run streamlit_app.py
 Check out the logs, configured in logging.json to save only the prompt texts:
 ``` cat evals.log ```
 
+### Run containerized app locally
+`docker build -t composable-app . && docker run -p 8080:8080 -e GEMINI_API_KEY=your-key composable-app`. 
+
+Replace `your-key` with your actual Gemini API key.
+
 ## Deploy application
 This is a Dockerized application; you can deploy it on
 a serverless platform such as AWS Farsight or Google Cloud Run.
+
+### Google Cloud Run
+Before running the `deploy_to_cloud_run.sh` script, run the following commands to ensure everything is set up:
+
+1. Authenticate with Google Cloud:
+`gcloud auth login`
+
+2. Set your project:
+`gcloud config set project YOUR_PROJECT_ID`
+
+3. Set your region:
+`gcloud config set compute/region YOUR_REGION`
+
+4. Enable required services:
+`gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com`
+
+5. Create the Artifact Registry repository (if not already created):
+`gcloud artifacts repositories create composable-app-repo --repository-format=docker --location=YOUR_REGION`
+
+6. `export GEMINI_API_KEY=your-key`
+
+Replace `YOUR_PROJECT_ID` and `YOUR_REGION` with your actual project ID and region (e.g., `us-central1`). Replace `your-key` with your actual Gemini API key.
+
+After these steps, you can run:
+`bash deploy_to_cloud_run.sh`
+
+If you run the script as `./deploy_to_cloud_run.sh` and get a "Permission denied" or similar error, you can fix this by running: `chmod +x deploy_to_cloud_run.sh`
+
+<b>Note:</b> for greater security, you can keep your Gemini API key in the Google Cloud Secret Manager.
 
 
 ## How it works
