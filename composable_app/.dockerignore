@@ -1,0 +1,51 @@
+# Ignore Python cache and virtualenv
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env
+.env.*
+keys.env
+*.env
+# Ignore logs
+*.log
+# Ignore OS files
+.DS_Store
+# Ignore Jupyter checkpoints
+.ipynb_checkpoints/
+# Ignore test outputs
+htmlcov/
+.coverage
+# Ignore build artifacts
+dist/
+build/
+.eggs/
+*.egg-info/
+# Ignore Docker files
+docker-compose.override.yml
+# Ignore secrets and credentials
+secrets.env
+# Ignore images
+*.svg
+*.png
+# Ignore Excalidraw files
+*.excalidraw
+# Ignore notebooks
+*.ipynb
+# Ignore markdown drafts and temp files
+*.md~
+*.tmp
+*.bak
+# Ignore VSCode and editor settings
+.vscode/
+*.swp
+*.swo
+.idea/
+# Ignore test and coverage outputs
+.tox/
+.nox/
+.cache/
+# Ignore Mac and Windows system files
+Thumbs.db
+Desktop.ini

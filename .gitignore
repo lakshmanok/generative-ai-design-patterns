@@ -5,3 +5,4 @@
 **/__pycache__/
 /composable_app/*.log
 /.venv/
+.DS_Store

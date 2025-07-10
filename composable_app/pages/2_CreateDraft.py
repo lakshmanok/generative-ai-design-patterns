@@ -4,7 +4,7 @@ import dataclasses
 from composable_app.agents.article import Article
 from composable_app.utils.human_feedback import record_human_feedback
 import composable_app.utils.long_term_memory as ltm
-from composable_app.pages import patched_asyncio
+from pages import patched_asyncio
 
 logger = logging.getLogger(__name__)
 
