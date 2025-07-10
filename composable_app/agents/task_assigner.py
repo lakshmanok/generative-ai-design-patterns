@@ -29,8 +29,7 @@ class TaskAssigner:
                            system_prompt=system_prompt)
 
         self.topic_guardrail = InputGuardrail(name="topic_guardrail",
-                                              condition=PromptService.render_prompt("TaskAssigner_input_guardrail"),
-                                              should_reject=False) # accept condition provided
+                                              accept_condition=PromptService.render_prompt("TaskAssigner_input_guardrail"))
 
         logger.info(f"Created {self.id}")
 

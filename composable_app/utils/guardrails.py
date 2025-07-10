@@ -12,11 +12,11 @@ class InputGuardrailException(Exception):
         super().__init__(message)
 
 class InputGuardrail:
-    def __init__(self, name: str, condition: str, should_reject=True):
+    def __init__(self, name: str, accept_condition: str):
         self.id = f"Input Guardrail {name} {uuid.uuid4()}"
+
         self.system_prompt = PromptService.render_prompt("InputGuardrail_prompt",
-                                                         condition=condition,
-                                                         should_reject=should_reject)
+                                                         accept_condition=accept_condition)
 
         self.agent = Agent(llms.SMALL_MODEL,
                            output_type=bool,
