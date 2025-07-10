@@ -12,7 +12,7 @@ def _setup():
     source_dir = os.path.dirname(os.path.abspath(__file__))
     load_dotenv(f"{source_dir}/../keys.env")
     assert os.environ["GEMINI_API_KEY"][:2] == "AI", \
-        "Please specify the GEMINI_API_KEY access token in keys.env file"
+        "Please specify the GEMINI_API_KEY access token in keys.env file or as an environment variable."
 
     logger.info(f"Defaulting to {DEFAULT_MODEL}; will use {BEST_MODEL} "
                 f"for higher quality and {SMALL_MODEL} for lower latency")
