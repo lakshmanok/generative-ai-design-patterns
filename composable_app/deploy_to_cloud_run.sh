@@ -45,10 +45,12 @@ gcloud builds submit --tag "${IMAGE_TAG}" .
 # By default only people with the IAP-secured Web App User role (owners, editors have it already) in this project can invoke this service.
 # See https://cloud.google.com/run/docs/securing/managing-access for other access options
 echo "Deploying container to Cloud Run..."
-gcloud run deploy "${SERVICE_NAME}" \
+gcloud beta run deploy "${SERVICE_NAME}" \
   --image "${IMAGE_TAG}" \
   --platform "managed" \
   --region "${REGION}" \
+  --no-allow-unauthenticated \
+  --iap \
   --set-env-vars=GEMINI_API_KEY=${GEMINI_API_KEY}
 
 echo "Deployment complete."
