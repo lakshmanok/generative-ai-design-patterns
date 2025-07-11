@@ -1,7 +1,7 @@
 FROM python:3.13-slim
 
 # Set working directory
-WORKDIR /app
+WORKDIR /composable_app
 
 # Copy requirements first for better caching
 COPY requirements.txt .
@@ -15,17 +15,12 @@ COPY . .
 # Create non-root user
 RUN useradd -m appuser
 
-# Set up composable_app package structure (do NOT move prompts or pages)
-RUN mkdir -p composable_app && \
-    mv agents utils evals composable_app/ && \
-    find composable_app -type d -exec touch {}/__init__.py \;
-
 # Set permissions and create log files
 RUN touch *.log 2>/dev/null || true && \
-    chown -R appuser:appuser /app
+    chown -R appuser:appuser /composable_app
 
 # Set environment variables
-ENV PYTHONPATH=/app
+ENV PYTHONPATH=/
 
 # Switch to non-root user
 USER appuser

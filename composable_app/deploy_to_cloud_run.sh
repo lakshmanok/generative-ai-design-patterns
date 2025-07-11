@@ -25,6 +25,13 @@ if [ -z "$REGION" ]; then
     exit 1
 fi
 
+if [ -z "$GEMINI_API_KEY" ]; then
+    echo "ERROR: GEMINI_API_KEY environment variable is not set."
+    echo "Set it in your shell or pass it inline: GEMINI_API_KEY=your-key bash deploy_to_cloud_run.sh"
+    echo "Your keys.env is not present in the Docker image (to avoid developer keys being used)"
+    exit 1
+fi
+
 echo "Using Project: $PROJECT_ID"
 echo "Using Region: $REGION"
 echo "Using Artifact Registry Repository: $REPOSITORY"
@@ -35,16 +42,13 @@ export IMAGE_TAG="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE_N
 gcloud builds submit --tag "${IMAGE_TAG}" .
 
 # --- Deploy to Cloud Run ---
+# By default only people with the IAP-secured Web App User role (owners, editors have it already) in this project can invoke this service.
+# See https://cloud.google.com/run/docs/securing/managing-access for other access options
 echo "Deploying container to Cloud Run..."
-if [ -z "$GEMINI_API_KEY" ]; then
-    echo "WARNING: GEMINI_API_KEY environment variable is not set."
-    echo "Set it in your shell or pass it inline: GEMINI_API_KEY=your-key bash deploy_to_cloud_run.sh"
-fi
 gcloud run deploy "${SERVICE_NAME}" \
   --image "${IMAGE_TAG}" \
   --platform "managed" \
   --region "${REGION}" \
-  --allow-unauthenticated \
   --set-env-vars=GEMINI_API_KEY=${GEMINI_API_KEY}
 
 echo "Deployment complete."
