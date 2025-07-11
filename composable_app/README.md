@@ -24,6 +24,7 @@ Use commercial off-the-shelf (COTS) tools for monitoring, memory and optionally 
 Clone the repo and make sure you don't check in your keys.env by mistake
 ```
 git clone https://github.com/lakshmanok/generative-ai-design-patterns/
+cd generative-ai-design-patterns/composable_app 
 git update-index --assume-unchanged keys.env
 ```
 Edit keys.env and add your Gemini API key to it (you don't need the others unless you plan to change LLMs):
@@ -50,7 +51,7 @@ pip install -r requirements.txt
 
 Try out the command-line app:
 ``` 
-python cmdline_app.py 
+PYTHONPATH=$PWD/.. python cmdline_app.py 
 ```
 
 Suggested topics:
@@ -59,7 +60,7 @@ Suggested topics:
 
 Try out the GUI interface:
 ``` 
-streamlit run streamlit_app.py 
+PYTHONPATH=$PWD/.. streamlit run streamlit_app.py 
 ```
 
 Check out the logs, configured in logging.json to save only the prompt texts:
@@ -70,7 +71,7 @@ Check out the logs, configured in logging.json to save only the prompt texts:
 
 Replace `your-key` with your actual Gemini API key.
 
-## Deploy application
+## How to deploy application as a webapp
 This is a Dockerized application; you can deploy it on
 a serverless platform such as AWS Farsight or Google Cloud Run.
 
@@ -78,30 +79,39 @@ a serverless platform such as AWS Farsight or Google Cloud Run.
 Before running the `deploy_to_cloud_run.sh` script, run the following commands to ensure everything is set up:
 
 1. Authenticate with Google Cloud:
-`gcloud auth login`
+```
+gcloud auth login
+```
 
-2. Set your project:
-`gcloud config set project YOUR_PROJECT_ID`
+2. If the default project selected by auth login is incorrect, set your project:
+```
+gcloud config set project YOUR_PROJECT_ID
+```
 
 3. Set your region:
-`gcloud config set compute/region YOUR_REGION`
+```
+gcloud config set compute/region YOUR_REGION
+```
+Replace `YOUR_REGION` with your actual region (e.g., `us-central1`).
 
 4. Enable required services:
-`gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com`
+```
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com
+```
 
 5. Create the Artifact Registry repository (if not already created):
-`gcloud artifacts repositories create composable-app-repo --repository-format=docker --location=YOUR_REGION`
+```
+gcloud artifacts repositories create composable-app-repo --repository-format=docker --location=$(gcloud config get compute/region)
+```
 
-6. `export GEMINI_API_KEY=your-key`
+6. After these steps, you can run:
+```
+GEMINI_API_KEY=your-key bash deploy_to_cloud_run.sh
+```
 
-Replace `YOUR_PROJECT_ID` and `YOUR_REGION` with your actual project ID and region (e.g., `us-central1`). Replace `your-key` with your actual Gemini API key.
-
-After these steps, you can run:
-`bash deploy_to_cloud_run.sh`
-
-If you run the script as `./deploy_to_cloud_run.sh` and get a "Permission denied" or similar error, you can fix this by running: `chmod +x deploy_to_cloud_run.sh`
-
-<b>Note:</b> for greater security, you can keep your Gemini API key in the Google Cloud Secret Manager.
+<b>Notes</b>
+1. If you run the script as `./deploy_to_cloud_run.sh` and get a "Permission denied" or similar error, you can fix this by running: `chmod +x deploy_to_cloud_run.sh`. You will also need the API key set in your environment.
+2. For greater security, you can keep your Gemini API key in the Google Cloud Secret Manager and change utils/llms.py accordingly.
 
 
 ## How it works
