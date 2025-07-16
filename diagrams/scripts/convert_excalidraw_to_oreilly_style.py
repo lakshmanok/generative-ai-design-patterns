@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 import base64
+import os
 import xml.etree.ElementTree as ET
 
 # This script assumes that you have this font file in
 # the current directory
-FONT_FILE="./GuardianSansCond-RegularIt.otf"
-INPUT_DIR="../original"
-OUTPUT_DIR=".."
+SCRIPT_DIR=os.path.dirname(__file__)
+FONT_FILE=os.path.join(SCRIPT_DIR, "../font_guardian sans cond", "GuardianSansCond-RegularIt.otf")
+INPUT_DIR=os.path.join(SCRIPT_DIR, "../original")
+OUTPUT_DIR=os.path.join(SCRIPT_DIR, "..")
 
 """
 Converts an Excalidraw svg file to use O'Reilly font

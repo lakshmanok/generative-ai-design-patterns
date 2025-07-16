@@ -9701,7 +9701,7 @@
       "type": "rectangle",
       "x": 1474.2596691485428,
       "y": 1317.9533749691336,
-      "width": 326.0000000000005,
+      "width": 293.0000000000005,
       "height": 393.66666666666634,
       "angle": 0,
       "strokeColor": "#1971c2",
@@ -9716,8 +9716,8 @@
       "index": "bHr",
       "roundness": null,
       "seed": 1175236380,
-      "version": 1523,
-      "versionNonce": 729757348,
+      "version": 1540,
+      "versionNonce": 1474832619,
       "isDeleted": false,
       "boundElements": [
         {
@@ -9725,14 +9725,14 @@
           "id": "YWEG1gwJgrFQKWvojwBXh"
         }
       ],
-      "updated": 1748533776706,
+      "updated": 1752266620332,
       "link": null,
       "locked": false
     },
     {
       "id": "YWEG1gwJgrFQKWvojwBXh",
       "type": "text",
-      "x": 1688.3637493487386,
+      "x": 1655.3637493487386,
       "y": 1322.9533749691336,
       "width": 106.89591979980469,
       "height": 40,
@@ -9749,11 +9749,11 @@
       "index": "bHs",
       "roundness": null,
       "seed": 257977244,
-      "version": 1283,
-      "versionNonce": 581915044,
+      "version": 1300,
+      "versionNonce": 1986646923,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1748533745640,
+      "updated": 1752266620332,
       "link": null,
       "locked": false,
       "text": "Model Pipeline\n(Remote)",
@@ -10295,10 +10295,10 @@
     {
       "id": "dq6bPcXT9xiQI1Zzzb0JE",
       "type": "text",
-      "x": 1815.3890229896888,
-      "y": 1683.5287114881767,
-      "width": 62.783966064453125,
-      "height": 20,
+      "x": 1778.3890229896888,
+      "y": 1687.5287114881767,
+      "width": 106.43989562988278,
+      "height": 60,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -10312,8 +10312,8 @@
       "index": "bI6",
       "roundness": null,
       "seed": 997501596,
-      "version": 1035,
-      "versionNonce": 1195796004,
+      "version": 1158,
+      "versionNonce": 380535883,
       "isDeleted": false,
       "boundElements": [
         {
@@ -10321,17 +10321,17 @@
           "type": "arrow"
         }
       ],
-      "updated": 1748533453890,
+      "updated": 1752266725089,
       "link": null,
       "locked": false,
-      "text": "Content",
+      "text": "structured\noutput\n(data object)",
       "fontSize": 16,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Content",
-      "autoResize": true,
+      "originalText": "structured\noutput\n(data object)",
+      "autoResize": false,
       "lineHeight": 1.25
     },
     {
