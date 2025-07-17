@@ -3,12 +3,12 @@ import base64
 import os
 import xml.etree.ElementTree as ET
 
-# This script assumes that you have this font file in
-# the current directory
-SCRIPT_DIR=os.path.dirname(__file__)
-FONT_FILE=os.path.join(SCRIPT_DIR, "../font_guardian sans cond", "GuardianSansCond-RegularIt.otf")
-INPUT_DIR=os.path.join(SCRIPT_DIR, "../original")
-OUTPUT_DIR=os.path.join(SCRIPT_DIR, "..")
+# This script assumes that you have the Guardian font file unzipped in the diagrams directory
+DIAGRAMS_DIR=os.path.dirname(os.path.dirname(__file__))  # abc/generative-ai-design-patterns/diagrams
+assert DIAGRAMS_DIR[-(len("diagrams")):] == "diagrams", "Expect that the script is in a folder named diagrams"
+FONT_FILE=os.path.join(DIAGRAMS_DIR, "font_guardian sans cond", "GuardianSansCond-RegularIt.otf")
+INPUT_DIR=os.path.join(DIAGRAMS_DIR, "original")
+OUTPUT_DIR=DIAGRAMS_DIR
 
 """
 Converts an Excalidraw svg file to use O'Reilly font

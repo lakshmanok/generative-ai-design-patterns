@@ -13,6 +13,5 @@ or in BibTex
   title = {Generative AI Design Patterns},
   year = {2025},
   publisher = {O'Reilly Media},
-  note = {In Press}
 }
 ```
