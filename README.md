@@ -6,7 +6,7 @@
 ## Summary of patterns
 These are the 32 design patterns covered in the book:
 
-<details>
+<details open>
 <summary>Chapter 2: Controlling Style (Patterns 1-5)</summary>
 
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
@@ -92,6 +92,10 @@ These are the 32 design patterns covered in the book:
 |             32 | Guardails |  Require safeguards for security, data privacy, content moderation, hallucination, and alignment to ensure that AI applications operate within ethical, legal, and functional parameters. | Wrap the LLM calls with a layer of code that preprocesses the information going into the model and/or post-processes the output of the model. Knowledge retrieval and tool use will also need to be protected. | Anytime your application could be subject to attacks by malicious adversaries. | [examples/32_guardrails](examples/32_guardrails)                   |
 
 </details>
+
+## Book reviews (selected)
+* The best part is the inclusion of working examples for each pattern and explanations of code snippets, which make the concepts much clearer. -- [Manjunath Janardhan](https://www.linkedin.com/feed/update/urn:li:activity:7353459829518008321/)
+* It's packed with design patterns, and even when I thought I knew a pattern, Valliappa Lakshmanan and Hannes Hapke offered valuable new insights. There are plenty of examples throughout the book to help illustrate and deepen understanding of the various patterns. This book is an absolute gem! -- [Glen Yu](https://www.linkedin.com/posts/glenyu_generative-ai-design-patterns-activity-7334304958369996801-1DVp)
 
 ## Want to be cited in future versions of the book?
 * If you have implemented any of the patterns in the book in production, submit a PR to update the USAGE.md in the folder corresponding to the pattern.
