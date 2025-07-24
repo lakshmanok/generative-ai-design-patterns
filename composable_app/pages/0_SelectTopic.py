@@ -17,6 +17,7 @@ def select_topic():
         - Solve for x:  x^2 - x = 12
         - Squaring the circle
         - Is Pluto a planet?
+        - What is in-context learning?
         """)
         if st.button("Next"):
             act_on_topic_selection(topic_input.strip())

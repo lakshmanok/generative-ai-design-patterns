@@ -5,6 +5,7 @@ import logging
 BEST_MODEL="gemini-2.0-flash"
 DEFAULT_MODEL="gemini-2.0-flash"
 SMALL_MODEL="gemini-2.5-flash-lite-preview-06-17"
+EMBED_MODEL="text-embedding-004"
 
 logger = logging.getLogger(__name__)
 
