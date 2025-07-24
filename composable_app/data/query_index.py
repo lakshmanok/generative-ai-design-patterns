@@ -1,8 +1,4 @@
 ## make sure logging starts first
-from llama_index.core.query_engine import RetrieverQueryEngine
-from llama_index.llms.google_genai import GoogleGenAI
-
-
 def setup_logging(config_file: str = "logging.json"):
     import json
     import logging.config
@@ -17,9 +13,17 @@ setup_logging()
 ##
 
 from llama_index.embeddings.google_genai import GoogleGenAIEmbedding
-import os
 from llama_index.core import StorageContext, Settings, load_index_from_storage
+from llama_index.core import get_response_synthesizer
+from llama_index.core.response_synthesizers import ResponseMode
+from llama_index.llms.google_genai import GoogleGenAI
 from composable_app.utils import llms
+import logging
+from pprint import pprint
+import os
+from composable_app.agents.article import Article
+
+logger = logging.getLogger(__name__)
 
 if __name__ == '__main__':
     Settings.embed_model = GoogleGenAIEmbedding(model_name=llms.EMBED_MODEL, api_key=os.environ["GEMINI_API_KEY"])
@@ -27,18 +31,27 @@ if __name__ == '__main__':
     storage_context = StorageContext.from_defaults(persist_dir="data")
     index = load_index_from_storage(storage_context)
 
-    query_engine = RetrieverQueryEngine.from_args(retriever=index.as_retriever(similarity_top_k=3))
+    retriever = index.as_retriever(similarity_top_k=3)
+    response_synthesizer = get_response_synthesizer(
+        response_mode=ResponseMode.COMPACT  # detailed answer after compacting all the retrieved chunks
+    )
 
-
-    def semantic_rag(question):
-        response = query_engine.query(question)
+    def semantic_rag(topic):
+        nodes = retriever.retrieve(topic)
+        response = response_synthesizer.synthesize(f"Based on the information provided, write a 2-paragraph article on {topic}",
+                                                   nodes=nodes)
         response = {
-            "answer": str(response),
-            "source_nodes": response.source_nodes
+            "response": response.response,
+            "source_nodes": [{
+                "page_number": node.metadata['bbox'][0]['page'],
+                "score": node.score,
+                "text_begin": node.text[:50],
+                "text_end": node.text[-50:]
+            } for node in response.source_nodes]
         }
-        print(response['answer'])
-        for node in response['source_nodes']:
-            print(node)
         return response
 
-    semantic_rag("What is in-context learning?")
+
+    print("*** SEMANTIC RAG***")
+    result = semantic_rag("What is in-context learning?")
+    pprint(result)

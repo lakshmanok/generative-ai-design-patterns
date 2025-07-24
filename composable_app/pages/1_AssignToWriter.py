@@ -1,9 +1,9 @@
 import streamlit as st
 import logging
 from composable_app.agents import task_assigner
-from composable_app.agents.generic_writer_agent import Writer, GenericWriter
+from composable_app.agents.generic_writer_agent import Writer, WriterFactory
 from composable_app.utils.human_feedback import record_human_feedback
-from pages import patched_asyncio
+from composable_app.pages import patched_asyncio
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +32,7 @@ def assign_to_writer():
                 record_human_feedback("assigned_writer", topic, suggested_writer.name, writer_selection)
             writer = Writer(writer_selection)
             st.write(f"Delegating work to {writer.name}")
-            st.session_state.writer = GenericWriter(writer)
+            st.session_state.writer = WriterFactory.create_writer(writer)
             st.switch_page("pages/2_CreateDraft.py")
 
     except Exception as e:
