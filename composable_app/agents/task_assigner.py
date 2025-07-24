@@ -2,11 +2,11 @@ from typing import Any
 
 from pydantic_ai.agent import AgentRunResult
 
-from .generic_writer_agent import GenericWriter
+from .generic_writer_agent import WriterFactory
+from .generic_writer_agent import Writer
+from .article import Article
 from composable_app.utils.prompt_service import PromptService
 from composable_app.utils import save_for_eval as evals
-from .article import Article
-from .generic_writer_agent import Writer
 from composable_app.utils import llms
 from composable_app.utils.guardrails import InputGuardrail
 from . import reviewer_panel
@@ -38,7 +38,7 @@ class TaskAssigner:
 
     async def write_about(self, topic: str) -> Article:
         # Step 1: Identify who can write on this topic
-        writer = GenericWriter(await self.find_writer(topic))
+        writer = WriterFactory.create_writer(await self.find_writer(topic))
 
         # Step 2: ask the writer to create an initial draft
         logger.info(f"Assigning {topic} to {writer.name()}")
