@@ -7,7 +7,7 @@
 These are the 32 design patterns covered in the book:
 
 <details open>
-<summary>Chapter 2: Controlling Style (Patterns 1-5)</summary>
+<summary>Chapter 2: Controlling Content Style (Patterns 1-5)</summary>
 
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |
@@ -35,7 +35,7 @@ These are the 32 design patterns covered in the book:
 </details>
 
 <details>
-<summary>Chapter 5: Extending Model Capability (Patterns 13-16) </summary>
+<summary>Chapter 5: Extending Model Capabilities (Patterns 13-16) </summary>
   
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |
@@ -47,7 +47,7 @@ These are the 32 design patterns covered in the book:
 </details>
 
 <details>
-<summary>Chapter 6: Increasing Reliability (Patterns 17-20) </summary>
+<summary>Chapter 6: Improving Reliability (Patterns 17-20) </summary>
 
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |  
@@ -59,7 +59,7 @@ These are the 32 design patterns covered in the book:
 </details>
 
 <details>
-<summary>Chapter 7: Enabling Action (Patterns 21-23) </summary>
+<summary>Chapter 7: Enabling Agents to Take Action (Patterns 21-23) </summary>
 
 | Pattern Number | Pattern Name | Problem | Solution | Usage Scenarios | Code Example |
 | -------------: | :----------- | :------ | :------- | :-------------- | :----------- |  
@@ -70,7 +70,7 @@ These are the 32 design patterns covered in the book:
 </details>
 
 <details>
-<summary>Chapters 8: Meeting Constraints (Patterns 24-28) </summary>
+<summary>Chapters 8: Addressing Constraints (Patterns 24-28) </summary>
 
 | Pattern Number | Pattern Name               | Problem                                                                                                                   | Solution                                                                                                                                                                                                                                                                     | Usage Scenarios                                                                                                                           | Code Example                                                             |
 | -------------: |:---------------------------|:--------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------|
