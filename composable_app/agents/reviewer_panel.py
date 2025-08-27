@@ -6,10 +6,10 @@ import uuid
 from pydantic_ai import Agent
 import logging
 
-from composable_app.utils import llms
+from utils import llms
 from .article import Article
-from composable_app.utils.prompt_service import PromptService
-from composable_app.utils import save_for_eval as evals
+from utils.prompt_service import PromptService
+from utils import save_for_eval as evals
 from enum import Enum, auto
 from typing import List, Tuple
 

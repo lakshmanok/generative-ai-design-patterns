@@ -3,7 +3,7 @@
 
 import json
 import os
-from composable_app.agents.article import Article # needed for eval() to work
+from agents.article import Article # needed for eval() to work
 from scipy import stats
 from typing import List, Any
 import numpy as np

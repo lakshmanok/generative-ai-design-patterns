@@ -1,6 +1,6 @@
 import logging
 
-from composable_app.utils.guardrails import InputGuardrailException
+from utils.guardrails import InputGuardrailException
 
 
 ## make sure logging starts first

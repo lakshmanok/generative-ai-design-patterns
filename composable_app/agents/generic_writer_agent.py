@@ -8,12 +8,12 @@ from pydantic_ai import Agent
 import logging
 import os
 
-from composable_app.utils import llms
+from utils import llms
 from .article import Article
-from composable_app.utils.prompt_service import PromptService
+from utils.prompt_service import PromptService
 from enum import Enum, auto
-from composable_app.utils import long_term_memory as ltm
-from composable_app.utils import save_for_eval as evals
+from utils import long_term_memory as ltm
+from utils import save_for_eval as evals
 
 from llama_index.embeddings.google_genai import GoogleGenAIEmbedding
 from llama_index.core import StorageContext, Settings, load_index_from_storage

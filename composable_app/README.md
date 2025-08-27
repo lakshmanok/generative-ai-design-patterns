@@ -46,12 +46,14 @@ Make sure you’re using a supported region (Gemini may not be available in all 
 
 Install the packages:
 ```
-pip install -r requirements.txt 
+python3 -m venv venv
+source venv/bin/activate
+python3 -m pip install -r requirements.txt 
 ```
 
 Try out the command-line app:
 ``` 
-PYTHONPATH=$PWD/.. python cmdline_app.py 
+python3 -m cmdline_app 
 ```
 
 Suggested topics:
@@ -60,7 +62,7 @@ Suggested topics:
 
 Try out the GUI interface:
 ``` 
-PYTHONPATH=$PWD/.. streamlit run streamlit_app.py 
+python3 -m streamlit run streamlit_app.py 
 ```
 
 Check out the logs, configured in logging.json to save only the prompt texts:

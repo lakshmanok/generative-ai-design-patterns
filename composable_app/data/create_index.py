@@ -17,7 +17,7 @@ setup_logging()
 
 from llama_index.embeddings.google_genai import GoogleGenAIEmbedding
 from llama_index.core import SimpleDirectoryReader, VectorStoreIndex, Settings
-from composable_app.utils import llms
+from utils import llms
 import openparse
 import logging
 import os

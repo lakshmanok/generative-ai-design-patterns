@@ -1,7 +1,7 @@
 import streamlit as st
 import logging
 
-from composable_app.agents import reviewer_panel
+from agents import reviewer_panel
 from pages import patched_asyncio
 
 logger = logging.getLogger(__name__)

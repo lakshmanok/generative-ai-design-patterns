@@ -1,9 +1,9 @@
 import streamlit as st
 import logging
 import dataclasses
-from composable_app.agents.article import Article
-from composable_app.utils.human_feedback import record_human_feedback
-import composable_app.utils.long_term_memory as ltm
+from agents.article import Article
+from utils.human_feedback import record_human_feedback
+import utils.long_term_memory as ltm
 from pages import patched_asyncio
 
 logger = logging.getLogger(__name__)

@@ -29,4 +29,4 @@ USER appuser
 EXPOSE 8080
 
 # Start application
-CMD ["streamlit", "run", "streamlit_app.py", "--server.port=8080", "--server.address=0.0.0.0"]
+CMD ["python3", "-m", "streamlit", "run", "streamlit_app.py", "--server.port=8080", "--server.address=0.0.0.0"]

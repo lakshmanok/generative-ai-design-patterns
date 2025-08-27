@@ -1,6 +1,6 @@
 import streamlit as st
 import logging
-from composable_app.agents.article import Article
+from agents.article import Article
 from pages import patched_asyncio
 
 logger = logging.getLogger(__name__)

@@ -3,7 +3,7 @@ import tempfile
 import os
 from typing import List, Dict, Any
 import logging
-from composable_app.utils import llms
+from utils import llms
 from mem0 import Memory
 
 logger = logging.getLogger(__name__)

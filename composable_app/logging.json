@@ -50,22 +50,22 @@
             }
         },
         "loggers": {
-            "composable_app.utils.prompt_service": {
+            "utils.prompt_service": {
                 "handlers": ["prompts"],
                 "level": "DEBUG",
                 "propagate": false
             },
-            "composable_app.utils.guardrails": {
+            "utils.guardrails": {
                 "handlers": ["guards"],
                 "level": "DEBUG",
                 "propagate": false
             },
-            "composable_app.utils.save_for_eval": {
+            "utils.save_for_eval": {
                 "handlers": ["evals"],
                 "level": "DEBUG",
                 "propagate": false
             },
-            "composable_app.utils.human_feedback": {
+            "utils.human_feedback": {
                 "handlers": ["feedback"],
                 "level": "DEBUG",
                 "propagate": true

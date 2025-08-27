@@ -17,11 +17,11 @@ from llama_index.core import StorageContext, Settings, load_index_from_storage
 from llama_index.core import get_response_synthesizer
 from llama_index.core.response_synthesizers import ResponseMode
 from llama_index.llms.google_genai import GoogleGenAI
-from composable_app.utils import llms
+from utils import llms
 import logging
 from pprint import pprint
 import os
-from composable_app.agents.article import Article
+from agents.article import Article
 
 logger = logging.getLogger(__name__)
 

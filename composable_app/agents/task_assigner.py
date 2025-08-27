@@ -5,10 +5,10 @@ from pydantic_ai.agent import AgentRunResult
 from .generic_writer_agent import WriterFactory
 from .generic_writer_agent import Writer
 from .article import Article
-from composable_app.utils.prompt_service import PromptService
-from composable_app.utils import save_for_eval as evals
-from composable_app.utils import llms
-from composable_app.utils.guardrails import InputGuardrail
+from utils.prompt_service import PromptService
+from utils import save_for_eval as evals
+from utils import llms
+from utils.guardrails import InputGuardrail
 from . import reviewer_panel
 from pydantic_ai import Agent
 import logging
