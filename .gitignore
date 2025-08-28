@@ -8,3 +8,5 @@
 .DS_Store
 /diagrams/font_guardian sans cond/
 /composable_app/data/book.pdf
+.idea
+composable_app/venv
