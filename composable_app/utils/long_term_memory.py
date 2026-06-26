@@ -37,7 +37,7 @@ class LongTermMemory:
             "embedder": {
                 "provider": "gemini",
                 "config": {
-                    "model": "models/gemini-embedding-exp-03-07",
+                    "model": "models/gemini-embedding-001",
                     "embedding_dims": 1536
                 }
             },
