@@ -7,7 +7,6 @@ import shutil
 from pathlib import Path
 from typing import List, Optional, Dict, Union, Tuple, Any
 from urllib.parse import urlparse
-from llama_index.core import Document
 from abc import ABC, abstractmethod
 
 # Configure logging
@@ -203,15 +202,16 @@ class CacheManager:
         return files_info
 
 
-
 class GutenbergTextLoadError(Exception):
     """Exception raised for errors in loading Gutenberg text files."""
     pass
 
+
 class DocumentSource(ABC):
     @abstractmethod
-    def load_from_url(self, url) -> Document:
+    def load_from_url(self, url) -> "Document":
         pass
+
 
 class GutenbergSource(DocumentSource):
     """
@@ -326,7 +326,23 @@ class GutenbergSource(DocumentSource):
         
         return content
     
-    def load_from_url(self, url) -> Document:
+    def load_cleaned_text(self, url: str) -> str:
+        """
+        Load text from a URL and return the cleaned text.
+        
+        Args:
+            url (str): URL to load text from.
+            
+        Returns:
+            str: Cleaned text.
+            
+        Raises:
+            GutenbergTextLoadError: If there's an error loading or processing the text.
+        """
+        raw_text = self._fetch_text_from_url(url)
+        return self._clean_gutenberg_text(raw_text)
+
+    def load_from_url(self, url) -> "Document":
         """
         Load text from a URL and return a LlamaIndex Document.
         
@@ -339,12 +355,13 @@ class GutenbergSource(DocumentSource):
         Raises:
             GutenbergTextLoadError: If there's an error loading or processing the text.
         """
-        url = url or self.default_url
+        from llama_index.core import Document
+        
+        url = url or getattr(self, "default_url", None)
         
         try:
             # Fetch and clean the text
-            raw_text = self._fetch_text_from_url(url)
-            cleaned_text = self._clean_gutenberg_text(raw_text)
+            cleaned_text = self.load_cleaned_text(url)
             
             # Create a document with metadata
             parsed_url = urlparse(url)
