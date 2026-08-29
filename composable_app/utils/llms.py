@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 def _setup():
     source_dir = os.path.dirname(os.path.abspath(__file__))
     load_dotenv(f"{source_dir}/../keys.env")
-    assert os.environ["GEMINI_API_KEY"][:2] == "AI", \
+    assert os.environ.get("GEMINI_API_KEY"), \
         "Please specify the GEMINI_API_KEY access token in keys.env file or as an environment variable."
 
     logger.info(f"Defaulting to {DEFAULT_MODEL}; will use {BEST_MODEL} "
